@@ -9,16 +9,19 @@ Vue.use(Router)
 
 export const router = new Router({
   routes: [
+
     {
       path: '/geolocation',
       name: 'geoloc',
       component: geoloc,
     },
+
   	{
     	path: '/Home',
     	name: 'home',
     	component: Home
     }
+
 
   ]
 })

@@ -1,10 +1,12 @@
 <template>
   <div class="content_test">
+
       <v-map id="map" :zoom="zoom" :center="center" :options="option" v-on:l-click="getPoint($event)" >
         <v-tilelayer :url="url" ></v-tilelayer>
       </v-map>
       <div class="photo">
         {{time}}
+
         <img src="https://www.petitfute.com/medias/professionnel/30049/premium/600_450/223989-nancy-place-stanislas.jpg" alt="photo">
         <div class="description">
           <h3>description</h3>
@@ -30,6 +32,7 @@ export default {
   data: function () {
     return {
       zoom: 13,
+
       center: [48.6833, 6.2],
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       option: { zoomControl: false, dragging: false, doubleClickZoom:false, trackResize:false, minZoom:this.zoom, maxZoom:this.zoom},
@@ -77,6 +80,7 @@ export default {
   },
   created: function () {
     this.count();
+
   }
 
 }
