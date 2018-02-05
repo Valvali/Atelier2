@@ -2,6 +2,7 @@
   <layout-basic>
     <div class="result">
       <h1>RESULTAT</h1>
+      <h2>votre resultat : </h2>
       <ul>
         <li><div class="score">01 : <div class="left">AAAAA</div> <div class="right">3461658</div></div></li>
         <li><div class="score">02 : <div class="left">AAAAA</div> <div class="right">3461658</div></div></li>
@@ -57,6 +58,10 @@ export default {
   font-size: 50px;
   font-weight: bold;
 }
+.result h2{
+  font-size: 25px;
+  font-weight: bold;
+}
 .score{
   background-color: #ffccb3;
   font-size: 20px;
@@ -65,15 +70,17 @@ export default {
   margin-bottom: 10px;
   border-style: solid;
   border-width: thin;
-
+  font-weight: bold;
 }
 .left{
+  font-weight: normal;
   margin:0;
   width: 45%;
   display: inline-block;
   text-align: left;
 }
 .right{
+  font-weight:normal;
   margin:0;
   width: 45%;
   display: inline-block;
