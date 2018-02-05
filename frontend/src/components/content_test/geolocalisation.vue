@@ -1,25 +1,29 @@
 <template>
-  <div class="content_test">
+  <layout-basic>
+    <div class="content_test">
 
-      <v-map id="map" :zoom="zoom" :center="center" :options="option" v-on:l-click="getPoint($event)" >
-        <v-tilelayer :url="url" ></v-tilelayer>
-      </v-map>
-      <div class="photo">
-        {{time}}
+        <v-map id="map" :zoom="zoom" :center="center" :options="option" v-on:l-click="getPoint($event)" >
+          <v-tilelayer :url="url" ></v-tilelayer>
+        </v-map>
+        <div class="photo">
+          {{time}}
 
-        <img src="https://www.petitfute.com/medias/professionnel/30049/premium/600_450/223989-nancy-place-stanislas.jpg" alt="photo">
-        <div class="description">
-          <h3>description</h3>
-          <p>lorem ipsum
-          </p>
+          <img src="https://www.petitfute.com/medias/professionnel/30049/premium/600_450/223989-nancy-place-stanislas.jpg" alt="photo">
+          <div class="description">
+            <h3>description</h3>
+            <p>lorem ipsum
+            </p>
+          </div>
         </div>
-      </div>
-  </div>
+    </div>
+  </layout-basic>
 </template>
 
 <script>
-import Vue from 'vue'
 import api from '@/services/api'
+import LayoutBasic from '@/components/layout/BaseLayout'
+
+import Vue from 'vue'
 
 import Vue2Leaflet from 'vue2-leaflet';
 
@@ -28,6 +32,10 @@ Vue.component('v-tilelayer', Vue2Leaflet.TileLayer);
 Vue.component('v-marker', Vue2Leaflet.Marker);
 
 export default {
+  components: {
+      LayoutBasic
+  },
+
   name: 'App',
   data: function () {
     return {
@@ -58,7 +66,7 @@ export default {
     getPoint(e){
       let click = L.latLng(e.latlng.lat,e.latlng.lng);
       //retourne
-      let res = (this.RayonValid - this.position.distanceTo(click)) / 2 
+      let res = (this.RayonValid - this.position.distanceTo(click)) / 2
       if(res<0){res = 0}
       console.log("distance = "+res);
       console.log("temps = "+this.time);
