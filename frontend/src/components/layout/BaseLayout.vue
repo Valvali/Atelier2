@@ -48,5 +48,14 @@
   		font-weight: bold;
    }
 
+   body{
+		min-height: 100%;
+		position: relative;
+		padding-bottom: 100px;
+	}
+
+	html{
+		height: 100%;
+	}
 	
 </style>
