@@ -5,10 +5,11 @@
         <v-map id="map" :zoom="zoom" :center="center" :options="option" v-on:l-click="getPoint($event)" >
           <v-tilelayer :url="url" ></v-tilelayer>
         </v-map>
-        <div class="photo">
-          {{time}}
+        <div class="info">
+          <h1 class="time">Score : {{score}} </h1>
+          <h1 class="time">Temps : {{time}} </h1>
 
-          <img src="https://www.petitfute.com/medias/professionnel/30049/premium/600_450/223989-nancy-place-stanislas.jpg" alt="photo">
+          <img class="tips" src="https://www.petitfute.com/medias/professionnel/30049/premium/600_450/223989-nancy-place-stanislas.jpg" alt="photo">
           <div class="description">
             <h3>description</h3>
             <p>lorem ipsum
@@ -48,8 +49,9 @@ export default {
 
       position: L.latLng(48.6833, 6.2),
 
+      score:0,
       time: 0,
-      RayonValid: 3000,
+      RayonValid: 2000,
     };
 	},
   methods: {
@@ -82,6 +84,7 @@ export default {
         res = 0
       }
       res = Math.round( res)
+      this.score += res
       console.log("score = "+res);
     },
 
@@ -97,10 +100,32 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 @import "~leaflet/dist/leaflet.css";
+.content_test{
+  margin:10px;
+  text-align: left;
+}
 #map {
+  display: inline-block;
   cursor: pointer;
   height: 700px;
-  width : 80%;
+  width : 75%;
 }
+.info{
+  margin: 15px;
+  display: inline-block;
+  width : 20%;
+  vertical-align: top;
+}
+.time{
+  margin-left: 15px;
+  line-height: 40px;
+  font-weight: bold;
+}
+.tips{
+  margin:0px;
+  display: block;
+  width: 100%;
+}
+
 
 </style>
