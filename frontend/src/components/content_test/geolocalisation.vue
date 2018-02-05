@@ -101,6 +101,7 @@ export default {
 <style scoped>
 @import "~leaflet/dist/leaflet.css";
 .content_test{
+  display: flex;
   margin:10px;
   text-align: left;
 }
@@ -111,9 +112,9 @@ export default {
   width : 75%;
 }
 .info{
-  margin: 15px;
+  margin: 10px;
   display: inline-block;
-  width : 20%;
+  width : 23%;
   vertical-align: top;
 }
 .time{
@@ -127,5 +128,14 @@ export default {
   width: 100%;
 }
 
+@media screen and (max-width: 800px) {
+  .content_test {
+    flex-direction: column-reverse;
+  }
+  #map, .info{
+    margin: 0;
+    width : 100%;
+  }
+}
 
 </style>
