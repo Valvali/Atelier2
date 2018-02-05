@@ -1,18 +1,33 @@
 <template>
 	<layout-basic>
-	    <div id="app" class="container">
-	    
-		    <section>		       
-		            <br><span><b>Ville: </b></span><b-input class="input" placeholder="Entrez votre ville"></b-input>
-		            <br><span><b>Difficulté: </b></span><b-input class="input" type="Number" placeholder="Entrez le niveau de difficulté"></b-input>
-		        	<br><span><b>Username: </b></span><b-input class="input" placeholder="Entrez votre username"></b-input>
-		        <br><a class="button is-link is-active">Active</a>
-		    </section>
+	 	<div class="container">
 
+		    <div class="field">  		
+			  	<div class="control">
+			  		<label class="label">Ville :</label>
+			    	<input class="input" type="text" placeholder="Entrez votre ville">
+			  	</div><br>
+		  		
+			  	<div class="control">
+			  		<label class="label">Difficulté :</label>
+			    	<input class="input" type="number" placeholder="Entrez le niveau de difficulté">
+			  	</div><br>
+		  		
+			  	<div class="control">
+			  		<label class="label">Username :</label>
+			    	<input class="input" type="text" placeholder="Saisissez votre username">
+			  	</div>
+			</div>
+
+			<div class="field is-grouped">
+			 	<div class="control">
+			    	<button class="button is-link">Envoyé</button>
+			 	</div>
+			</div>
 		</div>
-	</layout-basic>
+ 	</layout-basic>
 </template>
-s
+
 <script>
 	import api from '@/services/api'
 	import LayoutBasic from '@/components/layout/BaseLayout'
@@ -27,13 +42,15 @@ s
 <style scoped>
 	.input{
 		width: 40%;
-		padding: 0;
 	}
-	.input{
-		margin-bottom: 3%;
+	.container{
+		margin-left: 30%;
+		margin-top:5%;
+		margin-bottom: 5%;
 	}
-	.label{
-		margin-top:3%;
+
+	.button{
+		background-color: #3273dc;
 	}
 
 </style>
