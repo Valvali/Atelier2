@@ -1,6 +1,6 @@
 <template>
   <div class="content_test">
-      <v-map id="map" :zoom="zoom" :center="center" :options="option" v-on:l-click="getLocation($event)" >
+      <v-map id="map" :zoom="zoom" :center="center" :options="option" v-on:l-click="getPoint($event)" >
         <v-tilelayer :url="url" ></v-tilelayer>
       </v-map>
       <div class="photo">
@@ -38,21 +38,45 @@ export default {
       position: L.latLng(48.6833, 6.2),
 
       time: 0,
-      RayonValid: 2000,
+      RayonValid: 3000,
     };
 	},
   methods: {
-    getLocation(e){
+    count() {
+      console.log("launch");
+      let interval = setInterval(()=> {
+        this.time++
+        if(this.time>30){
+          clearInterval(interval);
+          this.time = "fin du temps"
+        }
+      },1000)
+    },
+    getPoint(e){
       let click = L.latLng(e.latlng.lat,e.latlng.lng);
       //retourne
-      let res = Math.round( (this.RayonValid - this.position.distanceTo(click)) / 2 )
+      let res = (this.RayonValid - this.position.distanceTo(click)) / 2 
       if(res<0){res = 0}
-      console.log(res);
+      console.log("distance = "+res);
+      console.log("temps = "+this.time);
+      if(this.time<5){
+        res = res*5
+      }else if (this.time<10) {
+        res = res*2.5
+      }else if (this.time<20) {
+        res = res*1.5
+      }else if (this.time<30) {
+        //res = res
+      }else{
+        res = 0
+      }
+      res = Math.round( res)
+      console.log("score = "+res);
     },
 
   },
   created: function () {
-
+    this.count();
   }
 
 }
