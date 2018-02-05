@@ -55,10 +55,14 @@ export default {
 	  };
 	},
   methods: {
-		newGame() {
+		async newGame() {
+
+			//await api.get("url/api")
 			console.log(this.pseudo);
 			console.log(this.difficulty);
 			console.log(this.city);
+			this.$router.push({'name': 'geoloc'})
+
 		}
 	}
 }
