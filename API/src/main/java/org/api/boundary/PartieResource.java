@@ -54,6 +54,7 @@ public class PartieResource {
             pointJSON.add("difficulte", p.getDifficulte());
             pointsJSON.add(pointJSON);
         }
+        // randomUUID() utilise SecureRandom et 122bits de random, ce qui est suffisant
         ret.add("token", UUID.randomUUID().toString());
         ret.add("points", pointsJSON);
         return Response.ok(ret.build()).build();

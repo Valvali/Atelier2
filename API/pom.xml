@@ -30,8 +30,18 @@
         </dependency>
     </dependencies>
     <build>
+        <finalName>api</finalName>
         <!--<finalName>API</finalName>-->
-        <finalName>ROOT</finalName>
+        <!--<finalName>ROOT</finalName>-->
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <outputDirectory>../APIDeploy/deployments</outputDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
