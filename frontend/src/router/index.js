@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
+import Home from '@/components/Home'
 import store from '@/store'
 
 import geoloc from '@/components/content_test/geolocalisation'
@@ -14,6 +14,11 @@ export const router = new Router({
       name: 'geoloc',
       component: geoloc,
     },
+  	{
+    	path: '/Home',
+    	name: 'home',
+    	component: Home
+    }
 
   ]
 })
