@@ -4,6 +4,14 @@
         <v-tilelayer :url="url" ></v-tilelayer>
         <v-marker :lat-lng="marker"></v-marker>
       </v-map>
+      <div class="photo">
+        <img src="https://www.petitfute.com/medias/professionnel/30049/premium/600_450/223989-nancy-place-stanislas.jpg" alt="photo">
+        <div class="description">
+          <h3>description</h3>
+          <p>lorem ipsum
+          </p>
+        </div>
+      </div>
   </div>
 </template>
 
@@ -41,8 +49,8 @@ export default {
 <style scoped>
 @import "~leaflet/dist/leaflet.css";
 #map {
-  background-color: red;
-  height: 800px;
-  width : 800px;
+  height: 700px;
+  width : 80%;
 }
+
 </style>
