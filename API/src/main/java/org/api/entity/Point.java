@@ -17,7 +17,7 @@ public class Point implements Serializable {
     @NotNull
     private double lng;
     @NotNull
-    private String photo;
+    private String img;
     
     private String description;
     
@@ -47,12 +47,12 @@ public class Point implements Serializable {
         this.lng = lng;
     }
 
-    public String getPhoto() {
-        return photo;
+    public String getImg() {
+        return img;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public String getDescription() {
