@@ -14,9 +14,8 @@
         <li><div class="score">08 : <div class="left">AAAAA</div> <div class="right">3461658</div></div></li>
         <li><div class="score">09 : <div class="left">AAAAA</div> <div class="right">3461658</div></div></li>
         <li><div class="score">10 : <div class="left">AAAAA</div> <div class="right">3461658</div></div></li>
-
-
       </ul>
+      <button type="button" name="button" @click= "home">Accueil</button>
     </div>
   </layout-basic>
 </template>
@@ -39,7 +38,9 @@ export default {
     };
 	},
   methods: {
-
+    home(){
+      this.$router.push({'name': 'home'})
+    }
   },
   created: function () {
 

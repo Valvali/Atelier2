@@ -2,7 +2,6 @@
 	<layout-basic>
 	 	<div class="container">
 			<form class="" action="index.html" @submit.prevent="newGame()">
-		    <div class="field">
 			  	<div class="control">
 
 			  		<label class="label">Ville :</label>
@@ -27,14 +26,17 @@
 			  		<label class="label">Username :</label>
 			    	<input class="input" type="text" placeholder="Saisissez votre username" v-model="pseudo">
 			  	</div>
-				</div>
 
-				<div class="field is-grouped">
 				 	<div class="control">
 				    	<button class="button is-link">Envoyé</button>
 				 	</div>
-				</div>
 			</form>
+			todo list :<br>
+			- recuperer les infos de l'api avec le formulaire<br>
+			- mettre le fichier json des points dans le store pour l'utiliser dans geolocation<br>
+			- permettre de stocker le score dans le store puis pour l'afficher et/ou continuer<br>
+			- post / get le liste des meilleur particiapnt<br>
+
 		</div>
  	</layout-basic>
 </template>
@@ -74,8 +76,12 @@ export default {
 	}
 	.container{
 		margin-left: 30%;
-		margin-top:5%;
-		margin-bottom: 5%;
+		margin-top:200px;
+		margin-bottom: 200px;
+	}
+	.controle{
+		margin-top:25px;
+		margin-bottom: 25px;
 	}
 
 	.button{
