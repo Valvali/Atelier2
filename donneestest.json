@@ -1,0 +1,70 @@
+[{
+  "lat": "48.693609",
+  "lng": " 6.183243",
+  "img": "https://www.petitfute.com/medias/professionnel/30049/premium/600_450/223989-nancy-place-stanislas.jpg",
+  "description":"Place stanislas",
+  "difficulte": "1"
+},
+{
+  "lat": "48.692326",
+  "lng": "6.188301",
+  "img": "http://3.bp.blogspot.com/-ANdpXhRNMAg/Vlm5SHjx13I/AAAAAAAAnQQ/PzSX6h6WkCU/s1600/Porte%2Bsaint%2BGeorges%2B%25286%2529.jpg",
+  "description":"Porte saint george",
+  "difficulte": "4"
+},
+{
+  "lat": "48.696343",
+  "lng": "6.179632",
+  "img": "https://media-cdn.tripadvisor.com/media/photo-s/0e/c5/0e/63/basilique-saint-epvre.jpg",
+  "description":"Basilique Saint-Epvre",
+  "difficulte": "2"
+},
+  "lat": "48.682845",
+  "lng": "6.1611653",
+  "img": "http://www.univ-lorraine.fr/sites/www.univ-lorraine.fr/files/styles/header/public/iut-nancy-charlemagne.jpg?itok=ghAR954-",
+  "description":"IUT Nancy-Charlemagne",
+  "difficulte": "3"
+},
+{
+  "lat": "48.6587665",
+  "lng": "6.1489475",
+  "img": "http://www.annuaire-ecoles-sante-social.adeccomedical.fr/uploads/all_photo/545.jpg",
+  "description":"IUT Nancy-Brabois",
+  "difficulte": "4"
+},
+{
+  "lat": "48.6961925",
+  "lng": "6.1832994",
+  "img": "https://www.sitlor.fr/photos/737/737000267_4.jpg",
+  "description":"Parc de la pépinière",
+  "difficulte": "1"
+},
+{
+  "lat": "48.689894",
+  "lng": "6.1762033",
+  "img": "http://ekladata.com/qyTPU4beaBOGYjKQOB1JZT2Kg28.jpg",
+  "description":"Cathédrale Notre-Dame-de-l'Annonciation ",
+  "difficulte": "3"
+},
+{
+  "lat": "48.6963432",
+  "lng": "6.1718138",
+  "img": "http://4.bp.blogspot.com/-QiU3x7iHR-0/UZh5iKFaeSI/AAAAAAAAMEQ/gqDqZxn-I-w/s1600/Nancy-Porte+de+la+Craffe-001.jpg",
+  "description":"Porte de la Craffe",
+  "difficulte": "3"
+},
+{
+  "lat": "48.665741",
+  "lng": "6.1596302",
+  "img": "http://factuel.univ-lorraine.fr/sites/factuel.univ-lorraine.fr/files/field/image/2015/03/reportagesite_preview.jpg",
+  "description":"Faculté des sciences et technologies",
+  "difficulte": "4"
+},
+{
+  "lat": "48.6664166",
+  "lng": "6.1659675",
+  "img": "http://www.laforet.com/sites/default/files/styles/agence-video__800x650_/public/thumb-immobilier-vandoeuvrelesnancy.jpg?itok=sIrohMQ1",
+  "description":"Vélodrome",
+  "difficulte": "3"
+}
+]

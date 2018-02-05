@@ -1,0 +1,33 @@
+version : '3.4'
+services:
+  wildflyAtelier:
+    image: "atelier2/wildfly-admin"
+    ports:
+      - "8080:8080"
+      - "9990:9990"
+    networks:
+      - atelier2net
+    container_name: wildflyProdAtelier
+    volumes:
+      - ./deployments/:/opt/jboss/wildfly/standalone/deployments/:consistent
+    depends_on:
+      - dbAtelier
+
+  dbAtelier:
+    ports:
+      - "5432:5432"
+    networks:
+      - atelier2net
+    environment:
+      POSTGRES_DB: atelier2
+      POSTGRES_USER: atelier2
+      POSTGRES_PASSWORD: atelier2
+    container_name: dbAtelier
+    image: "atelier2/pgsql"
+
+volumes:
+  deployments:
+
+networks:
+  atelier2net:
+    driver: bridge
