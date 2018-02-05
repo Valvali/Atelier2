@@ -1,13 +1,16 @@
 
 package org.api.boundary;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -46,6 +49,14 @@ public class PointResource {
                 .map(p -> Response.ok(p).build())
                 //.orElseThrow(() -> new CategorieNotFound("Ressource non disponible "+ uriInfo.getPath()));
                 .orElse(Response.status(Response.Status.NOT_FOUND).build());
+    }
+    
+    @POST
+    public Response newPoint(@Valid Point p, @Context UriInfo uriInfo) {
+        Point newOne = this.pm.save(p);
+        long id = newOne.getId();
+        URI uri = uriInfo.getAbsolutePathBuilder().path("/"+id).build();
+        return Response.created(uri).build();
     }
     
     @DELETE
