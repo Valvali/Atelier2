@@ -1,20 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.atelier2.entity;
 
-/**
- *
- * @author vali
- */
-public class Point {
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@NamedQuery(name="Point.findAll",query="SELECT p FROM Point p")
+public class Point implements Serializable {
+    @Id
     private long id;
+    
+    @NotNull
     private double lat;
+    @NotNull
     private double lng;
+    @NotNull
     private String photo;
+    
     private String description;
+    
     private int difficulte;
 
     public long getId() {
