@@ -32,7 +32,7 @@ import org.api.entity.Score;
  */
 
 @Stateless
-@Path("points")
+@Path("scores")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class ScoreResource {
