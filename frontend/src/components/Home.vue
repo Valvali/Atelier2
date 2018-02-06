@@ -1,21 +1,21 @@
 <template>
 	<layout-basic>
-	<h1 class="homeTitle"><b>Welcome to our application GeoQuizz, please lunch the game...</b></h1>
+	<h1 class="homeTitle"><b>Welcome to our application GeoQuizz, please launch the game...</b></h1>
 	 	<div class="container">
 			<form class="" action="index.html" @submit.prevent="newGame(city)">
 			  	<div class="control">
 
 			  		<label class="label">Ville :</label>
 						<select v-model="city">
-  						<option value="nancy">Nancy</option>
-  						<option value="paris">Paris</option>
-  						<option value="lyon">Lyon</option>
+	  						<option value="nancy">Nancy</option>
+	  						<option value="paris">Paris</option>
+	  						<option value="lyon">Lyon</option>
 						</select>
 			  	</div><br>
 
 			  	<div class="control">
 			  		<label class="label">Difficulté :</label>
-							<select v-model="difficulty">
+						<select v-model="difficulty">
 	  						<option value="1">Facile</option>
 	  						<option value="2" selected>Moyen</option>
 	  						<option value="3">Difficile</option>
