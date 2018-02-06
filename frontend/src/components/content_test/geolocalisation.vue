@@ -3,14 +3,18 @@
     <div class="content_test">
 
         <v-map id="map" :zoom="zoom" :center="center" :options="option" v-on:l-click="getPoint($event)" >
+
           <v-tilelayer :url="url" ></v-tilelayer>
+          <ul v-for="(item) in underNumber()" >
+            <v-marker :lat-lng='[item.lat, item.lng]' ></v-marker>
+          </ul>
         </v-map>
         <div class="info">
           <h1 class="note">N° : {{number}} </h1>
           <h1 class="note">Score : {{score}} </h1>
           <h1 class="note">Temps : {{time}} </h1>
 
-          <img class="tips" src="https://www.petitfute.com/medias/professionnel/30049/premium/600_450/223989-nancy-place-stanislas.jpg" alt="photo">
+          <img class="tips" :src="img" alt="photo">
           <div class="description">
             <h3>description</h3>
             <p>lorem ipsum
@@ -26,6 +30,11 @@ import api from '@/services/api'
 import LayoutBasic from '@/components/layout/BaseLayout'
 import ls  from '@/services/ls'
 import Vue from 'vue'
+
+
+import json from '../../../assets/donneestest.json'
+
+
 import Vue2Leaflet from 'vue2-leaflet';
 import LayoutBasic from '@/components/layout/BaseLayout'
 
@@ -41,17 +50,26 @@ export default {
   data: function () {
     return {
       zoom: 13,
+<<<<<<< HEAD
       center: [48.6833, 6.2],
+=======
+
+      center: [48.6833, 6.19], //nancy
+>>>>>>> origin/charles
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       option: { zoomControl: false, dragging: false, doubleClickZoom:false, trackResize:false, minZoom:this.zoom, maxZoom:this.zoom},
 
-      number : 0,
-      position: L.latLng(48.6833, 6.2),
-
       score:0,
       time: 0,
+      number : 0,
+      img: "",
+      position: L.latLng(48.6833, 6.2),
+
       RayonValid: 2000,
       interval: null,
+
+      donnees : json, // à ne pas faire comme ça !!!!!
+      //markerIcon: "../../assets/marker.png",
     };
   },
   methods: {
@@ -63,6 +81,20 @@ export default {
           this.time = "fin du temps"
         }
       },1000)
+    },
+    underNumber(){
+      let ret = []
+      for(let i=0 ; i<this.number ; i++){
+        ret.push(this.donnees[i])
+      }
+      if(this.number>= 10 ){
+        this.position =  L.latLng(0 , 0);
+        this.img = "http://ak8.picdn.net/shutterstock/videos/26123588/thumb/9.jpg"
+      }else{
+        this.position = L.latLng(this.donnees[this.number].lat , this.donnees[this.number].lng);
+        this.img = this.donnees[this.number].img
+      }
+      return ret
     },
     async getPoint(e){
       //need stop interval
@@ -108,6 +140,9 @@ export default {
       }
 
     },
+  },
+  computed: {
+
   },
   created: function () {
     this.count();
