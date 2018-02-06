@@ -1,7 +1,7 @@
 {
-  "name": "projet_api",
+  "name": "GeoQuiz",
   "version": "1.0.0",
-  "description": "Projet de web client en interaction avec une api",
+  "description": "Projet d'atelier en interaction avec une api",
   "author": "valentin <valentin.escamilla@outlook.fr>",
   "private": true,
   "scripts": {
