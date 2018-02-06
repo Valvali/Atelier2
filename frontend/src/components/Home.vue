@@ -44,6 +44,8 @@
 <script>
 	import api from '@/services/api'
 	import LayoutBasic from '@/components/layout/BaseLayout'
+	import ls  from '@/services/ls'
+
 export default {
 	components: {
 	  LayoutBasic
@@ -63,8 +65,22 @@ export default {
 			console.log(this.pseudo);
 			console.log(this.difficulty);
 			console.log(this.city);
+
+			let playerInfo = {
+				"pseudo":this.pseudo,
+				"score": 0,
+				"difficulty":this.difficulty,
+				"city": this.city,
+			}
+			ls.set (0, playerInfo)
 			this.$router.push({'name': 'geoloc'})
 		}
+	},
+	created: function () {
+		ls.clear()
+		console.log(ls.get(0));
+		
+
 	}
 }
 </script>
