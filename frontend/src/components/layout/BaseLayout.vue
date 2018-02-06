@@ -3,7 +3,8 @@
   <div class="basic-layout">
     <header>
    		 	<div class="bar_nav">
-					<img src="../../../assets/images/geoquiz.jpg"/>				
+					<img src="../../../assets/images/geoquiz.jpg"/>	
+					<router-link class="buttonHome" to="home">Accueil</router-link>			
    		 	</div>
     </header>
 
@@ -57,5 +58,12 @@
 	html{
 		height: 100%;
 	}
-	
+
+	.buttonHome{
+		padding:5px;
+		color:white;
+		background-color: green;
+		text-align: center;
+	}
+
 </style>

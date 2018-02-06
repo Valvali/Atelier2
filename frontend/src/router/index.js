@@ -4,12 +4,12 @@ import Home from '@/components/Home'
 import store from '@/store'
 
 import geoloc from '@/components/content_test/geolocalisation'
+import result from '@/components/content_test/result'
 
 Vue.use(Router)
 
 export const router = new Router({
   routes: [
-
     {
       path: '/geolocation',
       name: 'geoloc',
@@ -20,6 +20,15 @@ export const router = new Router({
     	path: '/',
     	name: 'home',
     	component: Home
+    },
+    {
+    	path: '/result',
+    	name: 'result',
+    	component: result
+    },
+    {
+      path: '*',
+      redirect: '/'
     }
 
 
