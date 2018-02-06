@@ -42,7 +42,6 @@ export default {
   components: {
       LayoutBasic
   },
-
   name: 'App',
   data: function () {
     return {
@@ -64,7 +63,7 @@ export default {
       donnees : json, // à ne pas faire comme ça !!!!!
       //markerIcon: "../../assets/marker.png",
     };
-	},
+  },
   methods: {
     count() {
       this.interval = setInterval(()=> {
@@ -133,7 +132,6 @@ export default {
       }
 
     },
-
   },
   computed: {
 
@@ -141,7 +139,6 @@ export default {
   created: function () {
     this.count();
   }
-
 }
 </script>
 
@@ -185,5 +182,4 @@ export default {
     width : 100%;
   }
 }
-
 </style>

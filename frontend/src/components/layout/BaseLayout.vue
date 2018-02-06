@@ -3,9 +3,11 @@
   <div class="basic-layout">
     <header>
    		 	<div class="bar_nav">
+
 					<img src="../../../assets/images/geoquiz.jpg"/>
           <div class="pseudo" v-if="connected">
-            <strong>{{pseudo}}</strong>
+            <strong>{{pseudo}} <router-link class="buttonHome" to="home">Accueil</router-link> </strong>
+
           </div>
    		 	</div>
     </header>
@@ -97,5 +99,13 @@ export default {
     margin: 20px 25px 20px 20px;
     color: white;
   }
+
+  .buttonHome{
+    padding:5px;
+    color:white;
+    background-color: green;
+    text-align: center;
+  }
+
 
 </style>

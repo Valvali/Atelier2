@@ -1,6 +1,8 @@
 <template>
 	<layout-basic>
+	<h1 class="homeTitle"><b>Welcome to our application GeoQuizz, please lunch the game...</b></h1>
 	 	<div class="container">
+
 			<form class="" action="index.html" @submit.prevent="newGame()">
 			  	<div class="control">
 
@@ -14,10 +16,10 @@
 
 			  	<div class="control">
 			  		<label class="label">Difficulté :</label>
-						<select v-model="difficulty">
-  						<option value="1">Facile</option>
-  						<option value="2" selected>Moyen</option>
-  						<option value="3">Difficile</option>
+							<select v-model="difficulty">
+	  						<option value="1">Facile</option>
+	  						<option value="2" selected>Moyen</option>
+	  						<option value="3">Difficile</option>
 							<option value="4">Expert</option>
 						</select>
 			  	</div><br>
@@ -25,10 +27,10 @@
 			  	<div class="control">
 			  		<label class="label">Username :</label>
 			    	<input class="input" type="text" placeholder="Saisissez votre username" v-model="pseudo">
-			  	</div>
+			  	</div><br>
 
 				 	<div class="control">
-				    	<button class="button is-link">Envoyé</button>
+				    	<button class="button is-link">Envoyer</button>
 				 	</div>
 			</form>
 			todo list :<br>
@@ -45,6 +47,7 @@
 	import api from '@/services/api'
 	import LayoutBasic from '@/components/layout/BaseLayout'
 	import ls  from '@/services/ls'
+	import axios from 'axios'
 
 export default {
 	components: {
@@ -54,7 +57,8 @@ export default {
 	  return {
 			pseudo: "",
 			difficulty: 2,
-	    city: "nancy",
+	    	city: "nancy",
+	    	serie:{}
 	  };
 	},
   methods: {
@@ -76,11 +80,17 @@ export default {
 
 		}
 	},
-	created: function () {
-		ls.clear()
-		console.log(ls.get(0));
-		
 
+	//wait for backend
+	created(){
+		ls.clear()
+		axios.get('').then(response=>{
+			this.serie=response.data;
+			console.log(this.serie);
+			console.log('okkkkk');
+		}).catch((err) => {
+			  console.log(err);
+			})
 	}
 }
 </script>
@@ -91,7 +101,7 @@ export default {
 	}
 	.container{
 		margin-left: 30%;
-		margin-top:200px;
+		margin-top:100px;
 		margin-bottom: 200px;
 	}
 	.controle{
@@ -101,6 +111,12 @@ export default {
 
 	.button{
 		background-color: #3273dc;
+	}
+
+	h1.homeTitle{
+		color:black;
+		font-size: 2em;
+		margin-top:50px;
 	}
 
 </style>
