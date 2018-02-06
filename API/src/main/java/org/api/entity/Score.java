@@ -7,12 +7,14 @@ package org.api.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author vali
  */
 @Entity
+@NamedQuery(name="Score.findAll",query="SELECT s FROM Score s")
 public class Score {
     @Id
     private long id;
