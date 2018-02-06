@@ -30,7 +30,7 @@
 			  	</div><br>
 
 				 	<div class="control">
-				    	<button class="button is-link">Envoyé</button>
+				    	<button class="button is-link">Envoyer</button>
 				 	</div>
 			</form>
 			todo list :<br>
@@ -57,6 +57,7 @@ export default {
 			pseudo: "",
 			difficulty: 2,
 	    	city: "nancy",
+	    	serie:{}
 	  };
 	},
   methods: {
@@ -70,15 +71,17 @@ export default {
 
 		}
 	},
-	// created(){
-	// 	axios.get('localhost:8080/partie').then(response=>{
-	// 		this.city=response.data;
-	// 		console.log(this.city);
-	// 		console.log('okkkkk');
-	// 	}).catch((error) => {
-	// 		  console.log(error)
-	// 		})
-	// }
+
+	//wait for backend
+	created(){
+		axios.get('').then(response=>{
+			this.serie=response.data;
+			console.log(this.serie);
+			console.log('okkkkk');
+		}).catch((err) => {
+			  console.log(err);
+			})
+	}
 }
 </script>
 
