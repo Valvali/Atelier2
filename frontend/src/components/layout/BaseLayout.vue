@@ -5,7 +5,7 @@
    		 	<div class="bar_nav">
 					<img src="../../../assets/images/geoquiz.jpg"/>
           <div class="pseudo" v-if="connected">
-            <strong>{{pseudo}} || score : {{score}}</strong>
+            <strong>{{pseudo}}</strong>
           </div>
    		 	</div>
     </header>
@@ -28,13 +28,11 @@ export default {
 	  return {
       connected: false,
       pseudo : "",
-      score : 0,
 	  };
 	},
   methods: {
     actualise(){
       this.pseudo =  ls.get(0).pseudo;
-      this.score =   ls.get(0).score;
       if(ls.get(0)){ this.connected = true; }
     }
 	},
