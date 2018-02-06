@@ -2,7 +2,7 @@
   <layout-basic>
     <div class="result">
       <h1>RESULTAT</h1>
-      <h2>votre resultat : </h2>
+      <h2>votre resultat : {{finalScore}}</h2>
       <ul>
         <li><div class="score">01 : <div class="left">AAAAA</div> <div class="right">3461658</div></div></li>
         <li><div class="score">02 : <div class="left">AAAAA</div> <div class="right">3461658</div></div></li>
@@ -23,6 +23,8 @@
 <script>
 import api from '@/services/api'
 import LayoutBasic from '@/components/layout/BaseLayout'
+import ls  from '@/services/ls'
+
 
 import Vue from 'vue'
 
@@ -34,7 +36,7 @@ export default {
   name: 'App',
   data: function () {
     return {
-
+      finalScore :  "",
     };
 	},
   methods: {
@@ -43,7 +45,7 @@ export default {
     }
   },
   created: function () {
-
+    this.finalScore =  ls.get(0).score;
   }
 
 }
