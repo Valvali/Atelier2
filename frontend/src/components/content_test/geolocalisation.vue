@@ -36,7 +36,6 @@ import json from '../../../assets/donneestest.json'
 
 
 import Vue2Leaflet from 'vue2-leaflet';
-import LayoutBasic from '@/components/layout/BaseLayout'
 
 Vue.component('v-map', Vue2Leaflet.Map);
 Vue.component('v-tilelayer', Vue2Leaflet.TileLayer);
@@ -50,12 +49,8 @@ export default {
   data: function () {
     return {
       zoom: 13,
-<<<<<<< HEAD
-      center: [48.6833, 6.2],
-=======
-
       center: [48.6833, 6.19], //nancy
->>>>>>> origin/charles
+
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       option: { zoomControl: false, dragging: false, doubleClickZoom:false, trackResize:false, minZoom:this.zoom, maxZoom:this.zoom},
 

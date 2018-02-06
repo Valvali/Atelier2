@@ -47,11 +47,9 @@
 <script>
 	import api from '@/services/api'
 	import LayoutBasic from '@/components/layout/BaseLayout'
-<<<<<<< HEAD
 	import ls  from '@/services/ls'
-=======
 	import axios from 'axios'
->>>>>>> origin/dev
+
 
 export default {
 	components: {
@@ -84,15 +82,8 @@ export default {
 			this.$router.push({'name': 'geoloc'})
 		}
 	},
-<<<<<<< HEAD
-	created: function () {
-		ls.clear()
-		console.log(ls.get(0));
-		
 
-=======
 
-	//wait for backend
 	created(){
 		axios.get('').then(response=>{
 			this.serie=response.data;
@@ -101,7 +92,7 @@ export default {
 		}).catch((err) => {
 			  console.log(err);
 			})
->>>>>>> origin/dev
+
 	}
 }
 </script>
@@ -122,9 +113,7 @@ export default {
 	.button{
 		background-color: #3273dc;
 	}
-<<<<<<< HEAD
-</style>
-=======
+
 
 	h1.homeTitle{
 		color:black;
@@ -133,4 +122,4 @@ export default {
 	}
 
 </style>
->>>>>>> origin/dev
+
