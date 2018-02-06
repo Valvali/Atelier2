@@ -2,8 +2,7 @@
 	<layout-basic>
 	<h1 class="homeTitle"><b>Welcome to our application GeoQuizz, please lunch the game...</b></h1>
 	 	<div class="container">
-	 	
-			<form class="" action="index.html" @submit.prevent="newGame()">
+			<form class="" action="index.html" @submit.prevent="newGame(city)">
 			  	<div class="control">
 
 			  		<label class="label">Ville :</label>
@@ -47,6 +46,7 @@
 	import api from '@/services/api'
 	import LayoutBasic from '@/components/layout/BaseLayout'
 	import axios from 'axios'
+	import ls  from '@/services/ls'
 
 export default {
 	components: {
@@ -61,14 +61,22 @@ export default {
 	  };
 	},
   methods: {
-		async newGame() {
-
-			//await api.get("url/api")
+		async newGame(ville) {
+			await api.get('partie/' + ville).then(function (response) {
+				console.log(response);
+			})
 			console.log(this.pseudo);
 			console.log(this.difficulty);
 			console.log(this.city);
-			this.$router.push({'name': 'geoloc'})
 
+			let playerInfo = {
+				"pseudo":this.pseudo,
+				"score": 0,
+				"difficulty":this.difficulty,
+				"city": this.city,
+			}
+			ls.set (0, playerInfo)
+			this.$router.push({'name': 'geoloc'})
 		}
 	},
 
@@ -81,6 +89,10 @@ export default {
 		}).catch((err) => {
 			  console.log(err);
 			})
+	},
+	created: function () {
+		ls.clear()
+		console.log(ls.get(0));
 	}
 }
 </script>
@@ -98,7 +110,6 @@ export default {
 		margin-top:25px;
 		margin-bottom: 25px;
 	}
-
 	.button{
 		background-color: #3273dc;
 	}
@@ -108,5 +119,4 @@ export default {
 		font-size: 2em;
 		margin-top:50px;
 	}
-
 </style>

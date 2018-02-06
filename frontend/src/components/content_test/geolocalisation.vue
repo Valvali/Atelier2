@@ -23,6 +23,7 @@
 
 <script>
 import api from '@/services/api'
+import ls  from '@/services/ls'
 import Vue from 'vue'
 import Vue2Leaflet from 'vue2-leaflet';
 import LayoutBasic from '@/components/layout/BaseLayout'
@@ -62,15 +63,14 @@ export default {
         }
       },1000)
     },
-    getPoint(e){
+    async getPoint(e){
       //need stop interval
       clearInterval(this.interval);
       let click = L.latLng(e.latlng.lat,e.latlng.lng);
-      //retourne
       let res = (this.RayonValid - this.position.distanceTo(click)) / 2
       if(res<0){res = 0}
-      console.log("distance = "+res);
-      console.log("temps = "+this.time);
+      //console.log("distance = "+res);
+      //console.log("temps = "+this.time);
       if(this.time<5){
         res = res*5
       }else if (this.time<10) {
@@ -84,7 +84,16 @@ export default {
       }
       res = Math.round( res)
       this.score += res
-      console.log("score = "+res);
+      //console.log("score = "+res);
+
+      let playerInfo = {
+				"pseudo":ls.get(0).pseudo,
+				"score": ls.get(0).score + this.score,
+				"difficulty":ls.get(0).difficulty,
+				"city": ls.get(0).city,
+			}
+      console.log(playerInfo);
+			await ls.set (0, playerInfo)
 
       if(this.number>= 10){
         //end of the game

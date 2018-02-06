@@ -3,8 +3,11 @@
   <div class="basic-layout">
     <header>
    		 	<div class="bar_nav">
-					<img src="../../../assets/images/geoquiz.jpg"/>	
-					<router-link class="buttonHome" to="home">Accueil</router-link>			
+				<img src="../../../assets/images/geoquiz.jpg"/>	
+				<router-link class="buttonHome" to="home">Accueil</router-link>	
+	          	<div class="pseudo" v-if="connected">
+	            	<strong>{{pseudo}} || score : {{score}}</strong>
+	          	</div>
    		 	</div>
     </header>
 
@@ -16,6 +19,32 @@
 
 </template>
 
+<script>
+	import api from '@/services/api'
+	import LayoutBasic from '@/components/layout/BaseLayout'
+	import ls  from '@/services/ls'
+
+export default {
+	data: function () {
+	  return {
+      connected: false,
+      pseudo : "",
+      score : 0,
+	  };
+	},
+  methods: {
+    actualise(){
+      this.pseudo =  ls.get(0).pseudo;
+      this.score =   ls.get(0).score;
+      if(ls.get(0)){ this.connected = true; }
+    }
+	},
+  created: function () {
+    this.connected = false ;
+    this.actualise();
+  }
+}
+</script>
 
 <style scoped>
 
@@ -27,7 +56,7 @@
 
 	.bar_nav {
 		background-color: black;
-	  	overflow: hidden; 
+	  	overflow: hidden;
 	  	height: 100px;
 	  	width: 100%;
 	}
@@ -65,5 +94,18 @@
 		background-color: green;
 		text-align: center;
 	}
+  .pseudo{
+    padding-top : -20px;
+    margin: 0;
+    display: block;
+    height: 100%;
+    text-align: right;
+  }
+  strong{
+    display: block;
+    vertical-align: center;
+    margin: 20px 25px 20px 20px;
+    color: white;
+  }
 
 </style>
