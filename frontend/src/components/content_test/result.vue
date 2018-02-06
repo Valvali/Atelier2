@@ -3,17 +3,8 @@
     <div class="result">
       <h1>RESULTAT</h1>
       <h2>votre resultat : {{finalScore}}</h2>
-      <ul>
-        <li><div class="score">01 : <div class="left">AAAAA</div> <div class="right">3461658</div></div></li>
-        <li><div class="score">02 : <div class="left">AAAAA</div> <div class="right">3461658</div></div></li>
-        <li><div class="score">03 : <div class="left">AAAAA</div> <div class="right">3461658</div></div></li>
-        <li><div class="score">04 : <div class="left">AAAAA</div> <div class="right">3461658</div></div></li>
-        <li><div class="score">05 : <div class="left">AAAAA</div> <div class="right">3461658</div></div></li>
-        <li><div class="score">06 : <div class="left">AAAAA</div> <div class="right">3461658</div></div></li>
-        <li><div class="score">07 : <div class="left">AAAAA</div> <div class="right">3461658</div></div></li>
-        <li><div class="score">08 : <div class="left">AAAAA</div> <div class="right">3461658</div></div></li>
-        <li><div class="score">09 : <div class="left">AAAAA</div> <div class="right">3461658</div></div></li>
-        <li><div class="score">10 : <div class="left">AAAAA</div> <div class="right">3461658</div></div></li>
+      <ul   v-for="item in topScore">
+        <li><div class="score"> {{item.position}} : <div class="left">{{item.pseudo}}</div> <div class="right">{{item.score}}</div></div></li>
       </ul>
       <button type="button" name="button" @click= "home">Accueil</button>
     </div>
@@ -27,6 +18,7 @@ import ls  from '@/services/ls'
 
 
 import Vue from 'vue'
+import json from '../../../assets/donneesScore.json'
 
 export default {
   components: {
@@ -37,6 +29,8 @@ export default {
   data: function () {
     return {
       finalScore :  "",
+
+      topScore : json,
     };
 	},
   methods: {
