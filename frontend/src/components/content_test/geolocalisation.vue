@@ -10,14 +10,18 @@
           </ul>
         </v-map>
         <div class="info">
-          <h1 class="note">N° : {{number}} </h1>
+
+
+          <div v-if="number != iterationMax" >
+            <h1 class="note">N° : {{number + 1}} </h1>
+            <h1 class="note">Temps : {{time}} </h1>
+          </div>
           <h1 class="note">Score : {{score}} </h1>
-          <h1 class="note">Temps : {{time}} </h1>
 
           <img class="tips" :src="img" alt="photo">
           <div class="description">
             <h3>description</h3>
-            <p>lorem ipsum
+            <p>{{descr}}
             </p>
           </div>
         </div>
@@ -51,11 +55,13 @@ export default {
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       option: { zoomControl: false, dragging: false, doubleClickZoom:false, trackResize:false, minZoom:this.zoom, maxZoom:this.zoom},
 
+      iterationMax: 10,
       score:0,
       time: 0,
       number : 0,
       img: "",
       position: L.latLng(48.6833, 6.2),
+      descr: "",
 
       RayonValid: 2000,
       interval: null,
@@ -79,12 +85,15 @@ export default {
       for(let i=0 ; i<this.number ; i++){
         ret.push(this.donnees[i])
       }
-      if(this.number>= 10 ){
+      if(this.number>= this.iterationMax ){
         this.position =  L.latLng(0 , 0);
         this.img = "http://ak8.picdn.net/shutterstock/videos/26123588/thumb/9.jpg"
+        this.descr = "le jeu est terminée, veuillez cliquez sur la carte pour voir le tableau des scores"
       }else{
         this.position = L.latLng(this.donnees[this.number].lat , this.donnees[this.number].lng);
         this.img = this.donnees[this.number].img
+        this.descr = this.donnees[this.number].description
+
       }
       return ret
     },
@@ -117,10 +126,10 @@ export default {
 				"difficulty":ls.get(0).difficulty,
 				"city": ls.get(0).city,
 			}
-      console.log(playerInfo);
+      //console.log(playerInfo);
 			await ls.set (0, playerInfo)
 
-      if(this.number>= 10){
+      if(this.number>= this.iterationMax){
         //end of the game
         this.$router.push({'name': 'result'})
       }else{
@@ -128,7 +137,9 @@ export default {
         this.time = 0
         this.number++
         this.$router.push({'name': 'geoloc'})
-        this.count()
+        if(this.number != this.iterationMax ){
+          this.count()
+        }
       }
 
     },
