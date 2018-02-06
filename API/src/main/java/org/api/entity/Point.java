@@ -2,15 +2,18 @@ package org.api.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.NamedQuery;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @NamedQuery(name="Point.findAll",query="SELECT p FROM Point p")
 public class Point implements Serializable {
     @Id
-    private long id;
+    private String id;
     
     @NotNull
     private double lat;
@@ -22,12 +25,16 @@ public class Point implements Serializable {
     private String description;
     
     private int difficulte;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "")
+    private Serie serie;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -69,6 +76,20 @@ public class Point implements Serializable {
 
     public void setDifficulte(int difficulte) {
         this.difficulte = difficulte;
+    }
+
+    /**
+     * @return the serie
+     */
+    public Serie getSerie() {
+        return serie;
+    }
+
+    /**
+     * @param serie the serie to set
+     */
+    public void setSerie(Serie serie) {
+        this.serie = serie;
     }
     
     
