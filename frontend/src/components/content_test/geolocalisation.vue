@@ -26,8 +26,8 @@ import api from '@/services/api'
 import LayoutBasic from '@/components/layout/BaseLayout'
 import ls  from '@/services/ls'
 import Vue from 'vue'
-
 import Vue2Leaflet from 'vue2-leaflet';
+import LayoutBasic from '@/components/layout/BaseLayout'
 
 Vue.component('v-map', Vue2Leaflet.Map);
 Vue.component('v-tilelayer', Vue2Leaflet.TileLayer);
@@ -37,12 +37,10 @@ export default {
   components: {
       LayoutBasic
   },
-
   name: 'App',
   data: function () {
     return {
       zoom: 13,
-
       center: [48.6833, 6.2],
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       option: { zoomControl: false, dragging: false, doubleClickZoom:false, trackResize:false, minZoom:this.zoom, maxZoom:this.zoom},
@@ -55,7 +53,7 @@ export default {
       RayonValid: 2000,
       interval: null,
     };
-	},
+  },
   methods: {
     count() {
       this.interval = setInterval(()=> {
@@ -110,13 +108,10 @@ export default {
       }
 
     },
-
   },
   created: function () {
     this.count();
-
   }
-
 }
 </script>
 
@@ -160,5 +155,4 @@ export default {
     width : 100%;
   }
 }
-
 </style>
