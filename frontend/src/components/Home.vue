@@ -1,7 +1,7 @@
 <template>
 	<layout-basic>
 	 	<div class="container">
-			<form class="" action="index.html" @submit.prevent="newGame()">
+			<form class="" action="index.html" @submit.prevent="newGame(city)">
 			  	<div class="control">
 
 			  		<label class="label">Ville :</label>
@@ -44,7 +44,6 @@
 <script>
 	import api from '@/services/api'
 	import LayoutBasic from '@/components/layout/BaseLayout'
-
 export default {
 	components: {
 	  LayoutBasic
@@ -57,14 +56,14 @@ export default {
 	  };
 	},
   methods: {
-		async newGame() {
-
-			//await api.get("url/api")
+		async newGame(ville) {
+			await api.get('partie/' + ville).then(function (response) {
+				console.log(response);
+			})
 			console.log(this.pseudo);
 			console.log(this.difficulty);
 			console.log(this.city);
 			this.$router.push({'name': 'geoloc'})
-
 		}
 	}
 }
@@ -83,9 +82,7 @@ export default {
 		margin-top:25px;
 		margin-bottom: 25px;
 	}
-
 	.button{
 		background-color: #3273dc;
 	}
-
 </style>
