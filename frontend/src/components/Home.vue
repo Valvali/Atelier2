@@ -2,21 +2,20 @@
 	<layout-basic>
 	<h1 class="homeTitle"><b>Welcome to our application GeoQuizz, please launch the game...</b></h1>
 	 	<div class="container">
-
-			<form class="" action="index.html" @submit.prevent="newGame()">
+			<form class="" action="index.html" @submit.prevent="newGame(city)">
 			  	<div class="control">
 
 			  		<label class="label">Ville :</label>
 						<select v-model="city">
-  						<option value="nancy">Nancy</option>
-  						<option value="paris">Paris</option>
-  						<option value="lyon">Lyon</option>
+	  						<option value="nancy">Nancy</option>
+	  						<option value="paris">Paris</option>
+	  						<option value="lyon">Lyon</option>
 						</select>
 			  	</div><br>
 
 			  	<div class="control">
 			  		<label class="label">Difficulté :</label>
-							<select v-model="difficulty">
+						<select v-model="difficulty">
 	  						<option value="1">Facile</option>
 	  						<option value="2" selected>Moyen</option>
 	  						<option value="3">Difficile</option>
@@ -45,8 +44,8 @@
 <script>
 	import api from '@/services/api'
 	import LayoutBasic from '@/components/layout/BaseLayout'
-	import ls  from '@/services/ls'
 	import axios from 'axios'
+	import ls  from '@/services/ls'
 
 export default {
 	components: {
@@ -61,9 +60,10 @@ export default {
 	  };
 	},
   methods: {
-		async newGame() {
-
-			//await api.get("url/api")
+		async newGame(ville) {/*
+			await api.get('partie/' + ville).then(function (response) {
+				console.log(response);
+			})*/
 			console.log(this.pseudo);
 			console.log(this.difficulty);
 			console.log(this.city);
@@ -76,10 +76,8 @@ export default {
 			}
 			ls.set (0, playerInfo)
 			this.$router.push({'name': 'geoloc'})
-
 		}
 	},
-
 	//wait for backend
 	created(){
 		ls.clear()
@@ -90,6 +88,9 @@ export default {
 		}).catch((err) => {
 			  console.log(err);
 			})
+	},
+	created: function () {
+		ls.clear()
 	}
 }
 </script>
@@ -107,7 +108,6 @@ export default {
 		margin-top:25px;
 		margin-bottom: 25px;
 	}
-
 	.button{
 		background-color: #3273dc;
 	}
@@ -117,5 +117,4 @@ export default {
 		font-size: 2em;
 		margin-top:50px;
 	}
-
 </style>
