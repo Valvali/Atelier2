@@ -4,16 +4,10 @@
       <h1>RESULTAT</h1>
       <h2>votre resultat : {{finalScore}}</h2>
       <ul>
-        <li><div class="score">01 : <div class="left">AAAAA</div> <div class="right">3461658</div></div></li>
-        <li><div class="score">02 : <div class="left">AAAAA</div> <div class="right">3461658</div></div></li>
-        <li><div class="score">03 : <div class="left">AAAAA</div> <div class="right">3461658</div></div></li>
-        <li><div class="score">04 : <div class="left">AAAAA</div> <div class="right">3461658</div></div></li>
-        <li><div class="score">05 : <div class="left">AAAAA</div> <div class="right">3461658</div></div></li>
-        <li><div class="score">06 : <div class="left">AAAAA</div> <div class="right">3461658</div></div></li>
-        <li><div class="score">07 : <div class="left">AAAAA</div> <div class="right">3461658</div></div></li>
-        <li><div class="score">08 : <div class="left">AAAAA</div> <div class="right">3461658</div></div></li>
-        <li><div class="score">09 : <div class="left">AAAAA</div> <div class="right">3461658</div></div></li>
-        <li><div class="score">10 : <div class="left">AAAAA</div> <div class="right">3461658</div></div></li>
+        <div v-for="(item) in scores">
+          <li><div class="score">01 : <div class="left">{{item.nom}}</div> <div class="right">{{item.score}}</div></div></li>
+
+        </div>
       </ul>
       <button type="button" name="button" @click= "home">Accueil</button>
     </div>
@@ -34,6 +28,12 @@ export default {
   },
 
   name: 'App',
+  data() { 
+    return {
+    scores:[]
+
+  }
+},
   data: function () {
     return {
       finalScore :  "",
@@ -42,10 +42,21 @@ export default {
   methods: {
     home(){
       this.$router.push({'name': 'home'})
+    },
+
+    getScores() {
+      api.get('scores').then(response => {
+        // success callback
+        this.scores = response.data
+      }, response => {
+        // error callback
+        console.log("error = "+response.message)
+      })
     }
   },
   created: function () {
     this.finalScore =  ls.get(0).score;
+    this.getScores();
   }
 
 }
