@@ -1,29 +1,42 @@
 <template>
 	<layout-basic>
 	 	<div class="container">
-
-		    <div class="field">  		
+			<form class="" action="index.html" @submit.prevent="newGame()">
 			  	<div class="control">
+
 			  		<label class="label">Ville :</label>
-			    	<input class="input" type="text" placeholder="Entrez votre ville">
+						<select v-model="city">
+  						<option value="nancy">Nancy</option>
+  						<option value="paris">Paris</option>
+  						<option value="lyon">Lyon</option>
+						</select>
 			  	</div><br>
-		  		
+
 			  	<div class="control">
 			  		<label class="label">Difficulté :</label>
-			    	<input class="input" type="number" placeholder="Entrez le niveau de difficulté">
+						<select v-model="difficulty">
+  						<option value="1">Facile</option>
+  						<option value="2" selected>Moyen</option>
+  						<option value="3">Difficile</option>
+							<option value="4">Expert</option>
+						</select>
 			  	</div><br>
-		  		
+
 			  	<div class="control">
 			  		<label class="label">Username :</label>
-			    	<input class="input" type="text" placeholder="Saisissez votre username">
+			    	<input class="input" type="text" placeholder="Saisissez votre username" v-model="pseudo">
 			  	</div>
-			</div>
 
-			<div class="field is-grouped">
-			 	<div class="control">
-			    	<button class="button is-link">Envoyé</button>
-			 	</div>
-			</div>
+				 	<div class="control">
+				    	<button class="button is-link">Envoyé</button>
+				 	</div>
+			</form>
+			todo list :<br>
+			- recuperer les infos de l'api avec le formulaire<br>
+			- mettre le fichier json des points dans le store pour l'utiliser dans geolocation<br>
+			- permettre de stocker le score dans le store puis pour l'afficher et/ou continuer<br>
+			- post / get le liste des meilleur particiapnt<br>
+
 		</div>
  	</layout-basic>
 </template>
@@ -32,11 +45,29 @@
 	import api from '@/services/api'
 	import LayoutBasic from '@/components/layout/BaseLayout'
 
-	export default {
-		components: {
-	      LayoutBasic
-	    }
+export default {
+	components: {
+	  LayoutBasic
+	},
+	data: function () {
+	  return {
+			pseudo: "",
+			difficulty: 2,
+	    city: "nancy",
+	  };
+	},
+  methods: {
+		async newGame() {
+
+			//await api.get("url/api")
+			console.log(this.pseudo);
+			console.log(this.difficulty);
+			console.log(this.city);
+			this.$router.push({'name': 'geoloc'})
+
+		}
 	}
+}
 </script>
 
 <style scoped>
@@ -45,8 +76,12 @@
 	}
 	.container{
 		margin-left: 30%;
-		margin-top:5%;
-		margin-bottom: 5%;
+		margin-top:200px;
+		margin-bottom: 200px;
+	}
+	.controle{
+		margin-top:25px;
+		margin-bottom: 25px;
 	}
 
 	.button{
