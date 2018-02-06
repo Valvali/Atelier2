@@ -51,6 +51,7 @@ export default {
       zoom: 13,
       center: [48.6833, 6.19], //nancy
 
+
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       option: { zoomControl: false, dragging: false, doubleClickZoom:false, trackResize:false, minZoom:this.zoom, maxZoom:this.zoom},
 

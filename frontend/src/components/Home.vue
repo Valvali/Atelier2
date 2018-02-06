@@ -1,6 +1,6 @@
 <template>
 	<layout-basic>
-	<h1 class="homeTitle"><b>Welcome to our application GeoQuizz, please lunch the game...</b></h1>
+	<h1 class="homeTitle"><b>Welcome to our application GeoQuizz, please launch the game...</b></h1>
 	 	<div class="container">
 
 			<form class="" action="index.html" @submit.prevent="newGame(city)">
@@ -37,7 +37,6 @@
 			todo list :<br>
 			- recuperer les infos de l'api avec le formulaire<br>
 			- mettre le fichier json des points dans le store pour l'utiliser dans geolocation<br>
-			- permettre de stocker le score dans le store puis pour l'afficher et/ou continuer<br>
 			- post / get le liste des meilleur particiapnt<br>
 
 		</div>
@@ -85,6 +84,7 @@ export default {
 
 
 	created(){
+		ls.clear()
 		axios.get('').then(response=>{
 			this.serie=response.data;
 			console.log(this.serie);
@@ -92,7 +92,6 @@ export default {
 		}).catch((err) => {
 			  console.log(err);
 			})
-
 	}
 }
 </script>

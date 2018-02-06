@@ -6,9 +6,10 @@
 
 					<img src="../../../assets/images/geoquiz.jpg"/>
           <div class="pseudo" v-if="connected">
-            <strong>{{pseudo}}</strong>
+            <strong>{{pseudo}} <router-link class="buttonHome" to="home">Accueil</router-link> </strong>
+
           </div>
-					<router-link class="buttonHome" to="home">Accueil</router-link>			
+
 
    		 	</div>
     </header>
@@ -87,7 +88,7 @@ export default {
 	html{
 		height: 100%;
 	}
-<<<<<<< HEAD
+
   .pseudo{
     padding-top : -20px;
     margin: 0;
@@ -102,15 +103,12 @@ export default {
     color: white;
   }
 
-</style>
-=======
+  .buttonHome{
+    padding:5px;
+    color:white;
+    background-color: green;
+    text-align: center;
+  }
 
-	.buttonHome{
-		padding:5px;
-		color:white;
-		background-color: green;
-		text-align: center;
-	}
 
 </style>
->>>>>>> origin/dev
