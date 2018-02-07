@@ -1,6 +1,7 @@
 package org.api.boundary;
 
 import java.util.List;
+import java.util.UUID;
 import javax.ejb.Stateless;
 import javax.persistence.CacheStoreMode;
 import javax.persistence.EntityManager;
@@ -26,6 +27,7 @@ public class PointManager {
     }
 
     public Point save(Point p) {
+        p.setId(UUID.randomUUID().toString());
         return this.em.merge(p);
     }
 
