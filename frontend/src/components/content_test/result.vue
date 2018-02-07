@@ -3,11 +3,14 @@
     <div class="result">
       <h1>RESULTAT</h1>
       <h2>votre resultat : {{finalScore}}</h2>
-      <ul>
+
+      <!--<ul>
         <div v-for="(item) in scores">
           <li><div class="score">01 : <div class="left">{{item.nom}}</div> <div class="right">{{item.score}}</div></div></li>
 
-        </div>
+        </div>-->
+      <ul   v-for="item in topScore">
+        <li><div class="score"> {{item.position}} : <div class="left">{{item.pseudo}}</div> <div class="right">{{item.score}}</div></div></li>
       </ul>
       <button type="button" name="button" @click= "home">Accueil</button>
     </div>
@@ -21,6 +24,7 @@ import ls  from '@/services/ls'
 
 
 import Vue from 'vue'
+import json from '../../../assets/donneesScore.json'
 
 export default {
   components: {
@@ -37,6 +41,8 @@ export default {
   data: function () {
     return {
       finalScore :  "",
+
+      topScore : json,
     };
 	},
   methods: {

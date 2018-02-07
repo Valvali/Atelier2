@@ -5,10 +5,11 @@
  */
 package org.api.entity;
 
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -23,7 +24,9 @@ public class Partie {
     private int score;
     private Difficulte difficulte;
     @OneToMany
-    private Collection<Point> points;
+    private List<Point> points;
+    @OneToOne
+    private Serie serie;
 
     public String getId() {
         return id;
