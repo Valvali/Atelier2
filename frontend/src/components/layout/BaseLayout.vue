@@ -3,10 +3,9 @@
   <div class="basic-layout">
     <header>
    		 	<div class="bar_nav">
-				<img src="../../../assets/images/geoquiz.jpg"/>	
-				<router-link class="buttonHome" to="home">Accueil</router-link>	
+				<img src="../../../assets/images/geoquiz.jpg"/>
 	          	<div class="pseudo" v-if="connected">
-	            	<strong>{{pseudo}} || score : {{score}}</strong>
+	            	<strong class="infoParty "> score : {{score}} <router-link class="buttonHome" to="home">Accueil</router-link></strong>
 	          	</div>
    		 	</div>
     </header>
@@ -102,7 +101,7 @@ export default {
     height: 100%;
     text-align: right;
   }
-  strong{
+  .infoParty{
     display: block;
     vertical-align: center;
     margin: 20px 25px 20px 20px;

@@ -4,7 +4,7 @@
 		<h1 class="titleFormBackend"><b>Formulaire d'inscription</b></h1>
 	 	<div class="container">
 
-			<form class="" @submit.prevent="submit()">
+			<form class="form" @submit.prevent="submit()">
 			  	<div class="control">
 			  		<label class="label">Nom :</label>
 			    	<input class="input" type="text" placeholder="Entrez votre nom complet" v-model="name" required>
@@ -20,6 +20,9 @@
 					<div class="control">
 						<label class="label">Verification du mot de passe</label>
 						<input class="input" type="password" password-reveal v-model="passwordVerif" required >
+						<div class="messageError" v-if="matchPassword">
+							<strong>Les mots de passes ne correspondent pas !</strong>
+						</div>
 					</div><br>
 
 
@@ -47,6 +50,7 @@ export default {
 			email: "",
 			password: "",
 			passwordVerif: "",
+			matchPassword: false,
 		}
 	},
 	methods: {
@@ -58,9 +62,13 @@ export default {
 			}
 		},
 		verifPassword(){
-			console.log(this.password)
-			console.log(this.passwordVerif)
-			return this.password == this.passwordVerif
+			if(this.password == this.passwordVerif){
+				this.matchPassword = false
+				return true
+			}else{
+				this.matchPassword = true
+				return false
+			}
 		}
 	}
 }
@@ -71,7 +79,10 @@ export default {
 		width: 65%;
 	}
 	.container{
-		margin-left: 10%;
+		width: calc( 100% - 2 * 5%);
+		margin-left: 5%;
+		margin-right: 5%;
+
 		margin-top:60px;
 		margin-bottom: 150px;
 	}
@@ -101,6 +112,10 @@ export default {
 		margin-top: 20px;
 		margin-bottom: 10px;
 		margin-left: 100px;
+	}
+	.messageError strong{
+		color: red;
+		text-align: left;
 	}
 
 </style>

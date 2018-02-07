@@ -7,7 +7,7 @@
 			<form class="" @submit.prevent="submit()" >
 					<div class="coordonees">
 						<div class="block">
-							<p>Veuillez entrer les coordonnées manuellement ou cliquer sur la carte le point d'intéret</p><br>
+							<p>Veuillez entrer les coordonnées manuellement ou cliquer sur la carte le point d'intéret</p>
 							<div class="control">
 					  		<label class="label">Latitude :</label>
 					    	<input class="input" type="text" placeholder="Entrez l'altitude" pattern="^[0-9]+(\.[0-9]+$|$)" v-model="lat" required>
@@ -38,7 +38,7 @@
 				  		<label class="label">Description :</label>
 				    	<b-input id="textarea" class="b-input" type="textarea" minlength="10" maxlength="100"
 						placeholder="Entrez la descriptiond de la partie" v-model="description" required/>
-				  	</div><br>
+				  	</div>
 			  	</div>
 
 
