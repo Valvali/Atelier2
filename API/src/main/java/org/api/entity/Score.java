@@ -7,7 +7,10 @@ package org.api.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
 /**
@@ -22,6 +25,10 @@ public class Score implements Serializable {
     
     private int score;
     private String nom;
+    private int difficulte;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "")
+    private Serie serie;
     
     public long getId() {
         return id;

@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.UUID;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
@@ -21,6 +22,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import org.api.entity.Partie;
 import org.api.entity.Point;
 
 /**
@@ -31,20 +33,21 @@ import org.api.entity.Point;
 @Stateless
 @Path("partie")
 public class PartieResource {
-//    @GET
-//    public Response getSeries() {
-//        JsonObject pointJSON = Json.createObjectBuilder()
-//                .add("hello", "hello")
-//                .add("world", "world")
-//                .build();
-//        return Response.ok(pointJSON).build();
-//    }
+
+    @Inject
+    PartieManager pm;
+    
+    
     @GET
-    @Path("{nom}/{difficulte}")
-    public Response getPartie(@PathParam("nom") String nom, @PathParam("difficulte") int difficulte, @Context UriInfo uriInfo) {
+    @Path("{serie}/{difficulte}")
+    public Response getPartie(@PathParam("serie") String nomSerie, @PathParam("difficulte") int difficulte, @Context UriInfo uriInfo) {
+        
+        Partie partie = new Partie();
+
+        
         JsonObjectBuilder ret = Json.createObjectBuilder();
         JsonArrayBuilder pointsJSON = Json.createArrayBuilder();
-        Collection<Point> points = new ArrayList<>(); // TODO
+        Collection<Point> points = pm.nouvellePartie(nomSerie, difficulte);
         for (Point p : points) {
             JsonObjectBuilder pointJSON = Json.createObjectBuilder();
             pointJSON.add("lat", p.getLat());

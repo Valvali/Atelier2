@@ -27,7 +27,7 @@ class SerieManager {
 
     public Serie findByName(String lieu) {
         return (Serie) em.createQuery("SELECT s FROM Serie s where s.lieu = :lieu")
-                        .setParameter("lieu", lieu).getResultList();
+                        .setParameter("lieu", lieu).getSingleResult();
     }
     
     public List<Serie> getAllSeries() {
