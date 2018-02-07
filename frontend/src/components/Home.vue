@@ -2,7 +2,7 @@
 	<layout-basic>
 	<h1 class="homeTitle"><b>Welcome to our application GeoQuizz, please launch the game...</b></h1>
 	 	<div class="container">
-			<form class="" action="index.html" @submit.prevent="newGame(city)">
+			<form class="" action="index.html" @submit.prevent="newGame()">
 			  	<div class="control">
 
 			  		<label class="label">Ville :</label>
@@ -60,8 +60,8 @@ export default {
 	  };
 	},
   methods: {
-		async newGame(ville) {/*
-			await api.get('partie/' + ville).then(function (response) {
+		async newGame() {/*
+			await api.get('partie/' + this.city).then(function (response) {
 				console.log(response);
 			})*/
 			console.log(this.pseudo);
