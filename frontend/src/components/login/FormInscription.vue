@@ -15,11 +15,11 @@
 					</div><br>
 					<div class="control">
 						<label class="label">Mot de passe :</label>
-						<input class="input" type="password" password-reveal v-model="password" >
+						<input class="input" type="password" placeholder="Entrez votre mot de passe" password-reveal v-model="password" >
 					</div><br>
 					<div class="control">
 						<label class="label">Verification du mot de passe</label>
-						<input class="input" type="password" password-reveal v-model="passwordVerif" >
+						<input class="input" type="password" placeholder="Confirmez votre mot de passe" password-reveal v-model="passwordVerif" >
 					</div><br>
 
 

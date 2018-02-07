@@ -78,7 +78,7 @@ export default {
 	  return {
 		pseudo: "",
 		difficulty: "2",
-	    serie:{}
+	    serie:[]
 	  };
 	},
   methods: {

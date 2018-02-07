@@ -128,7 +128,7 @@ export default {
 	.block{
 		text-align: left;
 	}
-	.input,.b-input{
+	.input,.b-input,#dropzone{
 		width: 65%;
 	}
 	.container{
