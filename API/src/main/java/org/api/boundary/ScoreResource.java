@@ -12,6 +12,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -40,6 +41,7 @@ import org.api.entity.Score;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class ScoreResource {
+    final int TOP = 10; // top 10
     @Inject
     ScoreManager sm;
     
@@ -49,12 +51,17 @@ public class ScoreResource {
     @GET
     public Response getScore() {
         JsonArrayBuilder jab = Json.createArrayBuilder();
-        for (Score s: this.sm.findAll()) {
-            jab.add(s.getNom());
-            jab.add(s.getScore());
+        List<Score> allScores = this.sm.findAll();
+        allScores.sort((s1, s2) -> {
+            return s2.getScore() - s1.getScore();
+        });
+        for (Score s: allScores.subList(0, TOP)) {
+            JsonObjectBuilder job = Json.createObjectBuilder();
+            job.add("nom", s.getNom());
+            job.add("score", s.getScore());
+            jab.add(job);
         }
         return Response.ok(jab.build()).build();
-
     }
     
     @POST
