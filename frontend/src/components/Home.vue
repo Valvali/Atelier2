@@ -55,7 +55,7 @@
 
 			  	<div class="control">
 			  		<label class="label">Username :</label>
-			    	<input class="input" type="text" placeholder="Saisissez votre username" v-model="pseudo">
+			    	<input class="input" type="text" placeholder="Saisissez votre username" v-model="pseudo" required>
 			  	</div><br>
 
 				 	<div class="control">

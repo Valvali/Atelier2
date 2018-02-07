@@ -7,19 +7,19 @@
 			<form class="" @submit.prevent="submit()">
 			  	<div class="control">
 			  		<label class="label">Nom :</label>
-			    	<input class="input" type="text" placeholder="Entrez votre nom complet" v-model="name">
+			    	<input class="input" type="text" placeholder="Entrez votre nom complet" v-model="name" required>
 			  	</div><br>
 			  	<div class="control">
 			  		<label class="label">E-mail :</label>
-			    	<input class="input" type="email" placeholder="Entrez votre E-mail" v-model="email">
+			    	<input class="input" type="email" placeholder="Entrez votre E-mail" v-model="email" required>
 					</div><br>
 					<div class="control">
 						<label class="label">Mot de passe :</label>
-						<input class="input" type="password" password-reveal v-model="password" >
+						<input class="input" type="password" password-reveal v-model="password" required>
 					</div><br>
 					<div class="control">
 						<label class="label">Verification du mot de passe</label>
-						<input class="input" type="password" password-reveal v-model="passwordVerif" >
+						<input class="input" type="password" password-reveal v-model="passwordVerif" required >
 					</div><br>
 
 
@@ -51,12 +51,16 @@ export default {
 	},
 	methods: {
 		submit(){
-			console.log(this.name)
-			console.log(this.email)
-			console.log(this.password)
+			if(this.verifPassword()){
+				console.log(this.name)
+				console.log(this.email)
+				console.log(this.password)
+			}
 		},
 		verifPassword(){
-			
+			console.log(this.password)
+			console.log(this.passwordVerif)
+			return this.password == this.passwordVerif
 		}
 	}
 }

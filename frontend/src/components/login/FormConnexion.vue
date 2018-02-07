@@ -7,11 +7,11 @@
 			<form class="" @submit.prevent="submit()">
 			  	<div class="control">
 			  		<label class="label">E-mail :</label>
-			    	<input class="input" type="email" placeholder="Entrez votre E-mail" v-model="email">
+			    	<input class="input" type="email" placeholder="Entrez votre E-mail" v-model="email" required>
 			  	</div><br>
 			  	<div class="control">
 			  		<label class="label">Password :</label>
-			    	<b-input class="b-input" type="password" password-reveal v-model="password"></b-input>
+			    	<b-input class="b-input" type="password" password-reveal v-model="password" required/>
 			  	</div><br>
 
 				 	<div class="control">

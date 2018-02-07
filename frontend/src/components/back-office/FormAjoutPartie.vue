@@ -10,15 +10,15 @@
 							<p>Veuillez entrer les coordonnées manuellement ou cliquer sur la carte le point d'intéret</p><br>
 							<div class="control">
 					  		<label class="label">Latitude :</label>
-					    	<input class="input" type="text" placeholder="Entrez l'altitude" pattern="^[0-9]+(\.[0-9]+$|$)" v-model="lat">
+					    	<input class="input" type="text" placeholder="Entrez l'altitude" pattern="^[0-9]+(\.[0-9]+$|$)" v-model="lat" required>
 					  	</div><br>
 					  	<div class="control">
 					  		<label class="label">Longitude :</label>
-					    	<input class="input" type="text" placeholder="Entrez la longitude" pattern="^[0-9]+(\.[0-9]+$|$)" v-model="lng">
+					    	<input class="input" type="text" placeholder="Entrez la longitude" pattern="^[0-9]+(\.[0-9]+$|$)" v-model="lng" required>
 					  	</div><br>
 							<div class="control">
 					  		<label class="label">Ville :</label>
-					    	<input class="input" type="text" placeholder="Entrez la ville" v-model="city">
+					    	<input class="input" type="text" placeholder="Entrez la ville" v-model="city" required>
 					  	</div><br>
 						</div>
 						<div class="block">
@@ -37,7 +37,7 @@
 				  	<div class="control">
 				  		<label class="label">Description :</label>
 				    	<b-input id="textarea" class="b-input" type="textarea" minlength="10" maxlength="100"
-						placeholder="Entrez la descriptiond de la partie" v-model="description"/>
+						placeholder="Entrez la descriptiond de la partie" v-model="description" required/>
 				  	</div><br>
 			  	</div>
 
