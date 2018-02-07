@@ -1,0 +1,70 @@
+{
+	"info": {
+		"name": "donneesGeoQuiz",
+		"_postman_id": "04ce63a4-661d-c0b7-a303-57394f50c2ed",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Nancy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\t\r\t\"lieu\": \"Nancy\",\r\t\"points\": [{\r\t\r\t  \"lat\": \"48.693609\",\r\t\r\t  \"lng\": \" 6.183243\",\r\t\r\t  \"img\": \"https://www.petitfute.com/medias/professionnel/30049/premium/600_450/223989-nancy-place-stanislas.jpg\",\r\t\r\t  \"description\":\"Place stanislas\",\r\t\r\t  \"difficulte\": \"1\"\r\t\r\t},\r\t\r\t{\r\t\r\t  \"lat\": \"48.692326\",\r\t\r\t  \"lng\": \"6.188301\",\r\t\r\t  \"img\": \"http://3.bp.blogspot.com/-ANdpXhRNMAg/Vlm5SHjx13I/AAAAAAAAnQQ/PzSX6h6WkCU/s1600/Porte%2Bsaint%2BGeorges%2B%25286%2529.jpg\",\r\t\r\t  \"description\":\"Porte saint george\",\r\t\r\t  \"difficulte\": \"4\"\r\t\r\t},\r\t\r\t{\r\t\r\t  \"lat\": \"48.696343\",\r\t\r\t  \"lng\": \"6.179632\",\r\t\r\t  \"img\": \"https://media-cdn.tripadvisor.com/media/photo-s/0e/c5/0e/63/basilique-saint-epvre.jpg\",\r\t\r\t  \"description\":\"Basilique Saint-Epvre\",\r\t\r\t  \"difficulte\": \"2\"\r\t\r\t},\r\t\r\t{\r\t  \"lat\": \"48.682845\",\r\t\r\t  \"lng\": \"6.1611653\",\r\t\r\t  \"img\": \"http://www.univ-lorraine.fr/sites/www.univ-lorraine.fr/files/styles/header/public/iut-nancy-charlemagne.jpg?itok=ghAR954-\",\r\t\r\t  \"description\":\"IUT Nancy-Charlemagne\",\r\t\r\t  \"difficulte\": \"3\"\r\t\r\t},\r\t\r\t{\r\t\r\t  \"lat\": \"48.6587665\",\r\t\r\t  \"lng\": \"6.1489475\",\r\t\r\t  \"img\": \"http://www.annuaire-ecoles-sante-social.adeccomedical.fr/uploads/all_photo/545.jpg\",\r\t\r\t  \"description\":\"IUT Nancy-Brabois\",\r\t\r\t  \"difficulte\": \"4\"\r\t\r\t},\r\t\r\t{\r\t\r\t  \"lat\": \"48.6961925\",\r\t\r\t  \"lng\": \"6.1832994\",\r\t\r\t  \"img\": \"https://www.sitlor.fr/photos/737/737000267_4.jpg\",\r\t\r\t  \"description\":\"Parc de la pépinière\",\r\t\r\t  \"difficulte\": \"1\"\r\t\r\t},\r\t\r\t{\r\t\r\t  \"lat\": \"48.689894\",\r\t\r\t  \"lng\": \"6.1762033\",\r\t\r\t  \"img\": \"http://ekladata.com/qyTPU4beaBOGYjKQOB1JZT2Kg28.jpg\",\r\t\r\t  \"description\":\"Cathédrale Notre-Dame-de-l'Annonciation \",\r\t\r\t  \"difficulte\": \"3\"\r\t\r\t},\r\t\r\t{\r\t\r\t  \"lat\": \"48.6963432\",\r\t\r\t  \"lng\": \"6.1718138\",\r\t\r\t  \"img\": \"http://4.bp.blogspot.com/-QiU3x7iHR-0/UZh5iKFaeSI/AAAAAAAAMEQ/gqDqZxn-I-w/s1600/Nancy-Porte+de+la+Craffe-001.jpg\",\r\t\r\t  \"description\":\"Porte de la Craffe\",\r\t\r\t  \"difficulte\": \"3\"\r\t\r\t},\r\t\r\t{\r\t\r\t  \"lat\": \"48.665741\",\r\t\r\t  \"lng\": \"6.1596302\",\r\t\r\t  \"img\": \"http://factuel.univ-lorraine.fr/sites/factuel.univ-lorraine.fr/files/field/image/2015/03/reportagesite_preview.jpg\",\r\t\r\t  \"description\":\"Faculté des sciences et technologies\",\r\t\r\t  \"difficulte\": \"4\"\r\t\r\t},\r\t\r\t{\r\t\r\t  \"lat\": \"48.6664166\",\r\t\r\t  \"lng\": \"6.1659675\",\r\t\r\t  \"img\": \"http://www.laforet.com/sites/default/files/styles/agence-video__800x650_/public/thumb-immobilier-vandoeuvrelesnancy.jpg?itok=sIrohMQ1\",\r\t\r\t  \"description\":\"Vélodrome\",\r\t\r\t  \"difficulte\": \"3\"\r\t\r\t}\r\t\r\t]\r}\t\r"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/serie",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"serie"
+					]
+				},
+				"description": "insertion points Nancy"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "93a6835d-fbd7-4c2c-99cf-3e813acac90f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "d2152c27-a72b-47a5-9847-9bf7891c177a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "604c3049-2f86-40e9-9872-e84677127e0b",
+			"key": "url",
+			"value": "\"http://localhost:8080\"",
+			"type": "text"
+		}
+	]
+}
