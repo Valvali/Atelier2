@@ -31,7 +31,7 @@ import org.api.entity.Serie;
  */
 @Stateless
 @Path("serie")
-@Produces(MediaType.APPLICATION_JSON)
+//@Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class SerieResource {
     

@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.UUID;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -24,6 +25,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import org.api.entity.Partie;
 import org.api.entity.Point;
+import org.api.entity.Serie;
 
 /**
  *
@@ -37,17 +39,27 @@ public class PartieResource {
     @Inject
     PartieManager pm;
     
+    @Inject
+    SerieManager sm;
+    
     
     @GET
     @Path("{serie}/{difficulte}")
     public Response getPartie(@PathParam("serie") String nomSerie, @PathParam("difficulte") int difficulte, @Context UriInfo uriInfo) {
         
-        Partie partie = new Partie();
+        // randomUUID() utilise SecureRandom et 122bits de random, ce qui est suffisant
+        String token = UUID.randomUUID().toString();
+        
+        Serie serie = sm.findByName(nomSerie);
+        if (serie == null) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Cette série n'existe pas").build();
 
+        }
         
         JsonObjectBuilder ret = Json.createObjectBuilder();
         JsonArrayBuilder pointsJSON = Json.createArrayBuilder();
-        Collection<Point> points = pm.nouvellePartie(nomSerie, difficulte);
+        List<Point> points = pm.nouvellePartie(nomSerie, difficulte);
         if (points == null) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("Pas assez de POI pour cette difficultê").build();
@@ -61,9 +73,18 @@ public class PartieResource {
             pointJSON.add("difficulte", p.getDifficulte());
             pointsJSON.add(pointJSON);
         }
-        // randomUUID() utilise SecureRandom et 122bits de random, ce qui est suffisant
-        ret.add("token", UUID.randomUUID().toString());
+        ret.add("token", token);
         ret.add("points", pointsJSON);
+        
+        Partie partie = new Partie();
+        partie.setDifficulte(difficulte);
+        partie.setPoints(points);
+        partie.setScore(-1);
+        partie.setSerie(serie);
+        partie.setToken(token);
+        
+        pm.save(partie);
+        
         return Response.ok(ret.build()).build();
     }
 }

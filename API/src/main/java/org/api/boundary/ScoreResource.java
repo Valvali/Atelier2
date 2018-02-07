@@ -38,7 +38,7 @@ import org.api.entity.Score;
 
 @Stateless
 @Path("score")
-@Produces(MediaType.APPLICATION_JSON)
+//@Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class ScoreResource {
     final int TOP = 10; // top 10
@@ -47,6 +47,8 @@ public class ScoreResource {
     
     @Inject
     SerieManager serieManager;
+    @Inject
+    PartieManager pm;
     
     @GET
     public Response getScore() {
@@ -67,6 +69,10 @@ public class ScoreResource {
     @POST
     @Path("{token}/{serie}")
     public Response newScore(@Valid Score s, @PathParam("token") String token, @PathParam("serie") String serie, @Context UriInfo uriInfo) {
+        if (! pm.isTokenValid(token, serie)) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("token invalide pour cette série").build();
+        }
         s.setSerie(serieManager.findByName(serie));
         s.setId(UUID.randomUUID().toString());
         Score newOne = this.sm.save(s);

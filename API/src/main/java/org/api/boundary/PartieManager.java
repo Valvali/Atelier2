@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import org.api.entity.Partie;
 import org.api.entity.Point;
@@ -58,5 +60,21 @@ public class PartieManager {
             Collections.swap(points, i , r.nextInt(i + 1));
         }
         return points.subList(length - NBPOINTS, length);
+    }
+    
+    public boolean isTokenValid(String token, String serie) {
+        Partie p;
+        try {
+            p = (Partie) em.createQuery("SELECT p FROM Partie p where p.token = :token")
+                        .setParameter("token", token).getSingleResult();
+        } catch (NoResultException e) {
+            return false;
+        }
+        return (sm.findByName(p.getSerie().getLieu()).getLieu().equals(serie));
+    }
+
+    void save(Partie partie) {
+        partie.setId(UUID.randomUUID().toString());
+        this.em.merge(partie);
     }
 }
