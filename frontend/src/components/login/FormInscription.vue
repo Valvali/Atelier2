@@ -76,7 +76,9 @@ export default {
 				nom: this.name,
 				mail: this.mail,
 				password: this.password
-			} )
+			} ).then(function(response) {
+				console.log(response);
+			})
 
 		}
 	}
