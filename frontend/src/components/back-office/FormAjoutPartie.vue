@@ -32,8 +32,8 @@
 			  	<div class="block">
 						<div class="control">
 				  		<label class="label">Image :</label>
-				    	<input type="file">
-				  	</div><br>
+							<vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"/>
+						</div>
 				  	<div class="control">
 				  		<label class="label">Description :</label>
 				    	<b-input id="textarea" class="b-input" type="textarea" minlength="10" maxlength="100"
@@ -56,9 +56,13 @@
 	import LayoutBasic from '@/components/layout/BaseLayout'
 	import axios from 'axios'
 
+	import vue2Dropzone from 'vue2-dropzone'
+	import 'vue2-dropzone/dist/vue2Dropzone.css'
+
 export default {
 	components: {
-	  LayoutBasic
+	  LayoutBasic,
+		vueDropzone: vue2Dropzone
 	},
 	data: function () {
     return {
@@ -71,6 +75,17 @@ export default {
 			lng: "",
 			description: "",
 			city: "",
+
+
+			dropzoneOptions: {
+          url: 'https://httpbin.org/post',
+          thumbnailWidth: 500,
+          maxFilesize: 0.5,
+          headers: { "My-Awesome-Header": "header value"},
+					maxFiles: "1",
+					acceptedFiles: "image/png,image/gif,image/jpeg",
+
+      }
 		}
 	},
 	methods: {
