@@ -5,7 +5,7 @@
    		 	<div class="bar_nav">
 				<img src="../../../assets/images/geoquiz.jpg"/>
 	          	<div class="pseudo" v-if="connected">
-	            	<strong class="infoParty "> score : {{score}} <router-link class="buttonHome" to="home">Accueil</router-link></strong>
+	            	<strong class="infoParty "> {{pseudo}} <router-link class="buttonHome" to="home">Accueil</router-link></strong>
 	          	</div>
    		 	</div>
     </header>
