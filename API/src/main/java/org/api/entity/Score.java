@@ -5,6 +5,7 @@
  */
 package org.api.entity;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
@@ -15,7 +16,7 @@ import javax.persistence.NamedQuery;
  */
 @Entity
 @NamedQuery(name="Score.findAll",query="SELECT s FROM Score s")
-public class Score {
+public class Score implements Serializable {
     @Id
     private long id;
     
