@@ -40,7 +40,6 @@ export default {
   },
   created: function () {
     this.finalScore =  ls.get(0).score;
-    ls.clear()
   }
 
 }
