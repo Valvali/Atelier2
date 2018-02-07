@@ -10,7 +10,7 @@
 					<li><router-link class="buttonHome" to="connexion">Connexion</router-link></li>	
 				</ul>
 	          	<div class="pseudo" v-if="connected">
-	            	<strong>Bonjour <span class="hello">{{pseudo}}</span> || score : {{score}}</strong>
+	            	<strong>Bienvenue <span class="hello">{{pseudo}}</span> || score : {{score}}</strong>
 	          	</div>
    		 	</div>
     </header>

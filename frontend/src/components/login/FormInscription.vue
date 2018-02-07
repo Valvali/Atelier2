@@ -4,7 +4,7 @@
 		<h1 class="titleFormBackend"><b>Formulaire d'inscription</b></h1>
 	 	<div class="container">
 
-			<form class="" @submit.prevent="submit()">
+			<form class="" @submit.prevent="signin()">
 			  	<div class="control">
 			  		<label class="label">Nom :</label>
 			    	<input class="input" type="text" placeholder="Entrez votre nom complet" v-model="name">
@@ -43,21 +43,15 @@ export default {
 	},
 	data: function () {
 		return {
-			name: "",
-			email: "",
-			password: "",
-			passwordVerif: "",
+			user:{ name: "",email: "",password: "",passwordVerif: ""}
 		}
 	},
 	methods: {
-		submit(){
-			console.log(this.name)
-			console.log(this.email)
-			console.log(this.password)
+		signin(){
+			this.$store.dispatch('auth/login').then(response=>{
+				this.$router.push({name:'home'})
+			})
 		},
-		verifPassword(){
-			
-		}
 	}
 }
 </script>
