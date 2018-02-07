@@ -1,0 +1,70 @@
+[{
+  "position": "1",
+  "pseudo": "Sombra",
+  "score": "999999999",
+  "city": "nancy",
+  "difficulty":"4"
+},
+{
+  "position": "2",
+  "pseudo": "AAA",
+  "score": "666185",
+  "city": "nancy",
+  "difficulty":"3"
+},
+{
+  "position": "3",
+  "pseudo": "Kro",
+  "score": "652452",
+  "city": "nancy",
+  "difficulty":"3"
+},
+{
+  "position": "4",
+  "pseudo": "Vali",
+  "score": "613789",
+  "city": "nancy",
+  "difficulty":"3"
+},
+{
+  "position": "5",
+  "pseudo": "AZERTY",
+  "score": "457892",
+  "city": "lyon",
+  "difficulty":"1"
+},
+{
+  "position": "6",
+  "pseudo": "test",
+  "score": "48153",
+  "city": "lyon",
+  "difficulty":"1"
+},
+{
+  "position": "7",
+  "pseudo": "qpsvn",
+  "score": "37520",
+  "city": "nancy",
+  "difficulty":"1"
+},
+{
+  "position": "8",
+  "pseudo": "xXxD4rkKn1ghtxXx",
+  "score": "5650",
+  "city": "paris",
+  "difficulty":"1"
+},
+{
+  "position": "9",
+  "pseudo": "satan",
+  "score": "666",
+  "city": "paris",
+  "difficulty":"4"
+},
+{
+  "position": "10",
+  "pseudo": "reponse",
+  "score": "42",
+  "city": "paris",
+  "difficulty":"4"
+}]
