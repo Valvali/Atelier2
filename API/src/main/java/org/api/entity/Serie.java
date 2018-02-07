@@ -5,7 +5,7 @@
  */
 package org.api.entity;
 
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -16,6 +16,12 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Serie {
+    
+    @Id
+    private String id;
+    private String lieu;
+    @OneToMany
+    private List<Point> points;
 
     public String getId() {
         return id;
@@ -25,18 +31,19 @@ public class Serie {
         this.id = id;
     }
 
-    public String getNom() {
-        return nom;
+    public String getLieu() {
+        return lieu;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setLieu(String nom) {
+        this.lieu = nom;
     }
     
-    @Id
-    private String id;
-    private String nom;
-    @OneToMany
-    private Collection<Point> points;
+    /**
+     * @return the points
+     */
+    public List<Point> getPoints() {
+        return points;
+    }
     
 }

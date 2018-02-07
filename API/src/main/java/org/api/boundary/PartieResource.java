@@ -40,8 +40,8 @@ public class PartieResource {
 //        return Response.ok(pointJSON).build();
 //    }
     @GET
-    @Path("{nom}")
-    public Response getPartie(@PathParam("nom") String nom, @Context UriInfo uriInfo) {
+    @Path("{nom}/{difficulte}")
+    public Response getPartie(@PathParam("nom") String nom, @PathParam("difficulte") int difficulte, @Context UriInfo uriInfo) {
         JsonObjectBuilder ret = Json.createObjectBuilder();
         JsonArrayBuilder pointsJSON = Json.createArrayBuilder();
         Collection<Point> points = new ArrayList<>(); // TODO

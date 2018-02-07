@@ -54,7 +54,7 @@ public class PointResource {
     @POST
     public Response newPoint(@Valid Point p, @Context UriInfo uriInfo) {
         Point newOne = this.pm.save(p);
-        long id = newOne.getId();
+        String id = newOne.getId();
         URI uri = uriInfo.getAbsolutePathBuilder().path("/"+id).build();
         return Response.created(uri).build();
     }
