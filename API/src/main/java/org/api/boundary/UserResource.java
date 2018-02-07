@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Optional;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
 import javax.validation.Valid;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -20,6 +22,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+
 import org.api.entity.User;
 
 /**
@@ -35,9 +38,13 @@ public class UserResource {
     
     @GET
     public Response GetUsers() {
-        GenericEntity<List<User>> liste = new GenericEntity<List<User>>(this.um.findAll()) {
-        };
-        return Response.ok(liste).build();
+        JsonArrayBuilder jab = Json.createArrayBuilder();
+        for (User u: this.um.findAll()) {
+            jab.add(u.getNom());
+            jab.add(u.getPrenom());
+            jab.add(u.getMail());
+        }
+        return Response.ok(jab.build()).build();
     }
     
     @GET
