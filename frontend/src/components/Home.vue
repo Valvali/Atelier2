@@ -5,22 +5,47 @@
 			<form class="" action="index.html" @submit.prevent="newGame()">
 			  	<div class="control">
 
-			  		<label class="label">Ville :</label>
-						<select v-model="city">
-	  						<option value="nancy">Nancy</option>
-	  						<option value="paris">Paris</option>
-	  						<option value="lyon">Lyon</option>
-						</select>
+						<b-field label="Ville :">
+
+							<b-select placeholder="Selectionner une ville" v-model="city" >
+								<option value="nancy">Nancy</option>
+								<option value="paris">Paris</option>
+								<option value="lyon">Lyon</option>
+							</b-select>
+						</b-field>
+
 			  	</div><br>
 
 			  	<div class="control">
-			  		<label class="label">Difficulté :</label>
-						<select v-model="difficulty">
-	  						<option value="1">Facile</option>
-	  						<option value="2" selected>Moyen</option>
-	  						<option value="3">Difficile</option>
-							<option value="4">Expert</option>
-						</select>
+						<label class="label">Difficulté :</label>
+						<b-field>
+            <b-radio-button v-model="difficulty"
+                native-value="1"
+                type="is-primary">
+                Façile
+            </b-radio-button>
+
+            <b-radio-button v-model="difficulty"
+                native-value="2"
+                type="is-primary"
+								checked="checked">
+                Normal
+            </b-radio-button>
+
+            <b-radio-button v-model="difficulty"
+                native-value="3"
+								type="is-primary">
+                Difficile
+            </b-radio-button>
+
+            <b-radio-button v-model="difficulty"
+                native-value="4"
+								type="is-primary">
+                Expert
+            </b-radio-button>
+        </b-field>
+
+
 			  	</div><br>
 
 			  	<div class="control">
@@ -41,6 +66,8 @@
  	</layout-basic>
 </template>
 
+
+
 <script>
 	import api from '@/services/api'
 	import LayoutBasic from '@/components/layout/BaseLayout'
@@ -54,9 +81,9 @@ export default {
 	data: function () {
 	  return {
 			pseudo: "",
-			difficulty: 2,
-	    	city: "nancy",
-	    	serie:{}
+			difficulty: "2",
+	    city: "nancy",
+	    serie:{}
 	  };
 	},
   methods: {
@@ -117,4 +144,5 @@ export default {
 		font-size: 2em;
 		margin-top:50px;
 	}
+
 </style>
