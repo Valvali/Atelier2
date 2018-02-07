@@ -3,20 +3,25 @@
 	<div class="globalContainer">
 		<h1 class="titleFormBackend"><b>Formulaire d'inscription</b></h1>
 	 	<div class="container">
-	 	
-			<form class="" >	
+
+			<form class="" @submit.prevent="submit()">
 			  	<div class="control">
 			  		<label class="label">Nom :</label>
-			    	<input class="input" type="text" placeholder="Entrez votre nom">
-			  	</div><br>	
-			  	<div class="control">
-			  		<label class="label">Prénom :</label>
-			    	<input class="input" type="text" placeholder="Entrez votre prénom">
-			  	</div><br>	
+			    	<input class="input" type="text" placeholder="Entrez votre nom complet" v-model="name">
+			  	</div><br>
 			  	<div class="control">
 			  		<label class="label">E-mail :</label>
-			    	<input class="input" type="email" placeholder="Entrez votre E-mail">
-			  	</div><br>	
+			    	<input class="input" type="email" placeholder="Entrez votre E-mail" v-model="email">
+					</div><br>
+					<div class="control">
+						<label class="label">Mot de passe :</label>
+						<input class="input" type="password" password-reveal v-model="password" >
+					</div><br>
+					<div class="control">
+						<label class="label">Verification du mot de passe</label>
+						<input class="input" type="password" password-reveal v-model="passwordVerif" >
+					</div><br>
+
 
 				 	<div class="control">
 				    	<button class="button is-link">Enregistrer</button>
@@ -36,6 +41,24 @@ export default {
 	components: {
 	  LayoutBasic
 	},
+	data: function () {
+		return {
+			name: "",
+			email: "",
+			password: "",
+			passwordVerif: "",
+		}
+	},
+	methods: {
+		submit(){
+			console.log(this.name)
+			console.log(this.email)
+			console.log(this.password)
+		},
+		verifPassword(){
+			
+		}
+	}
 }
 </script>
 
