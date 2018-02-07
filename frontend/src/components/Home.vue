@@ -5,10 +5,10 @@
 			<form class="" action="index.html" @submit.prevent="newGame()">
 			  	<div class="control">
 
-						<b-field label="Ville :">							
+						<b-field label="Ville :">
 							<b-select placeholder="Selectionner une ville">
-								<option v-for="s in serie" v-bind:value="s">{{ s }}</option>			
-							</b-select>							
+								<option v-for="s in serie" v-bind:value="s">{{ s }}</option>
+							</b-select>
 						</b-field>
 
 			  	</div><br>
@@ -54,11 +54,6 @@
 				    	<button class="button is-link">Envoyer</button>
 				 	</div>
 			</form>
-			todo list :<br>
-			- recuperer les infos de l'api avec le formulaire<br>
-			- mettre le fichier json des points dans le store pour l'utiliser dans geolocation<br>
-			- post / get le liste des meilleur particiapnt<br>
-
 		</div>
  	</layout-basic>
 </template>

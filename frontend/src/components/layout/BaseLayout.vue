@@ -3,25 +3,9 @@
   <div class="basic-layout">
     <header>
    		 	<div class="bar_nav">
-<<<<<<< HEAD
 				<img src="../../../assets/images/geoquiz.jpg"/>
-				<ul >
-					<li><router-link class="buttonHome" to="home">Accueil</router-link></li>
-					<li><router-link class="buttonHome" to="inscription">Inscription</router-link></li>
-					<li><router-link class="buttonHome" to="connexion">Connexion</router-link></li>
-				</ul>
 	          	<div class="pseudo" v-if="connected">
-	            	<strong><span class="hello">{{pseudo}}</span></strong>
-=======
-				<img src="../../../assets/images/geoquiz.jpg"/>
-				<ul>
-					<li><router-link class="buttonHome" to="home">Accueil</router-link></li>
-					<li><router-link class="buttonHome" to="inscription">Inscription</router-link></li>
-					<li><router-link class="buttonHome" to="connexion">Connexion</router-link></li>
-				</ul>
-	          	<div class="pseudo" v-if="connected">
-	            	<strong>Bonjour <span class="hello">{{pseudo}}</span> || score : {{score}}</strong>
->>>>>>> 60c159b92397c48bdd2f0e146d89f7883489489a
+	            	<strong class="infoParty "> {{pseudo}} <router-link class="buttonHome" to="home">Accueil</router-link></strong>
 	          	</div>
    		 	</div>
     </header>
@@ -38,7 +22,6 @@
 	import api from '@/services/api'
 	import LayoutBasic from '@/components/layout/BaseLayout'
 	import ls  from '@/services/ls'
-
 export default {
 	data: function () {
 	  return {
@@ -49,7 +32,6 @@ export default {
 	},
   methods: {
     actualise(){
-    console.log('Voilà'+ls.get(0));
       this.pseudo =  ls.get(0).pseudo;
       this.score =   ls.get(0).score;
       if(ls.get(0)){ this.connected = true; }
@@ -63,11 +45,11 @@ export default {
 </script>
 
 <style scoped>
-
 	.hello{
-		color:yellow;
+		color:white;
+		font-weight: bold;
+		background-color: black;
 	}
-
 	.bar_nav {
 		background-color: black;
 	  	overflow: hidden;
@@ -80,73 +62,29 @@ export default {
 		float:left;
 		margin-left: 5%;
 	}
-
 	footer{
 		background-color:black;
 		color:white;
 	}
-
 	p.footerPara {
   		margin-bottom: 0px;
   		padding: 1%;
   		font-weight: bold;
    }
-
    body{
 		min-height: 100%;
 		position: relative;
 		padding-bottom: 100px;
 	}
-
 	html{
 		height: 100%;
 	}
-
 	.buttonHome{
-		padding:10px;
+		padding:5px;
 		color:white;
-		background-color: 	#228B22;
+		background-color: green;
 		text-align: center;
-		font-weight: bold;
 	}
-	.buttonHome:hover{
-  		background-color: #008000;
-  	}
-	.pseudo{
-	    padding-top : -40px;
-	    margin: -48px 10px 0 0;
-	    display: block;
-	    height: 100%;
-	    text-align: right;
-	    clear:both;
-	    float:right;
-	}
-	strong{
-		display: block;
-		vertical-align: center;
-		margin: 20px 25px 20px 20px;
-		color: white;
-	}
-
-<<<<<<< HEAD
-	.bar_nav ul{
-=======
-	ul{
->>>>>>> 60c159b92397c48bdd2f0e146d89f7883489489a
-		float:right;
-		margin-right: 20px;
-	}
-
-<<<<<<< HEAD
-	.bar_nav ul li{
-=======
-	li{
->>>>>>> 60c159b92397c48bdd2f0e146d89f7883489489a
-		display:inline-block;
-		margin-left: 10px;
-		margin-top:35px;
-	}
-<<<<<<< HEAD
   .pseudo{
     padding-top : -20px;
     margin: 0;
@@ -154,8 +92,10 @@ export default {
     height: 100%;
     text-align: right;
   }
-
-=======
->>>>>>> 60c159b92397c48bdd2f0e146d89f7883489489a
-
+  .infoParty{
+    display: block;
+    vertical-align: center;
+    margin: 20px 25px 20px 20px;
+    color: white;
+  }
 </style>
