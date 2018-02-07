@@ -7,6 +7,7 @@ package org.api.boundary;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -33,12 +34,22 @@ public class UserResource {
     UserManager um;
     
     @GET
-    public Response GetUser() {
+    public Response GetUsers() {
         GenericEntity<List<User>> liste = new GenericEntity<List<User>>(this.um.findAll()) {
         };
         return Response.ok(liste).build();
     }
     
+    @GET
+    @Path("{id}")
+    public Response getOneUser(@PathParam("id") String id, @Context UriInfo uriInfo) {
+        return Optional.ofNullable(um.findById(id))
+                //.map(c -> Response.ok(categorie2Json(c)).build())
+                .map(u -> Response.ok(u).build())
+                //.orElseThrow(() -> new CategorieNotFound("Ressource non disponible "+ uriInfo.getPath()));
+                .orElse(Response.status(Response.Status.NOT_FOUND).build());
+    }
+        
     @POST
     public Response newScore(@Valid User u, @Context UriInfo uriInfo) {
         User newOne = this.um.save(u);
