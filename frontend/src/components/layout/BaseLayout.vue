@@ -5,8 +5,10 @@
    		 	<div class="bar_nav">
 					<img src="../../../assets/images/geoquiz.jpg"/>
           <div class="pseudo" v-if="connected">
-            <strong>{{pseudo}} || score : {{score}}</strong>
+            <strong>{{pseudo}} <router-link class="buttonHome" to="home">Accueil</router-link> </strong>
+
           </div>
+
    		 	</div>
     </header>
 
@@ -28,13 +30,11 @@ export default {
 	  return {
       connected: false,
       pseudo : "",
-      score : 0,
 	  };
 	},
   methods: {
     actualise(){
       this.pseudo =  ls.get(0).pseudo;
-      this.score =   ls.get(0).score;
       if(ls.get(0)){ this.connected = true; }
     }
 	},
@@ -85,6 +85,13 @@ export default {
 
 	html{
 		height: 100%;
+	}
+
+	.buttonHome{
+		padding:5px;
+		color:white;
+		background-color: green;
+		text-align: center;
 	}
   .pseudo{
     padding-top : -20px;
