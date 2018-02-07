@@ -11,7 +11,7 @@
 			  	</div><br>	
 			  	<div class="control">
 			  		<label class="label">Password :</label>
-			    	<b-input class="b-input" type="password" password-reveal></b-input>
+			    	<b-input class="b-input" type="password" password-reveal placeholder="Entrez votre mot de passe"></b-input>
 			  	</div><br>	
 
 				 	<div class="control">

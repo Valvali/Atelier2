@@ -113,7 +113,7 @@ export default {
 	},
 	created(){
 		ls.clear()
-		axios.get('').then(response=>{
+		axios.get('http://localhost:8080/api/serie').then(response=>{
 			this.serie=response.data;
 			console.log(this.serie);
 			console.log('okkkkk');
