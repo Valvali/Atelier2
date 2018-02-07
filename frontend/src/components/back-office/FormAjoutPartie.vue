@@ -4,21 +4,21 @@
 		<h1 class="titleFormBackend"><b>Formulaire d'ajout d'une partie</b></h1>
 	 	<div class="container">
 
-			<form class="" >
+			<form class="" @submit.prevent="submit()" >
 					<div class="coordonees">
 						<div class="block">
-							<p>Veuillez entrer les coordonnées manuellement ou cliquer sur la carte le point d'intéret</p><br>
+							<p>Veuillez entrer les coordonnées manuellement ou cliquer sur la carte le point d'intéret</p>
 							<div class="control">
 					  		<label class="label">Latitude :</label>
-					    	<input class="input" type="text" placeholder="Entrez l'altitude" pattern="^[0-9]+(\.[0-9]+$|$)" v-model="lat">
+					    	<input class="input" type="text" placeholder="Entrez l'altitude" pattern="^[0-9]+(\.[0-9]+$|$)" v-model="lat" required>
 					  	</div><br>
 					  	<div class="control">
 					  		<label class="label">Longitude :</label>
-					    	<input class="input" type="text" placeholder="Entrez la longitude" pattern="^[0-9]+(\.[0-9]+$|$)" v-model="lng">
+					    	<input class="input" type="text" placeholder="Entrez la longitude" pattern="^[0-9]+(\.[0-9]+$|$)" v-model="lng" required>
 					  	</div><br>
 							<div class="control">
 					  		<label class="label">Ville :</label>
-					    	<input class="input" type="text" placeholder="Entrez la ville" v-model="city">
+					    	<input class="input" type="text" placeholder="Entrez la ville" v-model="city" required>
 					  	</div><br>
 						</div>
 						<div class="block">
@@ -32,13 +32,13 @@
 			  	<div class="block">
 						<div class="control">
 				  		<label class="label">Image :</label>
-				    	<input type="file">
-				  	</div><br>
+							<vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions" v-model="img"/>
+						</div>
 				  	<div class="control">
 				  		<label class="label">Description :</label>
 				    	<b-input id="textarea" class="b-input" type="textarea" minlength="10" maxlength="100"
-						placeholder="Entrez la descriptiond de la partie" v-model="description"/>
-				  	</div><br>
+						placeholder="Entrez la descriptiond de la partie" v-model="description" required/>
+				  	</div>
 			  	</div>
 
 
@@ -56,9 +56,13 @@
 	import LayoutBasic from '@/components/layout/BaseLayout'
 	import axios from 'axios'
 
+	import vue2Dropzone from 'vue2-dropzone'
+	import 'vue2-dropzone/dist/vue2Dropzone.css'
+
 export default {
 	components: {
-	  LayoutBasic
+	  LayoutBasic,
+		vueDropzone: vue2Dropzone
 	},
 	data: function () {
     return {
@@ -71,12 +75,31 @@ export default {
 			lng: "",
 			description: "",
 			city: "",
+			img:"",
+
+
+			dropzoneOptions: {
+          url: 'https://httpbin.org/post',
+          thumbnailWidth: 500,
+          maxFilesize: 0.5,
+          headers: { "My-Awesome-Header": "header value"},
+					maxFiles: "1",
+					acceptedFiles: "image/png,image/gif,image/jpeg",
+					addRemoveLinks: true,
+      }
 		}
 	},
 	methods: {
 		async getPoint(e){
 			this.lat = e.latlng.lat
 			this.lng = e.latlng.lng
+		},
+		submit(){
+			console.log(this.lat)
+			console.log(this.lng)
+			console.log(this.city)
+			console.log(this.img)
+			console.log(this.description)
 		}
 	},
 

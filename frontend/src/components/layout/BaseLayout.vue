@@ -3,12 +3,10 @@
   <div class="basic-layout">
     <header>
    		 	<div class="bar_nav">
-					<img src="../../../assets/images/geoquiz.jpg"/>
-          <div class="pseudo" v-if="connected">
-            <strong>{{pseudo}} <router-link class="buttonHome" to="home">Accueil</router-link> </strong>
-
-          </div>
-
+				<img src="../../../assets/images/geoquiz.jpg"/>
+	          	<div class="pseudo" v-if="connected">
+	            	<strong class="infoParty "> score : {{score}} <router-link class="buttonHome" to="home">Accueil</router-link></strong>
+	          	</div>
    		 	</div>
     </header>
 
@@ -30,11 +28,13 @@ export default {
 	  return {
       connected: false,
       pseudo : "",
+      score : 0,
 	  };
 	},
   methods: {
     actualise(){
       this.pseudo =  ls.get(0).pseudo;
+      this.score =   ls.get(0).score;
       if(ls.get(0)){ this.connected = true; }
     }
 	},
@@ -101,7 +101,7 @@ export default {
     height: 100%;
     text-align: right;
   }
-  strong{
+  .infoParty{
     display: block;
     vertical-align: center;
     margin: 20px 25px 20px 20px;

@@ -55,7 +55,7 @@
 
 			  	<div class="control">
 			  		<label class="label">Username :</label>
-			    	<input class="input" type="text" placeholder="Saisissez votre username" v-model="pseudo">
+			    	<input class="input" type="text" placeholder="Saisissez votre username" v-model="pseudo" required>
 			  	</div><br>
 
 				 	<div class="control">
@@ -113,7 +113,7 @@ export default {
 	},
 	created(){
 		ls.clear()
-		axios.get('').then(response=>{
+		axios.get('http://localhost:8080/api/serie').then(response=>{
 			this.serie=response.data;
 			console.log(this.serie);
 			console.log('okkkkk');
