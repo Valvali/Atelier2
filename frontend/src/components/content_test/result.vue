@@ -6,7 +6,6 @@
       <ul   v-for="item in topScore">
         <li><div class="score"> {{item.position}} : <div class="left">{{item.pseudo}}</div> <div class="right">{{item.score}}</div></div></li>
       </ul>
-      <button type="button" name="button" @click= "home">Accueil</button>
     </div>
   </layout-basic>
 </template>

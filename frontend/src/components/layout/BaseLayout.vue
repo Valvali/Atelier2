@@ -3,6 +3,7 @@
   <div class="basic-layout">
     <header>
    		 	<div class="bar_nav">
+<<<<<<< HEAD
 				<img src="../../../assets/images/geoquiz.jpg"/>
 				<ul >
 					<li><router-link class="buttonHome" to="home">Accueil</router-link></li>
@@ -11,6 +12,16 @@
 				</ul>
 	          	<div class="pseudo" v-if="connected">
 	            	<strong><span class="hello">{{pseudo}}</span></strong>
+=======
+				<img src="../../../assets/images/geoquiz.jpg"/>
+				<ul>
+					<li><router-link class="buttonHome" to="home">Accueil</router-link></li>
+					<li><router-link class="buttonHome" to="inscription">Inscription</router-link></li>
+					<li><router-link class="buttonHome" to="connexion">Connexion</router-link></li>
+				</ul>
+	          	<div class="pseudo" v-if="connected">
+	            	<strong>Bonjour <span class="hello">{{pseudo}}</span> || score : {{score}}</strong>
+>>>>>>> 60c159b92397c48bdd2f0e146d89f7883489489a
 	          	</div>
    		 	</div>
     </header>
@@ -117,16 +128,25 @@ export default {
 		color: white;
 	}
 
+<<<<<<< HEAD
 	.bar_nav ul{
+=======
+	ul{
+>>>>>>> 60c159b92397c48bdd2f0e146d89f7883489489a
 		float:right;
 		margin-right: 20px;
 	}
 
+<<<<<<< HEAD
 	.bar_nav ul li{
+=======
+	li{
+>>>>>>> 60c159b92397c48bdd2f0e146d89f7883489489a
 		display:inline-block;
 		margin-left: 10px;
 		margin-top:35px;
 	}
+<<<<<<< HEAD
   .pseudo{
     padding-top : -20px;
     margin: 0;
@@ -135,5 +155,7 @@ export default {
     text-align: right;
   }
 
+=======
+>>>>>>> 60c159b92397c48bdd2f0e146d89f7883489489a
 
 </style>
