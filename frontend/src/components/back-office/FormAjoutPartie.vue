@@ -84,7 +84,7 @@ export default {
           headers: { "My-Awesome-Header": "header value"},
 					maxFiles: "1",
 					acceptedFiles: "image/png,image/gif,image/jpeg",
-
+					addRemoveLinks: true,
       }
 		}
 	},
