@@ -13,7 +13,7 @@ enum Difficulte {
     FACILE(1),
     MOYEN(2),
     DIFFICILE(3),
-    TRES_DIFFICILE(4);
+    EXPERT(4);
     
     private int value;
     
