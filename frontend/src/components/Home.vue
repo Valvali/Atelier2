@@ -2,25 +2,50 @@
 	<layout-basic>
 	<h1 class="homeTitle"><b>Welcome to our application GeoQuizz, please launch the game...</b></h1>
 	 	<div class="container">
-			<form class="" action="index.html" @submit.prevent="newGame(city)">
+			<form class="" action="index.html" @submit.prevent="newGame()">
 			  	<div class="control">
 
-			  		<label class="label">Ville :</label>
-						<select v-model="city">
-	  						<option value="nancy">Nancy</option>
-	  						<option value="paris">Paris</option>
-	  						<option value="lyon">Lyon</option>
-						</select>
+						<b-field label="Ville :">
+
+							<b-select placeholder="Selectionner une ville" v-model="city" >
+								<option value="nancy">Nancy</option>
+								<option value="paris">Paris</option>
+								<option value="lyon">Lyon</option>
+							</b-select>
+						</b-field>
+
 			  	</div><br>
 
 			  	<div class="control">
-			  		<label class="label">Difficulté :</label>
-						<select v-model="difficulty">
-	  						<option value="1">Facile</option>
-	  						<option value="2" selected>Moyen</option>
-	  						<option value="3">Difficile</option>
-							<option value="4">Expert</option>
-						</select>
+						<label class="label">Difficulté :</label>
+						<b-field>
+            <b-radio-button v-model="difficulty"
+                native-value="1"
+                type="is-primary">
+                Façile
+            </b-radio-button>
+
+            <b-radio-button v-model="difficulty"
+                native-value="2"
+                type="is-primary"
+								checked="checked">
+                Normal
+            </b-radio-button>
+
+            <b-radio-button v-model="difficulty"
+                native-value="3"
+								type="is-primary">
+                Difficile
+            </b-radio-button>
+
+            <b-radio-button v-model="difficulty"
+                native-value="4"
+								type="is-primary">
+                Expert
+            </b-radio-button>
+        </b-field>
+
+
 			  	</div><br>
 
 			  	<div class="control">
@@ -35,12 +60,13 @@
 			todo list :<br>
 			- recuperer les infos de l'api avec le formulaire<br>
 			- mettre le fichier json des points dans le store pour l'utiliser dans geolocation<br>
-			- permettre de stocker le score dans le store puis pour l'afficher et/ou continuer<br>
 			- post / get le liste des meilleur particiapnt<br>
 
 		</div>
  	</layout-basic>
 </template>
+
+
 
 <script>
 	import api from '@/services/api'
@@ -55,16 +81,16 @@ export default {
 	data: function () {
 	  return {
 			pseudo: "",
-			difficulty: 2,
-	    	city: "nancy",
-	    	serie:{}
+			difficulty: "2",
+	    city: "nancy",
+	    serie:{}
 	  };
 	},
   methods: {
-		async newGame(ville) {
-			await api.get('partie/' + ville).then(function (response) {
+		async newGame() {/*
+			await api.get('partie/' + this.city).then(function (response) {
 				console.log(response);
-			})
+			})*/
 			console.log(this.pseudo);
 			console.log(this.difficulty);
 			console.log(this.city);
@@ -79,9 +105,9 @@ export default {
 			this.$router.push({'name': 'geoloc'})
 		}
 	},
-
 	//wait for backend
 	created(){
+		ls.clear()
 		axios.get('').then(response=>{
 			this.serie=response.data;
 			console.log(this.serie);
@@ -92,7 +118,6 @@ export default {
 	},
 	created: function () {
 		ls.clear()
-		console.log(ls.get(0));
 	}
 }
 </script>
@@ -119,4 +144,5 @@ export default {
 		font-size: 2em;
 		margin-top:50px;
 	}
+
 </style>
