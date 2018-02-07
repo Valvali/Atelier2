@@ -48,6 +48,10 @@ public class PartieResource {
         JsonObjectBuilder ret = Json.createObjectBuilder();
         JsonArrayBuilder pointsJSON = Json.createArrayBuilder();
         Collection<Point> points = pm.nouvellePartie(nomSerie, difficulte);
+        if (points == null) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Pas assez de POI pour cette difficultê").build();
+        }
         for (Point p : points) {
             JsonObjectBuilder pointJSON = Json.createObjectBuilder();
             pointJSON.add("lat", p.getLat());
