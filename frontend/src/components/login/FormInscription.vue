@@ -17,6 +17,12 @@
 			  		<label class="label">E-mail :</label>
 			    	<input class="input" type="email" placeholder="Entrez votre E-mail">
 			  	</div><br>	
+			  	<div class="control">
+			  		<label class="label">Password :</label>
+			    	<b-input class="b-input" type="password" password-reveal placeholder="Entrez votre mot de passe"></b-input>
+			  	</div><br>	
+
+
 
 				 	<div class="control">
 				    	<button class="button is-link">Enregistrer</button>
