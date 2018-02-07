@@ -4,7 +4,7 @@
 		<h1 class="titleFormBackend"><b>Formulaire d'ajout d'une partie</b></h1>
 	 	<div class="container">
 
-			<form class="" >
+			<form class="" @submit.prevent="submit()" >
 					<div class="coordonees">
 						<div class="block">
 							<p>Veuillez entrer les coordonnées manuellement ou cliquer sur la carte le point d'intéret</p><br>
@@ -32,7 +32,7 @@
 			  	<div class="block">
 						<div class="control">
 				  		<label class="label">Image :</label>
-							<vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"/>
+							<vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions" v-model="img"/>
 						</div>
 				  	<div class="control">
 				  		<label class="label">Description :</label>
@@ -75,6 +75,7 @@ export default {
 			lng: "",
 			description: "",
 			city: "",
+			img:"",
 
 
 			dropzoneOptions: {
@@ -92,6 +93,13 @@ export default {
 		async getPoint(e){
 			this.lat = e.latlng.lat
 			this.lng = e.latlng.lng
+		},
+		submit(){
+			console.log(this.lat)
+			console.log(this.lng)
+			console.log(this.city)
+			console.log(this.img)
+			console.log(this.description)
 		}
 	},
 
