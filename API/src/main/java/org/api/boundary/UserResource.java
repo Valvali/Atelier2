@@ -12,6 +12,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
 import javax.validation.Valid;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -50,11 +51,12 @@ public class UserResource {
     @GET
     @Path("{id}")
     public Response getOneUser(@PathParam("id") String id, @Context UriInfo uriInfo) {
-        return Optional.ofNullable(um.findById(id))
-                //.map(c -> Response.ok(categorie2Json(c)).build())
-                .map(u -> Response.ok(u).build())
-                //.orElseThrow(() -> new CategorieNotFound("Ressource non disponible "+ uriInfo.getPath()));
-                .orElse(Response.status(Response.Status.NOT_FOUND).build());
+        User u = um.findById(id);
+        JsonObjectBuilder job = Json.createObjectBuilder();
+        job.add("nom", u.getNom());
+        job.add("prenom", u.getPrenom());
+        job.add("mail", u.getMail());
+        return Response.ok(job.build()).build();
     }
         
     @POST
