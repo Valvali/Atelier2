@@ -6,7 +6,7 @@
 
           <v-tilelayer :url="url" ></v-tilelayer>
           <ul v-for="(item) in underNumber()" >
-            <v-marker :lat-lng='[item.lat, item.lng]' ></v-marker>
+            <v-marker :lat-lng='[item.lat, item.lng]' :options="markerOption"></v-marker>
           </ul>
         </v-map>
         <div class="info">
@@ -54,7 +54,8 @@ export default {
 
       center: [48.6833, 6.19], //nancy
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-      option: { zoomControl: false, dragging: false, doubleClickZoom:false, trackResize:false, minZoom:this.zoom, maxZoom:this.zoom},
+      option: { zoomControl: false, dragging: false, doubleClickZoom:false, trackResize:false, minZoom:this.zoom, maxZoom:this.zoom, scrollWheelZoom:false},
+      markerOption:{ draggable:false, opacity:0.7, interactive:false },
 
       iterationMax: 10,
       score:0,
