@@ -4,7 +4,7 @@
 		<h1 class="titleFormBackend"><b>Formulaire d'inscription</b></h1>
 	 	<div class="container">
 
-			<form class="form" @submit.prevent="submit()">
+			<form class="form" @submit.prevent="submit(name, email, password)">
 			  	<div class="control">
 			  		<label class="label">Nom :</label>
 			    	<input class="input" type="text" placeholder="Entrez votre nom complet" v-model="name" required>
@@ -54,11 +54,12 @@ export default {
 		}
 	},
 	methods: {
-		submit(){
+		submit(name, mail, pw){
 			if(this.verifPassword()){
 				console.log(this.name)
 				console.log(this.email)
 				console.log(this.password)
+				//this.postUser()
 			}
 		},
 		verifPassword(){
@@ -69,6 +70,14 @@ export default {
 				this.matchPassword = true
 				return false
 			}
+		},
+		postUser(name, mail, pw){
+			api.post('user', {
+				nom: this.name,
+				mail: this.mail,
+				password: this.password
+			} )
+
 		}
 	}
 }

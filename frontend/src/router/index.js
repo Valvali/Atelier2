@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
+//templates
 import Home from '@/components/Home'
 import store from '@/store'
 import geoloc from '@/components/content_test/geolocalisation'
