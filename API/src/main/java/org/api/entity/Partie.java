@@ -59,5 +59,33 @@ public class Partie {
     public void setDifficulte(Difficulte difficulte) {
         this.difficulte = difficulte;
     }
+
+    /**
+     * @return the points
+     */
+    public List<Point> getPoints() {
+        return points;
+    }
+
+    /**
+     * @param points the points to set
+     */
+    public void setPoints(List<Point> points) {
+        this.points = points;
+    }
+
+    /**
+     * @return the serie
+     */
+    public Serie getSerie() {
+        return serie;
+    }
+
+    /**
+     * @param serie the serie to set
+     */
+    public void setSerie(Serie serie) {
+        this.serie = serie;
+    }
     
 }

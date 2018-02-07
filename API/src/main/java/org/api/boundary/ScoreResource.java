@@ -32,7 +32,7 @@ import org.api.entity.Score;
  */
 
 @Stateless
-@Path("scores")
+@Path("score")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class ScoreResource {
@@ -40,7 +40,7 @@ public class ScoreResource {
     ScoreManager sm;
     
     @GET
-    public Response getPoints() {
+    public Response getScore() {
 
         GenericEntity<List<Score>> liste = new GenericEntity<List<Score>>(this.sm.findAll()) {
         };
@@ -48,7 +48,7 @@ public class ScoreResource {
     }
     
     @POST
-    public Response newPoint(@Valid Score s, @Context UriInfo uriInfo) {
+    public Response newScore(@Valid Score s, @Context UriInfo uriInfo) {
         Score newOne = this.sm.save(s);
         long id = newOne.getId();
         URI uri = uriInfo.getAbsolutePathBuilder().path("/"+id).build();
