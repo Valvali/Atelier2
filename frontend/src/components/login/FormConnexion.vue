@@ -53,8 +53,11 @@ export default {
 		width: 50%;
 	}
 	.container{
-		margin-left: 20%;
-		margin-top:100px;
+		width: calc( 100% - 2 * 5%);
+		margin-left: 5%;
+		margin-right: 5%;
+
+		margin-top:60px;
 		margin-bottom: 150px;
 	}
 	.controle{
