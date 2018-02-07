@@ -79,7 +79,6 @@ public class PartieResource {
         
         Partie partie = new Partie();
         partie.setDifficulte(difficulte);
-        partie.setPoints(points);
         partie.setScore(-1);
         partie.setSerie(serie);
         partie.setToken(token);
