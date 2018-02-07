@@ -7,10 +7,12 @@ package org.api.boundary;
 
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -36,27 +38,45 @@ import org.api.entity.Score;
 
 @Stateless
 @Path("score")
-@Produces(MediaType.APPLICATION_JSON)
+//@Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class ScoreResource {
+    final int TOP = 10; // top 10
     @Inject
     ScoreManager sm;
+    
+    @Inject
+    SerieManager serieManager;
+    @Inject
+    PartieManager pm;
     
     @GET
     public Response getScore() {
         JsonArrayBuilder jab = Json.createArrayBuilder();
-        for (Score s: this.sm.findAll()) {
-            jab.add(s.getNom());
-            jab.add(s.getScore());
+        List<Score> allScores = this.sm.findAll();
+        allScores.sort((s1, s2) -> {
+            return s2.getScore() - s1.getScore();
+        });
+        for (Score s: allScores.subList(0, TOP)) {
+            JsonObjectBuilder job = Json.createObjectBuilder();
+            job.add("nom", s.getNom());
+            job.add("score", s.getScore());
+            jab.add(job);
         }
         return Response.ok(jab.build()).build();
-
     }
     
     @POST
-    public Response newScore(@Valid Score s, @Context UriInfo uriInfo) {
+    @Path("{token}/{serie}")
+    public Response newScore(@Valid Score s, @PathParam("token") String token, @PathParam("serie") String serie, @Context UriInfo uriInfo) {
+        if (! pm.isTokenValid(token, serie)) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("token invalide pour cette série").build();
+        }
+        s.setSerie(serieManager.findByName(serie));
+        s.setId(UUID.randomUUID().toString());
         Score newOne = this.sm.save(s);
-        long id = newOne.getId();
+        String id = newOne.getId();
         URI uri = uriInfo.getAbsolutePathBuilder().path("/"+id).build();
         return Response.created(uri).build();
     }

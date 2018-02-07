@@ -22,7 +22,7 @@ public class Partie {
     private String id;
     private String token;
     private int score;
-    private Difficulte difficulte;
+    private int difficulte;
     @OneToMany
     private List<Point> points;
     @OneToOne
@@ -52,11 +52,11 @@ public class Partie {
         this.score = score;
     }
 
-    public Difficulte getDifficulte() {
+    public int getDifficulte() {
         return difficulte;
     }
 
-    public void setDifficulte(Difficulte difficulte) {
+    public void setDifficulte(int difficulte) {
         this.difficulte = difficulte;
     }
 
