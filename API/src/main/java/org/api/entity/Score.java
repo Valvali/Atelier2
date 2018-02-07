@@ -20,7 +20,7 @@ import javax.persistence.NamedQuery;
 @NamedQuery(name="Score.findAll",query="SELECT s FROM Score s")
 public class Score {
     @Id
-    private long id;
+    private String id;
     
     private int score;
     private String nom;
@@ -29,11 +29,11 @@ public class Score {
     @JoinColumn(name = "")
     private Serie serie;
     
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
     
@@ -51,6 +51,34 @@ public class Score {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    /**
+     * @return the difficulte
+     */
+    public int getDifficulte() {
+        return difficulte;
+    }
+
+    /**
+     * @param difficulte the difficulte to set
+     */
+    public void setDifficulte(int difficulte) {
+        this.difficulte = difficulte;
+    }
+
+    /**
+     * @return the serie
+     */
+    public Serie getSerie() {
+        return serie;
+    }
+
+    /**
+     * @param serie the serie to set
+     */
+    public void setSerie(Serie serie) {
+        this.serie = serie;
     }
     
     

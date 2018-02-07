@@ -7,6 +7,7 @@ package org.api.boundary;
 
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -39,6 +40,9 @@ public class ScoreResource {
     @Inject
     ScoreManager sm;
     
+    @Inject
+    SerieManager serieManager;
+    
     @GET
     public Response getScore() {
 
@@ -48,9 +52,12 @@ public class ScoreResource {
     }
     
     @POST
-    public Response newScore(@Valid Score s, @Context UriInfo uriInfo) {
+    @Path("{token}/{serie}")
+    public Response newScore(@Valid Score s, @PathParam("token") String token, @PathParam("serie") String serie, @Context UriInfo uriInfo) {
+        s.setSerie(serieManager.findByName(serie));
+        s.setId(UUID.randomUUID().toString());
         Score newOne = this.sm.save(s);
-        long id = newOne.getId();
+        String id = newOne.getId();
         URI uri = uriInfo.getAbsolutePathBuilder().path("/"+id).build();
         return Response.created(uri).build();
     }
