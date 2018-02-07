@@ -4,8 +4,13 @@
     <header>
    		 	<div class="bar_nav">
 				<img src="../../../assets/images/geoquiz.jpg"/>
+				<ul >
+					<li><router-link class="buttonHome" to="home">Accueil</router-link></li>
+					<li><router-link class="buttonHome" to="inscription">Inscription</router-link></li>
+					<li><router-link class="buttonHome" to="connexion">Connexion</router-link></li>
+				</ul>
 	          	<div class="pseudo" v-if="connected">
-	            	<strong class="infoParty "> {{pseudo}} <router-link class="buttonHome" to="home">Accueil</router-link></strong>
+	            	<strong><span class="hello">{{pseudo}}</span></strong>
 	          	</div>
    		 	</div>
     </header>
@@ -33,6 +38,7 @@ export default {
 	},
   methods: {
     actualise(){
+    console.log('Voilà'+ls.get(0));
       this.pseudo =  ls.get(0).pseudo;
       this.score =   ls.get(0).score;
       if(ls.get(0)){ this.connected = true; }
@@ -48,9 +54,7 @@ export default {
 <style scoped>
 
 	.hello{
-		color:white;
-		font-weight: bold;
-		background-color: black;
+		color:yellow;
 	}
 
 	.bar_nav {
@@ -88,10 +92,40 @@ export default {
 	}
 
 	.buttonHome{
-		padding:5px;
+		padding:10px;
 		color:white;
-		background-color: green;
+		background-color: 	#228B22;
 		text-align: center;
+		font-weight: bold;
+	}
+	.buttonHome:hover{
+  		background-color: #008000;
+  	}
+	.pseudo{
+	    padding-top : -40px;
+	    margin: -48px 10px 0 0;
+	    display: block;
+	    height: 100%;
+	    text-align: right;
+	    clear:both;
+	    float:right;
+	}
+	strong{
+		display: block;
+		vertical-align: center;
+		margin: 20px 25px 20px 20px;
+		color: white;
+	}
+
+	.bar_nav ul{
+		float:right;
+		margin-right: 20px;
+	}
+
+	.bar_nav ul li{
+		display:inline-block;
+		margin-left: 10px;
+		margin-top:35px;
 	}
   .pseudo{
     padding-top : -20px;
@@ -100,11 +134,6 @@ export default {
     height: 100%;
     text-align: right;
   }
-  .infoParty{
-    display: block;
-    vertical-align: center;
-    margin: 20px 25px 20px 20px;
-    color: white;
-  }
+
 
 </style>
