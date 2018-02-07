@@ -29,6 +29,8 @@
 				 	<div class="control">
 				    	<button class="button is-link">Enregistrer</button>
 				 	</div>
+
+					<router-link class="button is-primary" to="connexion" >Se connecter</router-link>
 			</form>
 		</div>
 	</div>

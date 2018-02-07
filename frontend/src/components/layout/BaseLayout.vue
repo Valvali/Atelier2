@@ -5,7 +5,15 @@
    		 	<div class="bar_nav">
 				<img src="../../../assets/images/geoquiz.jpg"/>
 	          	<div class="pseudo" v-if="connected">
-	            	<strong class="infoParty "> {{pseudo}} <router-link class="buttonHome" to="home">Accueil</router-link></strong>
+	            	<strong class="infoParty "> {{pseudo}}
+                  <router-link class="buttonHome" to="home()">Accueil</router-link>
+                </strong>
+
+	          	</div>
+              <div class="pseudo" v-else>
+	            	<strong class="infoParty ">
+                  <router-link class="buttonHome" to="connexion" >Ajouter un Point</router-link>
+                 </strong>
 	          	</div>
    		 	</div>
     </header>
@@ -31,6 +39,11 @@ export default {
 	  };
 	},
   methods: {
+
+    home(){
+      this.$router.push({'name': 'home'})
+    },
+
     actualise(){
       this.pseudo =  ls.get(0).pseudo;
       this.score =   ls.get(0).score;
