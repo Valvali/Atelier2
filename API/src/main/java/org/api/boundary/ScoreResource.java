@@ -9,6 +9,8 @@ import java.net.URI;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -26,6 +28,7 @@ import javax.ws.rs.core.UriInfo;
 import org.api.entity.Score;
 
 
+
 /**
  *
  * @author vali
@@ -41,10 +44,13 @@ public class ScoreResource {
     
     @GET
     public Response getScore() {
+        JsonArrayBuilder jab = Json.createArrayBuilder();
+        for (Score s: this.sm.findAll()) {
+            jab.add(s.getNom());
+            jab.add(s.getScore());
+        }
+        return Response.ok(jab.build()).build();
 
-        GenericEntity<List<Score>> liste = new GenericEntity<List<Score>>(this.sm.findAll()) {
-        };
-        return Response.ok(liste).build();
     }
     
     @POST
