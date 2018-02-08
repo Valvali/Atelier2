@@ -7,16 +7,19 @@
 			<form class="" @submit.prevent="submit()">
 			  	<div class="control">
 			  		<label class="label">E-mail :</label>
-			    	<input class="input" type="email" placeholder="Entrez votre E-mail" v-model="email">
+			    	<input class="input" type="email" placeholder="Entrez votre E-mail" v-model="email" required>
 			  	</div><br>
 			  	<div class="control">
 			  		<label class="label">Password :</label>
-			    	<b-input class="b-input" type="password" password-reveal v-model="password"></b-input>
+			    	<b-input class="b-input" type="password" password-reveal v-model="password" required/>
 			  	</div><br>
 
 				 	<div class="control">
 				    	<button class="button is-link">Connexion</button>
 				 	</div>
+
+					<router-link class="button is-primary" to="inscription" >S'inscrire</router-link>
+
 			</form>
 		</div>
 	</div>
@@ -43,6 +46,7 @@ export default {
 			console.log(this.email)
 			console.log(this.password)
 
+			this.$router.push({name:'admin'})
 		}
 	}
 }
@@ -53,8 +57,11 @@ export default {
 		width: 50%;
 	}
 	.container{
-		margin-left: 20%;
-		margin-top:100px;
+		width: calc( 100% - 2 * 5%);
+		margin-left: 5%;
+		margin-right: 5%;
+
+		margin-top:60px;
 		margin-bottom: 150px;
 	}
 	.controle{

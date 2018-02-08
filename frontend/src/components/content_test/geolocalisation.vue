@@ -6,7 +6,7 @@
 
           <v-tilelayer :url="url" ></v-tilelayer>
           <ul v-for="(item) in underNumber()" >
-            <v-marker :lat-lng='[item.lat, item.lng]' ></v-marker>
+            <v-marker :lat-lng='[item.lat, item.lng]' :options="markerOption"></v-marker>
           </ul>
         </v-map>
         <div class="info">
@@ -54,7 +54,8 @@ export default {
 
       center: [48.6833, 6.19], //nancy
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-      option: { zoomControl: false, dragging: false, doubleClickZoom:false, trackResize:false, minZoom:this.zoom, maxZoom:this.zoom},
+      option: { zoomControl: false, dragging: false, doubleClickZoom:false, trackResize:false, minZoom:this.zoom, maxZoom:this.zoom, scrollWheelZoom:false},
+      markerOption:{ draggable:false, opacity:0.7, interactive:false },
 
       iterationMax: 10,
       score:0,
@@ -136,26 +137,33 @@ export default {
       }
       return ret
     },
+
+
+
+
+
+
+
     async getPoint(e){
       //need stop interval
       clearInterval(this.interval);
       let click = L.latLng(e.latlng.lat,e.latlng.lng);
       let res = (this.RayonValid - this.position.distanceTo(click)) / 2
+      res = Math.round(res)
       if(res<0){res = 0}
 
-      res = this.multiplyByTime(res)
-      res = this.multiplyByDifficulty(res)
+      res += this.multiplyByTime(res)
+      res += this.multiplyByDifficulty(res)
       this.score += res
 
 
       let playerInfo = {
 				"pseudo":ls.get(0).pseudo,
-				"score": ls.get(0).score + this.score,
+				"score": this.score,
 				"difficulty":ls.get(0).difficulty,
 				"city": ls.get(0).city,
 			}
       //console.log(playerInfo);
-			await ls.set (0, playerInfo)
 
       if(this.number>= this.iterationMax){
         //end of the game
@@ -165,7 +173,10 @@ export default {
         this.time = 0
         this.number++
         this.$router.push({'name': 'geoloc'})
+
+        await ls.set (0, playerInfo) //push
         if(this.number != this.iterationMax ){
+
           this.count()
         }
       }

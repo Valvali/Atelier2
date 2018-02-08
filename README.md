@@ -19,3 +19,11 @@ npm run build --report
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+
+##framework
+
+frontend :
+- dropzone : https://github.com/rowanwins/vue-dropzone
+- leaflet : https://github.com/KoRiGaN/Vue2Leaflet
+- buefy : https://github.com/rafaelpimpa/buefy

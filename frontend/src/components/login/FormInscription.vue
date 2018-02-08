@@ -4,28 +4,33 @@
 		<h1 class="titleFormBackend"><b>Formulaire d'inscription</b></h1>
 	 	<div class="container">
 
-			<form class="" @submit.prevent="signin()">
+			<form class="form" @submit.prevent="submit()">
 			  	<div class="control">
 			  		<label class="label">Nom :</label>
-			    	<input class="input" type="text" placeholder="Entrez votre nom complet" v-model="name">
+			    	<input class="input" type="text" placeholder="Entrez votre nom complet" v-model="name" required>
 			  	</div><br>
 			  	<div class="control">
 			  		<label class="label">E-mail :</label>
-			    	<input class="input" type="email" placeholder="Entrez votre E-mail" v-model="email">
+			    	<input class="input" type="email" placeholder="Entrez votre E-mail" v-model="email" required>
 					</div><br>
 					<div class="control">
 						<label class="label">Mot de passe :</label>
-						<input class="input" type="password" placeholder="Entrez votre mot de passe" password-reveal v-model="password" >
+						<input class="input" type="password" password-reveal v-model="password" required>
 					</div><br>
 					<div class="control">
 						<label class="label">Verification du mot de passe</label>
-						<input class="input" type="password" placeholder="Confirmez votre mot de passe" password-reveal v-model="passwordVerif" >
+						<input class="input" type="password" password-reveal v-model="passwordVerif" required >
+						<div class="messageError" v-if="matchPassword">
+							<strong>Les mots de passes ne correspondent pas !</strong>
+						</div>
 					</div><br>
 
 
 				 	<div class="control">
 				    	<button class="button is-link">Enregistrer</button>
 				 	</div>
+
+					<router-link class="button is-primary" to="connexion" >Se connecter</router-link>
 			</form>
 		</div>
 	</div>
@@ -43,14 +48,33 @@ export default {
 	},
 	data: function () {
 		return {
-			user:{ name: "",email: "",password: "",passwordVerif: ""}
+			name: "",
+			email: "",
+			password: "",
+			passwordVerif: "",
+			matchPassword: false,
+			//user:{ name: "",email: "",password: "",passwordVerif: ""}
 		}
 	},
 	methods: {
-		signin(){
-			this.$store.dispatch('auth/login').then(response=>{
-				this.$router.push({name:'home'})
-			})
+		submit(){
+			if(this.verifPassword()){
+				console.log(this.name)
+				console.log(this.email)
+				console.log(this.password)
+				this.$store.dispatch('auth/login').then(response=>{
+					this.$router.push({name:'admin'})
+				})
+			}
+		},
+		verifPassword(){
+			if(this.password == this.passwordVerif){
+				this.matchPassword = false
+				return true
+			}else{
+				this.matchPassword = true
+				return false
+			}
 		},
 	}
 }
@@ -61,7 +85,10 @@ export default {
 		width: 65%;
 	}
 	.container{
-		margin-left: 10%;
+		width: calc( 100% - 2 * 5%);
+		margin-left: 5%;
+		margin-right: 5%;
+
 		margin-top:60px;
 		margin-bottom: 150px;
 	}
@@ -91,6 +118,10 @@ export default {
 		margin-top: 20px;
 		margin-bottom: 10px;
 		margin-left: 100px;
+	}
+	.messageError strong{
+		color: red;
+		text-align: left;
 	}
 
 </style>
