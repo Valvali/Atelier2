@@ -7,7 +7,7 @@
 			<form class="" @submit.prevent="submit()" >
 					<div class="coordonees">
 						<div class="block">
-							<p>Veuillez entrer les coordonnées manuellement ou cliquer sur la carte le point d'intéret</p>
+							<p>Veuillez entrer les coordonnées manuellement ou cliquer sur la carte le point d'intéret</p><br>
 							<div class="control">
 					  		<label class="label">Latitude :</label>
 					    	<input class="input" type="text" placeholder="Entrez l'altitude" pattern="^[0-9]+(\.[0-9]+$|$)" v-model="lat" required>
