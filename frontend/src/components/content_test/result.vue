@@ -50,7 +50,7 @@ export default {
       this.$router.push({'name': 'home'})
     },
     getScores() {
-      api.get('scores').then(response => {
+      api.get('/score').then(response => {
         // success callback
         this.scores = response.data
       }, response => {

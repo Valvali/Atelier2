@@ -31,7 +31,7 @@ export default {
 	},
 	actions: {
 		signup({commit},credentials){
-			api.post('http://localhost:8080/user',credentials).then(response=>{
+			api.post('/user',credentials).then(response=>{
 				ls.set('token',response.data.token)
 				commit('setConnectedUser', response.data)
 			}).catch(error => {
@@ -39,7 +39,7 @@ export default {
 				})
 		},
 		signin ({commit}, user){
-			return api.post('http://localhost:8080/user', user).then((response) => {
+			return api.post('/user', user).then((response) => {
 			}).catch((err) => {
 				console.log(err)
 			})
