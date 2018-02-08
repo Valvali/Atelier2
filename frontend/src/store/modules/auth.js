@@ -39,7 +39,7 @@ export default {
 				})
 		},
 		signin ({commit}, user){
-			return api.post('/user', user).then((response) => {
+			return api.post('/auth', user).then((response) => {
 			}).catch((err) => {
 				console.log(err)
 			})
