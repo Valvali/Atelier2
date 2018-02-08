@@ -10,11 +10,11 @@
 							<p>Veuillez entrer les coordonnées manuellement ou cliquer sur la carte le point d'intéret</p>
 							<div class="control">
 					  		<label class="label">Latitude :</label>
-					    	<input class="input" type="text" placeholder="Entrez l'altitude" pattern="^[0-9]+(\.[0-9]+$|$)" v-model="lat" required>
+					    	<input class="input" type="text" placeholder="Entrez la latitude" :pattern="finalRegex" @input="ifRegexLat()" @change="ifRegexLatEnd()" v-model="lat" required>
 					  	</div><br>
 					  	<div class="control">
 					  		<label class="label">Longitude :</label>
-					    	<input class="input" type="text" placeholder="Entrez la longitude" pattern="^[0-9]+(\.[0-9]+$|$)" v-model="lng" required>
+					    	<input class="input" type="text" placeholder="Entrez la longitude" :pattern="finalRegex" @input="ifRegexLng()" @change="ifRegexLngEnd()" v-model="lng" required>
 					  	</div><br>
 							<div class="control">
 					  		<label class="label">Ville :</label>
@@ -32,7 +32,7 @@
 			  	<div class="block">
 						<div class="control">
 				  		<label class="label">Image :</label>
-							<vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions" v-model="img"/>
+							<vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"  v-model="img"/>
 						</div>
 				  	<div class="control">
 				  		<label class="label">Description :</label>
@@ -71,6 +71,9 @@ export default {
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       option: {},
 
+			inputRegex: "^[0-9]+[\.]?([0-9]+$|$)",
+			finalRegex: "^[0-9]+(\.[0-9]+$|$)",
+
 			lat: "",
 			lng: "",
 			description: "",
@@ -100,6 +103,28 @@ export default {
 			console.log(this.city)
 			console.log(this.img)
 			console.log(this.description)
+		},
+		ifRegexLat(){
+			if(!this.lat.match(this.inputRegex)){
+				this.lat = ""
+			}
+		},
+		ifRegexLatEnd(){
+			if(!this.lat.match(this.finalRegex)){
+				console.log(false);
+				this.lat = this.lat.replace("\.", "")
+			}
+		},
+		ifRegexLng(){
+			if(!this.lng.match(this.inputRegex)){
+				this.lng = ""
+			}
+		},
+		ifRegexLngEnd(){
+			if(!this.lng.match(this.finalRegex)){
+				console.log(false);
+				this.lng = this.lng.replace("\.", "")
+			}
 		}
 	},
 
