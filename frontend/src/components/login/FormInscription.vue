@@ -82,7 +82,7 @@ export default {
 
 <style scoped>
 	.input,.b-input{
-		width: 65%;
+		width: 50%;
 	}
 	.container{
 		width: calc( 100% - 2 * 5%);
@@ -113,15 +113,27 @@ export default {
 	}
 	.globalContainer{
 		border:2px solid black;
-		width: 80%;
+		width: calc( 100% - 2 * 10% );
 		height: 700px;
-		margin-top: 20px;
-		margin-bottom: 10px;
-		margin-left: 100px;
+		margin: 20px 10% 10px 10%;
+
 	}
 	.messageError strong{
 		color: red;
 		text-align: left;
+	}
+	@media screen and (max-width: 900px) {
+		.globalContainer{
+			border:2px solid black;
+			width: calc( 100% - 2 * 2.5% );
+			height: 700px;
+			margin: 20px 2.5% 10px 2.5%;
+
+		}
+		.input,.b-input{
+			width: 100%;
+		}
+
 	}
 
 </style>

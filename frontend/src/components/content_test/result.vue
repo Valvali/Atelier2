@@ -4,7 +4,7 @@
       <h1>RESULTAT</h1>
       <h2>votre resultat : {{finalScore}}</h2>
       <ul   v-for="item in topScore">
-        <li><div class="score"> {{item.position}} : <div class="left">{{item.pseudo}}</div> <div class="right">{{item.score}}</div></div></li>
+        <li><div class="score"> <div class="left"><span class="strong">{{item.position}} :</span> {{item.pseudo}}</div> <div class="right">{{item.score}}</div></div></li>
       </ul>
       <button class="button is-primary" @click="home">Retour vers l'accueil</button>
     </div>
@@ -62,26 +62,48 @@ export default {
 .score{
   background-color: #ffccb3;
   font-size: 20px;
-  width: 50%;
-  margin-left: 25%;
+  width: calc(100% - 2 * 20% );
+  margin-right: 20%;
+  margin-left: 20%;
   margin-bottom: 10px;
   border-style: solid;
   border-width: thin;
+}
+.strong{
   font-weight: bold;
 }
 .left{
-  font-weight: normal;
   margin:0;
   width: 45%;
   display: inline-block;
   text-align: left;
 }
 .right{
-  font-weight:normal;
   margin:0;
   width: 45%;
   display: inline-block;
   text-align: right;
+}
+@media screen and (max-width: 900px) {
+  .score{
+    width: calc(100% - 2 * 2.5%);
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+  }
+
+}
+@media screen and (max-width: 500px) {
+
+    .left{
+      width: 100%;
+      display: block;
+      text-align: center;
+    }
+    .right{
+      width: 100%;
+      display: block;
+      text-align: center;
+    }
 }
 
 </style>
