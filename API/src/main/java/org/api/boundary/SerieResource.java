@@ -23,6 +23,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import org.control.JsonError;
 import org.api.entity.Serie;
 
 /**
@@ -31,7 +32,7 @@ import org.api.entity.Serie;
  */
 @Stateless
 @Path("serie")
-//@Produces(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class SerieResource {
     
@@ -62,7 +63,7 @@ public class SerieResource {
     // TODO protéger
     public Response newSerie(@Valid Serie s, @Context UriInfo uriInfo) {
         if (sm.findByName(s.getLieu()) != null) {
-            return Response.status(Response.Status.CONFLICT).entity("La série existe déjà").build();
+            return Response.status(Response.Status.CONFLICT).entity(JsonError.error("La série existe déjà")).build();
         }
         String id = this.sm.save(s).getId();
         URI uri = uriInfo.getAbsolutePathBuilder().path("/" + id).build();
