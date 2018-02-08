@@ -58,7 +58,9 @@ public class ScoreResource {
         allScores.sort((s1, s2) -> {
             return s2.getScore() - s1.getScore();
         });
-        for (Score s: allScores.subList(0, TOP)) {
+        int size = allScores.size();
+        int top = size < TOP ? size : TOP;
+        for (Score s: allScores.subList(0, top)) {
             JsonObjectBuilder job = Json.createObjectBuilder();
             job.add("nom", s.getNom());
             job.add("score", s.getScore());
