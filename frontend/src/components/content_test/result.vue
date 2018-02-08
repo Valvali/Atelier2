@@ -51,7 +51,7 @@ export default {
     },
 
     getScores() {
-      api.get('scores').then(response => {
+      api.get('score').then(response => {
         // success callback
         this.scores = response.data
       }, response => {

@@ -4,7 +4,7 @@
 	 	<div class="container">
 
 			<!--<form class="" action="index.html" @submit.prevent="newGame(city)">-->
-	 	
+
 
 			<form class="" action="index.html" @submit.prevent="newGame()">
 
@@ -100,7 +100,7 @@ export default {
 	},
 	created(){
 		ls.clear()
-		api.get('http://localhost:8080/api/serie').then(response=>{
+		api.get('serie').then(response=>{
 			this.serie=response.data;
 		}).catch((err) => {
 			  console.log(err);
