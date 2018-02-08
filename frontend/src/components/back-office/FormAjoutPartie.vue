@@ -7,7 +7,7 @@
 			<form class="" @submit.prevent="submit()" >
 					<div class="coordonees">
 						<div class="block">
-							<p>Veuillez entrer les coordonnées manuellement ou cliquer sur la carte le point d'intéret</p>
+							<p>Veuillez entrer les coordonnées manuellement ou cliquer sur la carte le point d'intéret</p><br>
 							<div class="control">
 					  		<label class="label">Latitude :</label>
 					    	<input class="input" type="text" placeholder="Entrez la latitude" :pattern="finalRegex" @input="ifRegexLat()" @change="ifRegexLatEnd()" v-model="lat" required>
