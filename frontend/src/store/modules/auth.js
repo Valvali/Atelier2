@@ -2,19 +2,19 @@ import api from '../../services/api'
 import ls from '@/services/ls'
 
 const initialState = {
-	connected: false,
+	connectedAdmin: false,
 	user: {}
 }
 
 export default {
 	namespaced: true,//permet d'y accéder de façon nommée
 	state: {
-		connected:false,
+		connectedAdmin:false,
 		user:{}
 	},
 	getters: {
 		isConnected(state){
-			return state.connected
+			return state.connectedAdmin
 		},
 		getConnectedUser(state){
 			return state.user
@@ -23,20 +23,26 @@ export default {
 	mutations: {
 		setConnectedUser(state,u){
 			state.user=u
-			state.connected=true
+			state.connectedAdmin=true
 		},
 		initState(state){
 			Object.assign(state, initialState)
 		}
 	},
 	actions: {
-		login({commit},credentials){
+		signup({commit},credentials){
 			api.post('http://localhost:8080/user',credentials).then(response=>{
 				ls.set('token',response.data.token)
 				commit('setConnectedUser', response.data)
 			}).catch(error => {
 				console.log(error)
 				})
-		}
+		},
+		signin ({commit}, user){
+			return api.post('http://localhost:8080/user', user).then((response) => {
+			}).catch((err) => {
+				console.log(err)
+			})
+		},
 	}
 }
