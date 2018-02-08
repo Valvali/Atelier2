@@ -6,7 +6,7 @@
       <ul   v-for="item in topScore">
         <li><div class="score"> {{item.position}} : <div class="left">{{item.pseudo}}</div> <div class="right">{{item.score}}</div></div></li>
       </ul>
-      <button class="button is-primary" :click="home">Retour vers l'accueil</button>
+      <button class="button is-primary" @click="home">Retour vers l'accueil</button>
     </div>
   </layout-basic>
 </template>
@@ -34,7 +34,9 @@ export default {
     };
 	},
   methods: {
-
+    home(){
+      this.$router.push({'name': 'home'})
+    },
   },
   created: function () {
     this.finalScore =  ls.get(0).score;
