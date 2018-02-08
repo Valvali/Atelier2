@@ -51,7 +51,7 @@
 			  	</div><br>
 
 				 	<div class="control">
-				    	<button class="button is-link">Envoyer</button>
+				    	<button type="submit" class="button is-link">Envoyer</button>
 				 	</div>
 			</form>
 		</div>
@@ -64,6 +64,8 @@
 	import api from '@/services/api'
 	import LayoutBasic from '@/components/layout/BaseLayout'
 	import ls  from '@/services/ls'
+	import store from '@/store'
+
 
 export default {
 	components: {
@@ -98,7 +100,11 @@ export default {
 			this.serie=response.data;
 		}).catch((err) => {
 			  console.log(err);
-			})
+		})
+		if (store.getters['auth/isConnected']) {
+			this.pseudo = store.getters['auth/getConnectedUser']
+		}
+
 	}
 }
 </script>

@@ -46,21 +46,21 @@ export const router = new Router({
     {
       path: '/admin',
       name: 'admin',
-      component: backOffice,
+      component: backOffice,/*
       beforeEnter: (to, from, next) => {
         if (store.getters['auth/isConnected']) {
           next({path:"connexion"})
         } else {
           next(false)
         }
-      }
+      }*/
     },
     {
       path: '/inscription',
-      name: 'inscrption',
+      name: 'inscription',
       component: inscription,/*
       beforeEnter: (to, from, next) => {
-        if (!store.getters['auth/isConnected']) {
+        if (store.getters['auth/isConnected']) {
           next({path:"admin"})
         } else {
           next(false)
@@ -72,7 +72,7 @@ export const router = new Router({
       name: 'connection',
       component: connexion,/*
       beforeEnter: (to, from, next) => {
-        if (!store.getters['auth/isConnected']) {
+        if (store.getters['auth/isConnected']) {
           next({path:"admin"})
         } else {
           next(false)
