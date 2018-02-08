@@ -71,7 +71,7 @@ public class UtilisateurResource {
         URI uri = uriInfo.getAbsolutePathBuilder().path("/"+id).build();
         return Response.created(uri).build();
     }
-    
+        
     @DELETE
     @Path("{id}")
     public Response suppression(@PathParam("id") String id) {
