@@ -53,10 +53,6 @@ public class AuthentificationBoundary {
     }
 
     private void authentifie(String mail, String motDePasse) throws Exception {
-        System.out.println("hash : "+PasswordManagement.digestPassword(motDePasse));
-        // On authentifie l'utilisateur en utilisant la BD, LDAP,...
-        // On lève une exception si les crédentials sont invalides
-        String motDePasseUser = "$2a$10$hptny9c6DZW25O5v8hy1Oe0IjsLy89Ho6rHzutlDlj.Ts5L090Jii";
         if (um.checkCredentials(mail, motDePasse)) { 
         } else {
             throw new NotAuthorizedException("Problème d'authentification");
