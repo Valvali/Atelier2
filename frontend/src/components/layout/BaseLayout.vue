@@ -4,9 +4,20 @@
     <header>
    		 	<div class="bar_nav">
 				<img src="../../../assets/images/geoquiz.jpg"/>
-	          	<div class="pseudo" v-if="connected">
-	            	<strong class="infoParty "> {{pseudo}}
+              <div class="pseudo" v-if="connected">
+                <strong class="infoParty "> {{pseudo}}
                   <router-link class="buttonHome" to="home()">Accueil</router-link>
+                </strong>
+
+              </div>
+              <div class="pseudo" v-else>
+                <strong class="infoParty ">
+                  <router-link class="buttonHome" to="connexion" >Ajouter un Point</router-link>
+                 </strong>
+              </div>
+	          	<!-- <div class="pseudo" v-if="isConnected">
+	            	<strong class="infoParty "> {{pseudo}}
+                  <router-link class="buttonHome" to="home()">Déconnexion</router-link>
                 </strong>
 
 	          	</div>
@@ -14,7 +25,7 @@
 	            	<strong class="infoParty ">
                   <router-link class="buttonHome" to="connexion" >Ajouter un Point</router-link>
                  </strong>
-	          	</div>
+	          	</div> -->
    		 	</div>
     </header>
 
@@ -27,17 +38,22 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
 	import api from '@/services/api'
 	import LayoutBasic from '@/components/layout/BaseLayout'
 	import ls  from '@/services/ls'
+  
+
 export default {
 	data: function () {
 	  return {
       connected: false,
       pseudo : "",
-      score : 0,
-	  };
+      score : 0
+	  }
 	},
+  computed: mapGetters({isConnected: 'auth/isConnected'}),
+
   methods: {
 
     home(){
@@ -59,6 +75,10 @@ export default {
   created: function () {
     this.connected = false ;
     this.actualise();
+
+    // setTimeout(function(){
+    //   console.log(this.isConnected)
+    // }, 3000)
   }
 }
 </script>

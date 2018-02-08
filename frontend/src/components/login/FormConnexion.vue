@@ -7,7 +7,7 @@
 			<form class="" @submit.prevent="submit()">
 			  	<div class="control">
 			  		<label class="label">E-mail :</label>
-			    	<input class="input" type="email" placeholder="Entrez votre E-mail" v-model="user.email" required>
+			    	<input class="input" type="mail" placeholder="Entrez votre E-mail" v-model="user.mail" required>
 			  	</div><br>
 			  	<div class="control">
 			  		<label class="label">Password :</label>
@@ -38,14 +38,14 @@ export default {
 	data: function () {
     return {
 			user:{
-				email: "",
+				mail: "",
 				password: ""
 			}
 		}
 	},
 	methods: {
 		submit(){
-			console.log(this.user.email)
+			console.log(this.user.mail)
 			console.log(this.user.password)
 			this.$store.dispatch('auth/signin',this.user).then(response=>{
 				this.$router.push({name:'admin'})
