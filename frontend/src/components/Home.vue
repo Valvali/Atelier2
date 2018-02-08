@@ -51,7 +51,7 @@
 			  	</div><br>
 
 			  	<div class="control">
-			  		<label class="label">Username :</label>
+			  		<label class="label">Pseudo :</label>
 			    	<input class="input" type="text" placeholder="Saisissez votre username" v-model="pseudo" required>
 			  	</div><br>
 
@@ -69,6 +69,8 @@
 	import api from '@/services/api'
 	import LayoutBasic from '@/components/layout/BaseLayout'
 	import ls  from '@/services/ls'
+	import store from '@/store'
+
 
 
 export default {
@@ -94,7 +96,7 @@ export default {
 				"difficulty":this.difficulty,
 				"city": this.city,
 			}
-			ls.set (0, playerInfo)
+			ls.set(0, playerInfo)
 			this.$router.push({'name': 'geoloc'})
 		}
 	},
@@ -104,19 +106,26 @@ export default {
 			this.serie=response.data;
 		}).catch((err) => {
 			  console.log(err);
-			})
+		})
+		if (store.getters['auth/isConnected']) {
+			this.pseudo = store.getters['auth/getConnectedUser']
+		}
+
 	}
 }
 </script>
 
 <style scoped>
 	.input{
-		width: 40%;
+		width: 80%;
 	}
 	.container{
+		width: calc( 100% - 2 * 30%);
 		margin-left: 30%;
-		margin-top:100px;
-		margin-bottom: 200px;
+		margin-right: 30%;
+
+		margin-top:60px;
+		margin-bottom: 150px;
 	}
 	.controle{
 		margin-top:25px;
@@ -131,6 +140,26 @@ export default {
 		color:black;
 		font-size: 2em;
 		margin-top:50px;
+	}
+	@media screen and (max-width: 900px) {
+		.container{
+			width: calc( 100% - 2 * 25%);
+			margin-left: 25%;
+			margin-right: 25%;
+
+			margin-top:60px;
+			margin-bottom: 150px;
+		}
+		.container *{
+			margin : auto 5px auto 5px;
+		}
+	}
+	@media screen and (max-width: 500px) {
+		.container{
+			width: calc( 100% - 2 * 2.5%);
+			margin-left: 2.5%;
+			margin-right: 2.5%;
+		}
 	}
 
 </style>

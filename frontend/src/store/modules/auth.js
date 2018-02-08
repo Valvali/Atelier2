@@ -44,5 +44,10 @@ export default {
 				console.log(err)
 			})
 		},
+
+		logout({commit}){
+			commit('initState')
+			// ls.remove('token')
+		}
 	}
 }
