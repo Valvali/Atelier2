@@ -51,7 +51,7 @@
 			  	</div><br>
 
 				 	<div class="control">
-				    	<button type="submit" class="button is-link">Envoyer</button>
+				    	<button class="button is-link">Envoyer</button>
 				 	</div>
 			</form>
 		</div>
@@ -90,7 +90,7 @@ export default {
 				"difficulty":this.difficulty,
 				"city": this.city,
 			}
-			ls.set (0, playerInfo)
+			ls.set(0, playerInfo)
 			this.$router.push({'name': 'geoloc'})
 		}
 	},

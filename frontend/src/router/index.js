@@ -22,14 +22,15 @@ export const router = new Router({
     {
       path: '/geolocation',
       name: 'geoloc',
-      component: geoloc,
+      component: geoloc,/*
       beforeEnter: (to, from, next) => {
+        console.log(ls.isEmpty(0));
         if (ls.isEmpty(0)) {
           next({path:"home"})
         } else {
           next(false)
         }
-      }
+      }*/
     },
     {
     	path: '/result',
@@ -49,7 +50,7 @@ export const router = new Router({
       component: backOffice,/*
       beforeEnter: (to, from, next) => {
         if (store.getters['auth/isConnected']) {
-          next({path:"connexion"})
+          next({path:"connection"})
         } else {
           next(false)
         }
