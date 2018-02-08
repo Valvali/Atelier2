@@ -2,9 +2,25 @@
 
 > Projet de web client en interaction avec une api
 
-## Build Setup
+## Déploiement de l'API
 
 ``` bash
+cd APIDeploy
+
+# création des images docker (en tant que root si nécéssaire)
+./build.sh
+
+# construction de l'archive api.war: utiliser maven (build avec votre IDE ou manuellement)
+
+# lancement de l'API
+docker-compose up
+```
+
+## Build Setup (client)
+
+``` bash
+cd frontend
+
 # install dependencies
 npm install
 
@@ -21,7 +37,7 @@ npm run build --report
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 
-##framework
+## Framework
 
 frontend :
 - dropzone : https://github.com/rowanwins/vue-dropzone
