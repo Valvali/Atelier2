@@ -7,11 +7,11 @@
 			<form class="form" @submit.prevent="submit()">
 			  	<div class="control">
 			  		<label class="label">Nom :</label>
-			    	<input class="input" type="text" placeholder="Entrez votre nom complet" v-model="user.name" required>
+			    	<input class="input" type="text" placeholder="Entrez votre nom complet" v-model="user.nom" required>
 			  	</div><br>
 			  	<div class="control">
 			  		<label class="label">E-mail :</label>
-			    	<input class="input" type="email" placeholder="Entrez votre E-mail" v-model="user.email" required>
+			    	<input class="input" type="email" placeholder="Entrez votre E-mail" v-model="user.mail" required>
 					</div><br>
 					<div class="control">
 						<label class="label">Mot de passe :</label>
@@ -49,8 +49,8 @@ export default {
 	data: function () {
 		return {
 			user:{
-				name: "",
-				email: "",
+				nom: "",
+				mail: "",
 				password: "",
 				passwordVerif: "",
 				matchPassword: false,
@@ -60,11 +60,11 @@ export default {
 	methods: {
 		submit(){
 			if(this.verifPassword()){
-				console.log(this.user.name)
-				console.log(this.user.email)
+				console.log(this.user.nom)
+				console.log(this.user.mail)
 				console.log(this.user.password)
 				this.$store.dispatch('auth/signup',this.user).then(response=>{
-					this.$router.push({name:'admin'})
+					this.$router.push({nom:'admin'})
 				})
 			}
 		},
