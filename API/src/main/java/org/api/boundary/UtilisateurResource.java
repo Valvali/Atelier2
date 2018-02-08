@@ -42,7 +42,6 @@ public class UtilisateurResource {
         JsonArrayBuilder jab = Json.createArrayBuilder();
         for (Utilisateur u: this.um.findAll()) {
             jab.add(u.getNom());
-            jab.add(u.getPrenom());
             jab.add(u.getMail());
         }
         return Response.ok(jab.build()).build();
@@ -54,7 +53,6 @@ public class UtilisateurResource {
         Utilisateur u = um.findById(id);
         JsonObjectBuilder job = Json.createObjectBuilder();
         job.add("nom", u.getNom());
-        job.add("prenom", u.getPrenom());
         job.add("mail", u.getMail());
         return Response.ok(job.build()).build();
     }
