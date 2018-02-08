@@ -5,7 +5,15 @@
    		 	<div class="bar_nav">
 				<img src="../../../assets/images/geoquiz.jpg"/>
 	          	<div class="pseudo" v-if="connected">
-	            	<strong class="infoParty "> score : {{score}} <router-link class="buttonHome" to="home">Accueil</router-link></strong>
+	            	<strong class="infoParty "> {{pseudo}}
+                  <router-link class="buttonHome" to="home()">Accueil</router-link>
+                </strong>
+
+	          	</div>
+              <div class="pseudo" v-else>
+	            	<strong class="infoParty ">
+                  <router-link class="buttonHome" to="connexion" >Ajouter un Point</router-link>
+                 </strong>
 	          	</div>
    		 	</div>
     </header>
@@ -22,7 +30,6 @@
 	import api from '@/services/api'
 	import LayoutBasic from '@/components/layout/BaseLayout'
 	import ls  from '@/services/ls'
-
 export default {
 	data: function () {
 	  return {
@@ -32,10 +39,21 @@ export default {
 	  };
 	},
   methods: {
+
+    home(){
+      this.$router.push({'name': 'home'})
+    },
+
     actualise(){
-      this.pseudo =  ls.get(0).pseudo;
-      this.score =   ls.get(0).score;
-      if(ls.get(0)){ this.connected = true; }
+      if(ls.isEmpty(0)){
+        this.pseudo = ""
+        this.score =  0
+      }else {
+        this.pseudo =  ls.get(0).pseudo;
+        this.score =   ls.get(0).score;
+        if(ls.get(0)){ this.connected = true; }
+      }
+
     }
 	},
   created: function () {
@@ -46,13 +64,11 @@ export default {
 </script>
 
 <style scoped>
-
 	.hello{
 		color:white;
 		font-weight: bold;
 		background-color: black;
 	}
-
 	.bar_nav {
 		background-color: black;
 	  	overflow: hidden;
@@ -65,28 +81,23 @@ export default {
 		float:left;
 		margin-left: 5%;
 	}
-
 	footer{
 		background-color:black;
 		color:white;
 	}
-
 	p.footerPara {
   		margin-bottom: 0px;
   		padding: 1%;
   		font-weight: bold;
    }
-
    body{
 		min-height: 100%;
 		position: relative;
 		padding-bottom: 100px;
 	}
-
 	html{
 		height: 100%;
 	}
-
 	.buttonHome{
 		padding:5px;
 		color:white;
@@ -107,5 +118,4 @@ export default {
     margin: 20px 25px 20px 20px;
     color: white;
   }
-
 </style>

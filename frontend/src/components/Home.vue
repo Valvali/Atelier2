@@ -11,11 +11,8 @@
 			  	<div class="control">
 
 						<b-field label="Ville :">
-
-							<b-select placeholder="Selectionner une ville" v-model="city" >
-								<option value="nancy">Nancy</option>
-								<option value="paris">Paris</option>
-								<option value="lyon">Lyon</option>
+							<b-select placeholder="Selectionner une ville">
+								<option v-for="s in serie" v-bind:value="s">{{ s }}</option>
 							</b-select>
 						</b-field>
 
@@ -62,11 +59,6 @@
 				    	<button class="button is-link">Envoyer</button>
 				 	</div>
 			</form>
-			todo list :<br>
-			- recuperer les infos de l'api avec le formulaire<br>
-			- mettre le fichier json des points dans le store pour l'utiliser dans geolocation<br>
-			- post / get le liste des meilleur particiapnt<br>
-
 		</div>
  	</layout-basic>
 </template>
@@ -76,7 +68,6 @@
 <script>
 	import api from '@/services/api'
 	import LayoutBasic from '@/components/layout/BaseLayout'
-	import axios from 'axios'
 	import ls  from '@/services/ls'
 
 
@@ -86,10 +77,9 @@ export default {
 	},
 	data: function () {
 	  return {
-			pseudo: "",
-			difficulty: "2",
-	    city: "nancy",
-	    serie:{}
+		pseudo: "",
+		difficulty: "2",
+	    serie:[]
 	  };
 	},
   methods: {
@@ -97,9 +87,6 @@ export default {
 			await api.get('partie/' + this.city).then(function (response) {
 				console.log(response);
 			})*/
-			console.log(this.pseudo);
-			console.log(this.difficulty);
-			console.log(this.city);
 
 			let playerInfo = {
 				"pseudo":this.pseudo,
@@ -113,16 +100,11 @@ export default {
 	},
 	created(){
 		ls.clear()
-		axios.get('http://localhost:8080/api/serie').then(response=>{
+		api.get('http://localhost:8080/api/serie').then(response=>{
 			this.serie=response.data;
-			console.log(this.serie);
-			console.log('okkkkk');
 		}).catch((err) => {
 			  console.log(err);
 			})
-	},
-	created: function () {
-		ls.clear()
 	}
 }
 </script>
