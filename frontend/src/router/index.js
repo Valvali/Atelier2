@@ -2,8 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 //templates
-import Home from '@/components/Home'
+
 import store from '@/store'
+
+import Home from '@/components/Home'
 import geoloc from '@/components/content_test/geolocalisation'
 import result from '@/components/content_test/result'
 import backOffice from '@/components/back-office/FormAjoutPartie'
@@ -31,10 +33,6 @@ export const router = new Router({
     	component: result
     },
     {
-      path: '*',
-      redirect: '/'
-    },
-    {
       path: '/admin',
       name: 'admin',
       component: backOffice
@@ -48,8 +46,11 @@ export const router = new Router({
       path: '/connexion',
       name: 'connection',
       component: connexion
+    },
+    {
+      path: '*',
+      redirect: '/'
     }
-
 
   ]
 })
