@@ -23,8 +23,6 @@ public class Partie {
     private String token;
     private int score;
     private int difficulte;
-    @OneToMany
-    private List<Point> points;
     @OneToOne
     private Serie serie;
 
@@ -58,20 +56,6 @@ public class Partie {
 
     public void setDifficulte(int difficulte) {
         this.difficulte = difficulte;
-    }
-
-    /**
-     * @return the points
-     */
-    public List<Point> getPoints() {
-        return points;
-    }
-
-    /**
-     * @param points the points to set
-     */
-    public void setPoints(List<Point> points) {
-        this.points = points;
     }
 
     /**
