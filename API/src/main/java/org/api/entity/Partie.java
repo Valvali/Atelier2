@@ -7,7 +7,9 @@ package org.api.entity;
 
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -23,7 +25,7 @@ public class Partie {
     private String token;
     private int score;
     private int difficulte;
-    @OneToOne
+    @ManyToOne(fetch=FetchType.LAZY)
     private Serie serie;
 
     public String getId() {

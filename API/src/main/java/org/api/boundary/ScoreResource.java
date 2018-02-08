@@ -26,6 +26,7 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import org.control.JsonError;
 
 import org.api.entity.Score;
 
@@ -38,7 +39,7 @@ import org.api.entity.Score;
 
 @Stateless
 @Path("score")
-//@Produces(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class ScoreResource {
     final int TOP = 10; // top 10
@@ -71,7 +72,7 @@ public class ScoreResource {
     public Response newScore(@Valid Score s, @PathParam("token") String token, @PathParam("serie") String serie, @Context UriInfo uriInfo) {
         if (! pm.isTokenValid(token, serie)) {
             return Response.status(Response.Status.BAD_REQUEST)
-                    .entity("token invalide pour cette série").build();
+                    .entity(JsonError.error("token invalide pour cette série")).build();
         }
         s.setSerie(serieManager.findByName(serie));
         s.setId(UUID.randomUUID().toString());
