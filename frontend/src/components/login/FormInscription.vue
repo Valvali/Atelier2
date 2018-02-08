@@ -63,7 +63,7 @@ export default {
 				console.log(this.email)
 				console.log(this.password)
 				this.$store.dispatch('auth/login').then(response=>{
-					this.$router.push({name:'home'})
+					this.$router.push({name:'admin'})
 				})
 			}
 		},

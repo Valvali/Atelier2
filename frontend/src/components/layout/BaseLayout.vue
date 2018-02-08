@@ -45,9 +45,15 @@ export default {
     },
 
     actualise(){
-      this.pseudo =  ls.get(0).pseudo;
-      this.score =   ls.get(0).score;
-      if(ls.get(0)){ this.connected = true; }
+      if(ls.isEmpty(0)){
+        this.pseudo = ""
+        this.score =  0
+      }else {
+        this.pseudo =  ls.get(0).pseudo;
+        this.score =   ls.get(0).score;
+        if(ls.get(0)){ this.connected = true; }
+      }
+
     }
 	},
   created: function () {

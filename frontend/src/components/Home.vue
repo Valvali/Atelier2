@@ -81,9 +81,6 @@ export default {
 			await api.get('partie/' + this.city).then(function (response) {
 				console.log(response);
 			})*/
-			console.log(this.pseudo);
-			console.log(this.difficulty);
-			console.log(this.city);
 
 			let playerInfo = {
 				"pseudo":this.pseudo,
