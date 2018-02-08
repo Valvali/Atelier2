@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import javax.inject.Inject;
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.POST;
@@ -21,11 +22,14 @@ import javax.ws.rs.core.UriInfo;
 import static javax.ws.rs.core.HttpHeaders.AUTHORIZATION;
 import org.mindrot.jbcrypt.BCrypt;
 
-@Path("/authentification")
+@Path("auth")
 public class AuthentificationBoundary {
 
     @Inject
     private KeyManagement keyManagement;
+    
+    @Inject
+    private UtilisateurManager um;
 
     @Context
     private UriInfo uriInfo;
@@ -33,7 +37,7 @@ public class AuthentificationBoundary {
     @POST
     @Produces("application/json")
     @Consumes("application/json")
-    public Response authentifieUtilisateur(Utilisateur user) {
+    public Response authentifieUtilisateur(@Valid Utilisateur user) {
         try {
             String mail = user.getMail();
             String motDePasse = user.getPassword();
@@ -53,7 +57,7 @@ public class AuthentificationBoundary {
         // On authentifie l'utilisateur en utilisant la BD, LDAP,...
         // On lève une exception si les crédentials sont invalides
         String motDePasseUser = "$2a$10$hptny9c6DZW25O5v8hy1Oe0IjsLy89Ho6rHzutlDlj.Ts5L090Jii";
-        if (mail.equals("mail") && BCrypt.checkpw(motDePasse, motDePasseUser)) {  // A changer pour qu'il puisse check si l'username/password est bon dans la table utilisateur 
+        if (um.checkCredentials(mail, motDePasse)) { 
         } else {
             throw new NotAuthorizedException("Problème d'authentification");
         }
