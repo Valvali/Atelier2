@@ -100,7 +100,7 @@ export default {
 	},
 	created(){
 		ls.clear()
-		api.get('serie').then(response=>{
+		api.get('/serie').then(response=>{
 			this.serie=response.data;
 		}).catch((err) => {
 			  console.log(err);
