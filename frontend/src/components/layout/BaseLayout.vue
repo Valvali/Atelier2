@@ -23,7 +23,7 @@
 	            	<span class="infoParty ">
                   <button class="button is-primary" @click="connexion()" >Ajouter un Point</button>
                  </span>
-	          	</div> -->
+	          	</div> 
    		 	</div>
     </header>
 
@@ -36,7 +36,6 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
 	import api from '@/services/api'
 	import LayoutBasic from '@/components/layout/BaseLayout'
 	import ls  from '@/services/ls'
@@ -54,7 +53,6 @@ export default {
       score : 0
 	  }
 	},
-  computed: mapGetters({isConnected: 'auth/isConnected'}),
 
   methods: {
 
@@ -62,8 +60,9 @@ export default {
       this.$router.push({'name': 'home'})
     },
     logOut(){
-      //TODO deconnexion
-      this.$router.push({'name': 'home'})
+      this.$store.dispatch('auth/logout').then(response=>{
+        this.$router.push({'name': 'home'})
+      })
     },
     connexion(){
       this.$router.push({'name': 'connection'})
@@ -136,7 +135,16 @@ export default {
 	html{
 		height: 100%;
 	}
+<<<<<<< HEAD
 
+=======
+	.buttonHome{
+		padding:5px;
+		color:white;
+		background-color: green;
+		text-align: center;
+	}
+>>>>>>> 0085f85dfb883d8a746aab7f84f84139a549cab5
   .pseudo{
     padding-top : -20px;
     margin: 0;

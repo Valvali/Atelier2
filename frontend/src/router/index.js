@@ -58,26 +58,26 @@ export const router = new Router({
     {
       path: '/inscription',
       name: 'inscription',
-      component: inscription,/*
+      component: inscription,
       beforeEnter: (to, from, next) => {
         if (store.getters['auth/isConnected']) {
           next({path:"admin"})
         } else {
-          next(false)
+          next(true)
         }
-      }*/
+      }
     },
     {
       path: '/connexion',
       name: 'connection',
-      component: connexion,/*
+      component: connexion,
       beforeEnter: (to, from, next) => {
         if (store.getters['auth/isConnected']) {
           next({path:"admin"})
         } else {
-          next(false)
+          next(true)
         }
-      }*/
+      }
     },
     {
       path: '*',
