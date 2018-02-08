@@ -97,10 +97,6 @@ export default {
 	},
   created: function () {
     this.actualise();
-
-    // setTimeout(function(){
-    //   console.log(this.isConnected)
-    // }, 3000)
   }
 }
 </script>
