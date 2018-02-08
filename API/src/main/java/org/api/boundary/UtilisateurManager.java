@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.persistence.CacheStoreMode;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import org.api.entity.Utilisateur;
@@ -31,6 +32,19 @@ public class UtilisateurManager {
         Query q = this.em.createNamedQuery("User.findAll", Utilisateur.class);
         q.setHint("javax.persistence.cache.storeMode", CacheStoreMode.REFRESH);
         return q.getResultList();
+    }
+    
+    public boolean checkCredentials(String mail, String password) {
+        Query q = this.em.createQuery("SELECT u FROM Utilisateur u WHERE u.mail = :usermail AND u.password = :userpassword")
+        .setParameter("usermail", mail)
+        .setParameter("userpassword", password);
+        
+        try {
+            q.getSingleResult();
+        } catch(NoResultException e) {
+            return false;
+        }
+        return true;
     }
 
     public Utilisateur save(Utilisateur u) {

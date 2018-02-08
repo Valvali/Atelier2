@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
+//templates
+
 import store from '@/store'
 import ls  from '@/services/ls'
 

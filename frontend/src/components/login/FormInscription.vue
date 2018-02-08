@@ -4,7 +4,7 @@
 		<h1 class="titleFormBackend"><b>Formulaire d'inscription</b></h1>
 	 	<div class="container">
 
-			<form class="form" @submit.prevent="submit()">
+			<form class="form" @submit.prevent="submit(name, email, password)">
 			  	<div class="control">
 			  		<label class="label">Nom :</label>
 			    	<input class="input" type="text" placeholder="Entrez votre nom complet" v-model="user.nom" required>
@@ -58,7 +58,7 @@ export default {
 		}
 	},
 	methods: {
-		submit(){
+		submit(name, mail, pw){
 			if(this.verifPassword()){
 				console.log(this.user.nom)
 				console.log(this.user.mail)
@@ -76,7 +76,7 @@ export default {
 				this.matchPassword = true
 				return false
 			}
-		},
+		}
 	}
 }
 </script>
