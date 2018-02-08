@@ -244,7 +244,7 @@ export default {
   width: 100%;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
   .content_test {
     flex-direction: column-reverse;
   }

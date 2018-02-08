@@ -4,7 +4,7 @@
 		<h1 class="titleFormBackend"><b>Formulaire d'inscription</b></h1>
 	 	<div class="container">
 
-			<form class="form" @submit.prevent="submit()">
+			<form class="form" @submit.prevent="submit(name, email, password)">
 			  	<div class="control">
 			  		<label class="label">Nom :</label>
 			    	<input class="input" type="text" placeholder="Entrez votre nom complet" v-model="user.nom" required>
@@ -58,7 +58,7 @@ export default {
 		}
 	},
 	methods: {
-		submit(){
+		submit(name, mail, pw){
 			if(this.verifPassword()){
 				console.log(this.user.nom)
 				console.log(this.user.mail)
@@ -76,14 +76,14 @@ export default {
 				this.matchPassword = true
 				return false
 			}
-		},
+		}
 	}
 }
 </script>
 
 <style scoped>
 	.input,.b-input{
-		width: 65%;
+		width: 50%;
 	}
 	.container{
 		width: calc( 100% - 2 * 5%);
@@ -114,15 +114,27 @@ export default {
 	}
 	.globalContainer{
 		border:2px solid black;
-		width: 80%;
+		width: calc( 100% - 2 * 10% );
 		height: 700px;
-		margin-top: 20px;
-		margin-bottom: 10px;
-		margin-left: 100px;
+		margin: 20px 10% 10px 10%;
+
 	}
 	.messageError strong{
 		color: red;
 		text-align: left;
+	}
+	@media screen and (max-width: 900px) {
+		.globalContainer{
+			border:2px solid black;
+			width: calc( 100% - 2 * 2.5% );
+			height: 700px;
+			margin: 20px 2.5% 10px 2.5%;
+
+		}
+		.input,.b-input{
+			width: 100%;
+		}
+
 	}
 
 </style>

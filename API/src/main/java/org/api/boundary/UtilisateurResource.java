@@ -14,13 +14,16 @@ import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObjectBuilder;
 import javax.validation.Valid;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericEntity;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
@@ -32,6 +35,9 @@ import org.api.entity.Utilisateur;
  */
 @Stateless
 @Path("user")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+
 public class UtilisateurResource {
     
     @Inject
@@ -58,13 +64,14 @@ public class UtilisateurResource {
     }
         
     @POST
-    public Response newScore(@Valid Utilisateur u, @Context UriInfo uriInfo) {
+    public Response newUtilisateur(@Valid Utilisateur u, @Context UriInfo uriInfo) {
         Utilisateur newOne = this.um.save(u);
+
         String id = newOne.getId();
         URI uri = uriInfo.getAbsolutePathBuilder().path("/"+id).build();
         return Response.created(uri).build();
     }
-    
+        
     @DELETE
     @Path("{id}")
     public Response suppression(@PathParam("id") String id) {

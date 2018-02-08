@@ -153,7 +153,13 @@ export default {
 	.block{
 		text-align: left;
 	}
-	.input,.b-input,#dropzone{
+	@media screen and (min-width: 900px) {
+		/* block the size of the box to 65% without the media query*/
+		.input,  .b-input, #dropzone{
+			width: 65%;
+		}
+	}
+	.input, .b-input, #dropzone{
 		width: 65%;
 	}
 	.container{
@@ -188,9 +194,31 @@ export default {
 		width: 90%;
 		margin-top: 20px;
 		margin-bottom: 10px;
-		margin-left: 50px;
-		margin-right:  50px;
+		margin-left: 5%;
+		margin-right:  5%;
 
+	}
+
+	@media screen and (max-width: 900px) {
+	  .coordonees {
+	    flex-direction: column;
+	  }
+	  .block{
+	    margin: 0;
+	    width : 100%;
+	  }
+		.globalContainer{
+			border:2px solid black;
+			width: 98%;
+			margin-top: 20px;
+			margin-bottom: 10px;
+			margin-left: 1%;
+			margin-right:  1%;
+
+		}
+		.input, .b-input, #dropzone{
+			width: 100%;
+		}
 	}
 
 </style>

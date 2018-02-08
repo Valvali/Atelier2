@@ -84,11 +84,6 @@ export default {
 </script>
 
 <style scoped>
-	.hello{
-		color:white;
-		font-weight: bold;
-		background-color: black;
-	}
 	.bar_nav {
 		background-color: black;
 	  	overflow: hidden;
@@ -110,7 +105,7 @@ export default {
   		padding: 1%;
   		font-weight: bold;
    }
-   body{
+  body{
 		min-height: 100%;
 		position: relative;
 		padding-bottom: 100px;

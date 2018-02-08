@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
+import org.api.boundary.AuthentificationBoundary;
 import org.api.boundary.PartieResource;
 import org.api.boundary.PointResource;
 import org.api.boundary.ScoreResource;
@@ -32,6 +33,7 @@ public class JAXRSConfiguration extends Application {
         s.add(SerieResource.class);
         s.add(FileResource.class);
         s.add(UtilisateurResource.class);
+        s.add(AuthentificationBoundary.class);
         return s;
     }
 }
