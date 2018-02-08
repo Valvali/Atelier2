@@ -2,7 +2,7 @@
   "name": "GeoQuiz",
   "version": "1.0.0",
   "description": "Projet d'atelier en interaction avec une api",
-  "author": "valentin <valentin.escamilla@outlook.fr>",
+  "author": "valentin <valentin.escamilla@outlook.fr>,Charles BISELX <cha.biselx@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
