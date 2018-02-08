@@ -5,24 +5,24 @@
    		 	<div class="bar_nav">
 				<img src="../../../assets/images/geoquiz.jpg"/>
 	          	<div class="pseudo" v-if="connected">
-	            	<strong class="infoParty "> {{pseudo}}
-                  <button class="buttonHome" @click="home()">Accueil</button>
-                </strong>
+	            	<span class="infoParty "> <span>{{pseudo}}</span>
+                  <button class="button is-primary" @click="home()">Accueil</button>
+                </span>
 	          	</div>
               <div class="pseudo" v-else-if="backOffice">
-	            	<strong class="infoParty "> {{name}}
-                  <button class="buttonHome" @click="logOut()">Deconnexion</button>
-                </strong>
+	            	<span class="infoParty "> <span>{{name}}</span>
+                  <button class="button is-primary" @click="logOut()">Deconnexion</button>
+                </span>
 	          	</div>
               <div class="pseudo" v-else-if="signin">
-	            	<strong class="infoParty ">
-                  <button class="buttonHome" @click="home()">Accueil</button>
-                </strong>
+	            	<span class="infoParty ">
+                  <button class="button is-primary" @click="home()">Accueil</button>
+                </span>
 	          	</div>
               <div class="pseudo" v-else>
-	            	<strong class="infoParty ">
-                  <button class="buttonHome" @click="connexion()" >Ajouter un Point</button>
-                 </strong>
+	            	<span class="infoParty ">
+                  <button class="button is-primary" @click="connexion()" >Ajouter un Point</button>
+                 </span>
 	          	</div> 
    		 	</div>
     </header>
@@ -131,12 +131,16 @@ export default {
 	html{
 		height: 100%;
 	}
+<<<<<<< HEAD
+
+=======
 	.buttonHome{
 		padding:5px;
 		color:white;
 		background-color: green;
 		text-align: center;
 	}
+>>>>>>> 0085f85dfb883d8a746aab7f84f84139a549cab5
   .pseudo{
     padding-top : -20px;
     margin: 0;
@@ -145,9 +149,13 @@ export default {
     text-align: right;
   }
   .infoParty{
+    font-weight: bold;
     display: block;
-    vertical-align: center;
     margin: 20px 25px 20px 20px;
     color: white;
+  }
+  .infoParty button{
+    vertical-align: middle;
+
   }
 </style>

@@ -25,15 +25,14 @@ export const router = new Router({
     {
       path: '/geolocation',
       name: 'geoloc',
-      component: geoloc,/*
+      component: geoloc,
       beforeEnter: (to, from, next) => {
-        console.log(ls.isEmpty(0));
         if (ls.isEmpty(0)) {
           next({path:"home"})
         } else {
-          next(false)
+          next(true)
         }
-      }*/
+      }
     },
     {
     	path: '/result',
@@ -43,7 +42,7 @@ export const router = new Router({
         if (ls.isEmpty(0)) {
           next({path:"home"})
         } else {
-          next(false)
+          next(true)
         }
       }
     },
