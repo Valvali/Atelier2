@@ -12,6 +12,13 @@ export default {
 	remove(key) {
 		return localStorage.remove(key)
 	},
+	isEmpty(key) {
+		if(this.get(key) == null ){
+			return true
+		}else{
+			return false
+		}
+	},
 	clear(){
 		return localStorage.clear();
 	}

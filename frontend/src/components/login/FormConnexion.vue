@@ -17,6 +17,9 @@
 				 	<div class="control">
 				    	<button class="button is-link">Connexion</button>
 				 	</div>
+
+					<router-link class="button is-primary" to="inscription" >S'inscrire</router-link>
+
 			</form>
 		</div>
 	</div>
@@ -43,6 +46,7 @@ export default {
 			console.log(this.email)
 			console.log(this.password)
 
+			this.$router.push({name:'admin'})
 		}
 	}
 }

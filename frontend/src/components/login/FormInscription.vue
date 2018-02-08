@@ -29,6 +29,8 @@
 				 	<div class="control">
 				    	<button class="button is-link">Enregistrer</button>
 				 	</div>
+
+					<router-link class="button is-primary" to="connexion" >Se connecter</router-link>
 			</form>
 		</div>
 	</div>
@@ -51,6 +53,7 @@ export default {
 			password: "",
 			passwordVerif: "",
 			matchPassword: false,
+			//user:{ name: "",email: "",password: "",passwordVerif: ""}
 		}
 	},
 	methods: {
@@ -59,7 +62,9 @@ export default {
 				console.log(this.name)
 				console.log(this.email)
 				console.log(this.password)
-				//this.postUser()
+				this.$store.dispatch('auth/login').then(response=>{
+					this.$router.push({name:'admin'})
+				})
 			}
 		},
 		verifPassword(){
@@ -70,16 +75,6 @@ export default {
 				this.matchPassword = true
 				return false
 			}
-		},
-		postUser(name, mail, pw){
-			api.post('user', {
-				nom: this.name,
-				mail: this.mail,
-				password: this.password
-			} ).then(function(response) {
-				console.log(response);
-			})
-
 		}
 	}
 }
