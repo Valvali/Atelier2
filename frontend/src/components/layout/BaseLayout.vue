@@ -124,6 +124,7 @@ export default {
 		background-color: green;
 		text-align: center;
 	}
+
   .pseudo{
     padding-top : -20px;
     margin: 0;

@@ -9,19 +9,24 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.UUID;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import org.api.entity.Partie;
 import org.api.entity.Point;
+import org.api.entity.Serie;
 
 /**
  *
@@ -31,20 +36,35 @@ import org.api.entity.Point;
 @Stateless
 @Path("partie")
 public class PartieResource {
-//    @GET
-//    public Response getSeries() {
-//        JsonObject pointJSON = Json.createObjectBuilder()
-//                .add("hello", "hello")
-//                .add("world", "world")
-//                .build();
-//        return Response.ok(pointJSON).build();
-//    }
-    @GET
-    @Path("{nom}/{difficulte}")
-    public Response getPartie(@PathParam("nom") String nom, @PathParam("difficulte") int difficulte, @Context UriInfo uriInfo) {
+
+    @Inject
+    PartieManager pm;
+    
+    @Inject
+    SerieManager sm;
+    
+    
+    @POST
+    @Path("{serie}/{difficulte}")
+    public Response getPartie(@PathParam("serie") String nomSerie, @PathParam("difficulte") int difficulte, @Context UriInfo uriInfo) {
+        
+        // randomUUID() utilise SecureRandom et 122bits de random, ce qui est suffisant
+        String token = UUID.randomUUID().toString();
+        
+        Serie serie = sm.findByName(nomSerie);
+        if (serie == null) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Cette série n'existe pas").build();
+
+        }
+        
         JsonObjectBuilder ret = Json.createObjectBuilder();
         JsonArrayBuilder pointsJSON = Json.createArrayBuilder();
-        Collection<Point> points = new ArrayList<>(); // TODO
+        List<Point> points = pm.nouvellePartie(nomSerie, difficulte);
+        if (points == null) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Pas assez de POI pour cette difficultê").build();
+        }
         for (Point p : points) {
             JsonObjectBuilder pointJSON = Json.createObjectBuilder();
             pointJSON.add("lat", p.getLat());
@@ -54,9 +74,17 @@ public class PartieResource {
             pointJSON.add("difficulte", p.getDifficulte());
             pointsJSON.add(pointJSON);
         }
-        // randomUUID() utilise SecureRandom et 122bits de random, ce qui est suffisant
-        ret.add("token", UUID.randomUUID().toString());
+        ret.add("token", token);
         ret.add("points", pointsJSON);
+        
+        Partie partie = new Partie();
+        partie.setDifficulte(difficulte);
+        partie.setScore(-1);
+        partie.setSerie(serie);
+        partie.setToken(token);
+        
+        pm.save(partie);
+        
         return Response.ok(ret.build()).build();
     }
 }

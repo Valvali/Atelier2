@@ -2,9 +2,9 @@ import axios from 'axios'
 import config from '../config'
 
 var api = axios.create({
-  baseURL: '',
+  baseURL: config.url,
   headers: {
-    
+
 	}
 });
 export default api

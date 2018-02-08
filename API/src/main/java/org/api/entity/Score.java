@@ -5,29 +5,31 @@
  */
 package org.api.entity;
 
-import java.util.List;
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.NamedQuery;
 
 /**
  *
- * @author bertrand
+ * @author vali
  */
 @Entity
-public class Partie {
-    
+@NamedQuery(name="Score.findAll",query="SELECT s FROM Score s")
+public class Score implements Serializable {
     @Id
     private String id;
-    private String token;
+    
     private int score;
+    private String nom;
     private int difficulte;
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "")
     private Serie serie;
-
+    
     public String getId() {
         return id;
     }
@@ -35,15 +37,7 @@ public class Partie {
     public void setId(String id) {
         this.id = id;
     }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
+    
     public int getScore() {
         return score;
     }
@@ -52,10 +46,24 @@ public class Partie {
         this.score = score;
     }
 
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    /**
+     * @return the difficulte
+     */
     public int getDifficulte() {
         return difficulte;
     }
 
+    /**
+     * @param difficulte the difficulte to set
+     */
     public void setDifficulte(int difficulte) {
         this.difficulte = difficulte;
     }
@@ -73,5 +81,6 @@ public class Partie {
     public void setSerie(Serie serie) {
         this.serie = serie;
     }
+    
     
 }

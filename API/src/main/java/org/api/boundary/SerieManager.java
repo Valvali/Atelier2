@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.UUID;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import org.api.entity.Point;
 import org.api.entity.Serie;
@@ -26,8 +27,12 @@ class SerieManager {
     PointManager pm;
 
     public Serie findByName(String lieu) {
-        return (Serie) em.createQuery("SELECT s FROM Serie s where s.lieu = :lieu")
-                        .setParameter("lieu", lieu).getResultList();
+        try {
+            return (Serie) em.createQuery("SELECT s FROM Serie s where s.lieu = :lieu")
+                        .setParameter("lieu", lieu).getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
     
     public List<Serie> getAllSeries() {
