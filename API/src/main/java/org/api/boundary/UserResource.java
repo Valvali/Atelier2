@@ -65,7 +65,7 @@ public class UserResource {
     }
         
     @POST
-    public Response newScore(@Valid User u, @Context UriInfo uriInfo) {
+    public Response newUser(@Valid User u, @Context UriInfo uriInfo) {
         User newOne = this.um.save(u);
         String id = newOne.getId();
         URI uri = uriInfo.getAbsolutePathBuilder().path("/"+id).build();
