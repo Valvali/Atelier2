@@ -10,6 +10,8 @@ import org.api.boundary.ScoreResource;
 import org.api.boundary.SerieResource;
 import org.api.boundary.FileResource;
 import org.api.boundary.UserResource;
+import org.provider.CORSRequestFilter;
+import org.provider.CORSResponseFilter;
 
 /**
  * Configures a JAX-RS endpoint. Delete this class, if you are not exposing
@@ -22,6 +24,8 @@ public class JAXRSConfiguration extends Application {
         @Override
         public Set<Class<?>> getClasses() {
         Set<Class<?>> s = new HashSet<>();
+        s.add(CORSRequestFilter.class);
+        s.add(CORSResponseFilter.class);
         s.add(PartieResource.class);
         s.add(PointResource.class);
         s.add(ScoreResource.class);
