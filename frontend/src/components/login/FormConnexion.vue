@@ -7,11 +7,11 @@
 			<form class="" @submit.prevent="submit()">
 			  	<div class="control">
 			  		<label class="label">E-mail :</label>
-			    	<input class="input" type="email" placeholder="Entrez votre E-mail" v-model="email" required>
+			    	<input class="input" type="mail" placeholder="Entrez votre E-mail" v-model="user.mail" required>
 			  	</div><br>
 			  	<div class="control">
 			  		<label class="label">Password :</label>
-			    	<b-input class="b-input" type="password" password-reveal v-model="password" required/>
+			    	<b-input class="b-input" type="password" password-reveal v-model="user.password" required/>
 			  	</div><br>
 
 				 	<div class="control">
@@ -37,16 +37,20 @@ export default {
 	},
 	data: function () {
     return {
-			email: "",
-			password: "",
+			user:{
+				mail: "",
+				password: ""
+			}
 		}
 	},
 	methods: {
 		submit(){
-			console.log(this.email)
-			console.log(this.password)
-
-			this.$router.push({name:'admin'})
+			console.log(this.user.mail)
+			console.log(this.user.password)
+			this.$store.dispatch('auth/signin',this.user).then(response=>{
+				this.$router.push({name:'admin'})
+			})
+			
 		}
 	}
 }
@@ -60,7 +64,6 @@ export default {
 		width: calc( 100% - 2 * 5%);
 		margin-left: 5%;
 		margin-right: 5%;
-
 		margin-top:60px;
 		margin-bottom: 150px;
 	}

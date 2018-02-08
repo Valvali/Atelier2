@@ -22,7 +22,7 @@ import javax.ws.rs.core.UriInfo;
 import org.api.entity.Point;
 
 @Stateless
-@Path("points")
+@Path("point")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class PointResource {

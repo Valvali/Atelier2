@@ -23,7 +23,7 @@
 	            	<strong class="infoParty ">
                   <button class="buttonHome" @click="connexion()" >Ajouter un Point</button>
                  </strong>
-	          	</div>
+	          	</div> -->
    		 	</div>
     </header>
 
@@ -36,6 +36,7 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
 	import api from '@/services/api'
 	import LayoutBasic from '@/components/layout/BaseLayout'
 	import ls  from '@/services/ls'
@@ -50,9 +51,11 @@ export default {
       backOffice: false,
       connected: false,
       pseudo : "",
-      score : 0,
-	  };
+      score : 0
+	  }
 	},
+  computed: mapGetters({isConnected: 'auth/isConnected'}),
+
   methods: {
 
     home(){
@@ -95,6 +98,10 @@ export default {
 	},
   created: function () {
     this.actualise();
+
+    // setTimeout(function(){
+    //   console.log(this.isConnected)
+    // }, 3000)
   }
 }
 </script>
@@ -135,6 +142,7 @@ export default {
 		background-color: green;
 		text-align: center;
 	}
+
   .pseudo{
     padding-top : -20px;
     margin: 0;

@@ -3,6 +3,12 @@
     <div class="result">
       <h1>RESULTAT</h1>
       <h2>votre resultat : {{finalScore}}</h2>
+
+      <!--<ul>
+        <div v-for="(item) in scores">
+          <li><div class="score">01 : <div class="left">{{item.nom}}</div> <div class="right">{{item.score}}</div></div></li>
+
+        </div>-->
       <ul   v-for="item in topScore">
         <li><div class="score"> <div class="left"><span class="strong">{{item.position}} :</span> {{item.pseudo}}</div> <div class="right">{{item.score}}</div></div></li>
       </ul>
@@ -26,6 +32,12 @@ export default {
   },
 
   name: 'App',
+  data() {
+    return {
+    scores:[]
+
+  }
+},
   data: function () {
     return {
       finalScore :  "",
@@ -37,9 +49,20 @@ export default {
     home(){
       this.$router.push({'name': 'home'})
     },
+
+    getScores() {
+      api.get('/score').then(response => {
+        // success callback
+        this.scores = response.data
+      }, response => {
+        // error callback
+        console.log("error = "+response.message)
+      })
+    }
   },
   created: function () {
     this.finalScore =  ls.get(0).score;
+    this.getScores();
   }
 
 }

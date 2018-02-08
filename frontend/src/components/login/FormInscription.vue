@@ -7,20 +7,20 @@
 			<form class="form" @submit.prevent="submit()">
 			  	<div class="control">
 			  		<label class="label">Nom :</label>
-			    	<input class="input" type="text" placeholder="Entrez votre nom complet" v-model="name" required>
+			    	<input class="input" type="text" placeholder="Entrez votre nom complet" v-model="user.nom" required>
 			  	</div><br>
 			  	<div class="control">
 			  		<label class="label">E-mail :</label>
-			    	<input class="input" type="email" placeholder="Entrez votre E-mail" v-model="email" required>
+			    	<input class="input" type="email" placeholder="Entrez votre E-mail" v-model="user.mail" required>
 					</div><br>
 					<div class="control">
 						<label class="label">Mot de passe :</label>
-						<input class="input" type="password" password-reveal v-model="password" required>
+						<input class="input" type="password" password-reveal v-model="user.password" required>
 					</div><br>
 					<div class="control">
 						<label class="label">Verification du mot de passe</label>
-						<input class="input" type="password" password-reveal v-model="passwordVerif" required >
-						<div class="messageError" v-if="matchPassword">
+						<input class="input" type="password" password-reveal v-model="user.passwordVerif" required >
+						<div class="messageError" v-if="user.matchPassword">
 							<strong>Les mots de passes ne correspondent pas !</strong>
 						</div>
 					</div><br>
@@ -48,31 +48,32 @@ export default {
 	},
 	data: function () {
 		return {
-			name: "",
-			email: "",
-			password: "",
-			passwordVerif: "",
-			matchPassword: false,
-			//user:{ name: "",email: "",password: "",passwordVerif: ""}
+			user:{
+				nom: "",
+				mail: "",
+				password: "",
+				passwordVerif: "",
+				matchPassword: false,
+			}
 		}
 	},
 	methods: {
 		submit(){
 			if(this.verifPassword()){
-				console.log(this.name)
-				console.log(this.email)
-				console.log(this.password)
-				this.$store.dispatch('auth/login').then(response=>{
-					this.$router.push({name:'admin'})
+				console.log(this.user.nom)
+				console.log(this.user.mail)
+				console.log(this.user.password)
+				this.$store.dispatch('auth/signup',this.user).then(response=>{
+					this.$router.push({nom:'admin'})
 				})
 			}
 		},
 		verifPassword(){
-			if(this.password == this.passwordVerif){
-				this.matchPassword = false
+			if(this.user.password == this.user.passwordVerif){
+				this.user.matchPassword = false
 				return true
 			}else{
-				this.matchPassword = true
+				this.user.matchPassword = true
 				return false
 			}
 		},
