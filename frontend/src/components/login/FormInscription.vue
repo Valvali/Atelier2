@@ -53,6 +53,7 @@ export default {
 			password: "",
 			passwordVerif: "",
 			matchPassword: false,
+			//user:{ name: "",email: "",password: "",passwordVerif: ""}
 		}
 	},
 	methods: {
@@ -61,6 +62,9 @@ export default {
 				console.log(this.name)
 				console.log(this.email)
 				console.log(this.password)
+				this.$store.dispatch('auth/login').then(response=>{
+					this.$router.push({name:'home'})
+				})
 			}
 		},
 		verifPassword(){
@@ -71,7 +75,7 @@ export default {
 				this.matchPassword = true
 				return false
 			}
-		}
+		},
 	}
 }
 </script>
