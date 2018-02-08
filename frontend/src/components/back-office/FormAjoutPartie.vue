@@ -10,11 +10,11 @@
 							<p>Veuillez entrer les coordonnées manuellement ou cliquer sur la carte le point d'intéret</p>
 							<div class="control">
 					  		<label class="label">Latitude :</label>
-					    	<input class="input" type="text" placeholder="Entrez l'altitude" pattern="^[0-9]+(\.[0-9]+$|$)" v-model="lat" required>
+					    	<input class="input" type="text" placeholder="Entrez la latitude" :pattern="regex" v-model="lat" required>
 					  	</div><br>
 					  	<div class="control">
 					  		<label class="label">Longitude :</label>
-					    	<input class="input" type="text" placeholder="Entrez la longitude" pattern="^[0-9]+(\.[0-9]+$|$)" v-model="lng" required>
+					    	<input class="input" type="text" placeholder="Entrez la longitude" :pattern="regex" v-model="lng" required>
 					  	</div><br>
 							<div class="control">
 					  		<label class="label">Ville :</label>
@@ -70,6 +70,8 @@ export default {
       center: [48.6833, 6.19], //nancy
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       option: {},
+
+			regex: "^[0-9]+(\.[0-9]+$|$)",
 
 			lat: "",
 			lng: "",
