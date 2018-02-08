@@ -64,7 +64,7 @@ export default {
 				console.log(this.user.mail)
 				console.log(this.user.password)
 				this.$store.dispatch('auth/signup',this.user).then(response=>{
-					this.$router.push({nom:'admin'})
+					this.$router.push({name:'connection'})
 				})
 			}
 		},

@@ -15,17 +15,6 @@
                   <router-link class="buttonHome" to="connexion" >Ajouter un Point</router-link>
                  </strong>
               </div>
-	          	<!-- <div class="pseudo" v-if="isConnected">
-	            	<strong class="infoParty "> {{pseudo}}
-                  <router-link class="buttonHome" to="home()">Déconnexion</router-link>
-                </strong>
-
-	          	</div>
-              <div class="pseudo" v-else>
-	            	<strong class="infoParty ">
-                  <router-link class="buttonHome" to="connexion" >Ajouter un Point</router-link>
-                 </strong>
-	          	</div> -->
    		 	</div>
     </header>
 
@@ -124,7 +113,6 @@ export default {
 		background-color: green;
 		text-align: center;
 	}
-
   .pseudo{
     padding-top : -20px;
     margin: 0;
