@@ -27,7 +27,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import org.api.entity.User;
+import org.api.entity.Utilisateur;
 
 /**
  *
@@ -37,15 +37,16 @@ import org.api.entity.User;
 @Path("user")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class UserResource {
+
+public class UtilisateurResource {
     
     @Inject
-    UserManager um;
+    UtilisateurManager um;
     
     @GET
     public Response GetUsers() {
         JsonArrayBuilder jab = Json.createArrayBuilder();
-        for (User u: this.um.findAll()) {
+        for (Utilisateur u: this.um.findAll()) {
             jab.add(u.getNom());
             jab.add(u.getPrenom());
             jab.add(u.getMail());
@@ -56,7 +57,7 @@ public class UserResource {
     @GET
     @Path("{id}")
     public Response getOneUser(@PathParam("id") String id, @Context UriInfo uriInfo) {
-        User u = um.findById(id);
+        Utilisateur u = um.findById(id);
         JsonObjectBuilder job = Json.createObjectBuilder();
         job.add("nom", u.getNom());
         job.add("prenom", u.getPrenom());
@@ -65,8 +66,9 @@ public class UserResource {
     }
         
     @POST
-    public Response newUser(@Valid User u, @Context UriInfo uriInfo) {
-        User newOne = this.um.save(u);
+    public Response newUtilisateur(@Valid Utilisateur u, @Context UriInfo uriInfo) {
+        Utilisateur newOne = this.um.save(u);
+
         String id = newOne.getId();
         URI uri = uriInfo.getAbsolutePathBuilder().path("/"+id).build();
         return Response.created(uri).build();

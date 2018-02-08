@@ -15,8 +15,8 @@ import javax.validation.constraints.Pattern;
  * @author vali
  */
 @Entity
-@NamedQuery(name="User.findAll",query="SELECT u FROM User u")
-public class User implements Serializable {
+@NamedQuery(name="User.findAll",query="SELECT u FROM Utilisateur u")
+public class Utilisateur implements Serializable {
     
     @Id
     private String id;
@@ -30,14 +30,14 @@ public class User implements Serializable {
     
     private String password;
 
-    public User(String nom, String prenom, String mail, String password) {
+    public Utilisateur(String nom, String prenom, String mail, String password) {
         this.nom = nom;
         this.prenom = prenom;
         this.mail = mail;
         this.password = password;
     }
     
-    public User() {
+    public Utilisateur() {
         
     }
 

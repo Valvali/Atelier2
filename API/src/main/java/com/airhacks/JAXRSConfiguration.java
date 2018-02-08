@@ -9,7 +9,7 @@ import org.api.boundary.PointResource;
 import org.api.boundary.ScoreResource;
 import org.api.boundary.SerieResource;
 import org.api.boundary.FileResource;
-import org.api.boundary.UserResource;
+import org.api.boundary.UtilisateurResource;
 import org.provider.CORSRequestFilter;
 import org.provider.CORSResponseFilter;
 
@@ -31,7 +31,7 @@ public class JAXRSConfiguration extends Application {
         s.add(ScoreResource.class);
         s.add(SerieResource.class);
         s.add(FileResource.class);
-        s.add(UserResource.class);
+        s.add(UtilisateurResource.class);
         return s;
     }
 }

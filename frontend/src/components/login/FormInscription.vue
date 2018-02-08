@@ -19,8 +19,8 @@
 					</div><br>
 					<div class="control">
 						<label class="label">Verification du mot de passe</label>
-						<input class="input" type="password" password-reveal v-model="user.passwordVerif" required >
-						<div class="messageError" v-if="user.matchPassword">
+						<input class="input" type="password" password-reveal v-model="passwordVerif" required >
+						<div class="messageError" v-if="matchPassword">
 							<strong>Les mots de passes ne correspondent pas !</strong>
 						</div>
 					</div><br>
@@ -52,9 +52,9 @@ export default {
 				nom: "",
 				mail: "",
 				password: "",
-				passwordVerif: "",
-				matchPassword: false,
-			}
+			},
+			matchPassword: false,
+			passwordVerif: ""
 		}
 	},
 	methods: {
@@ -69,11 +69,11 @@ export default {
 			}
 		},
 		verifPassword(){
-			if(this.user.password == this.user.passwordVerif){
-				this.user.matchPassword = false
+			if(this.user.password == this.passwordVerif){
+				this.matchPassword = false
 				return true
 			}else{
-				this.user.matchPassword = true
+				this.matchPassword = true
 				return false
 			}
 		}
