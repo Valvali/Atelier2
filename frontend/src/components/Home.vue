@@ -11,8 +11,8 @@
 			  	<div class="control">
 
 						<b-field label="Ville :">
-							<b-select placeholder="Selectionner une ville">
-								<option v-for="s in serie" v-bind:value="s">{{ s }}</option>
+							<b-select placeholder="Selectionner une ville" v-model="serie">
+								<option v-for="s in series">{{ s }}</option>
 							</b-select>
 						</b-field>
 
@@ -81,7 +81,8 @@ export default {
 	  return {
 		pseudo: "",
 		difficulty: "2",
-	    serie:[]
+	  serie: "",
+		series: []
 	  };
 	},
   methods: {
@@ -94,7 +95,7 @@ export default {
 				"pseudo":this.pseudo,
 				"score": 0,
 				"difficulty":this.difficulty,
-				"city": this.city,
+				"city": this.serie,
 			}
 			ls.set(0, playerInfo)
 			this.$router.push({'name': 'geoloc'})
@@ -103,7 +104,7 @@ export default {
 	created(){
 		ls.clear()
 		api.get('/serie').then(response=>{
-			this.serie=response.data;
+			this.series=response.data;
 		}).catch((err) => {
 			  console.log(err);
 		})
