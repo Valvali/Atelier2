@@ -29,6 +29,7 @@ import javax.ws.rs.core.UriInfo;
 import org.control.JsonError;
 
 import org.api.entity.Score;
+import org.provider.Secured;
 
 
 
@@ -85,6 +86,7 @@ public class ScoreResource {
     }
     
     @DELETE
+    @Secured
     @Path("{id}")
     public Response suppression(@PathParam("id") long id) {
         this.sm.delete(id);

@@ -20,6 +20,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import org.api.entity.Point;
+import org.provider.Secured;
 
 @Stateless
 @Path("point")
@@ -52,6 +53,7 @@ public class PointResource {
     }
     
     @POST
+    @Secured
     public Response newPoint(@Valid Point p, @Context UriInfo uriInfo) {
         Point newOne = this.pm.save(p);
         String id = newOne.getId();
@@ -60,6 +62,7 @@ public class PointResource {
     }
     
     @DELETE
+    @Secured
     @Path("{id}")
     public Response suppression(@PathParam("id") long id) {
         this.pm.delete(id);

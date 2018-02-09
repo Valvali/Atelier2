@@ -25,6 +25,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import org.control.JsonError;
 import org.api.entity.Serie;
+import org.provider.Secured;
 
 /**
  *
@@ -60,7 +61,7 @@ public class SerieResource {
     }
     
     @POST
-    // TODO protéger
+    @Secured
     public Response newSerie(@Valid Serie s, @Context UriInfo uriInfo) {
         if (sm.findByName(s.getLieu()) != null) {
             return Response.status(Response.Status.CONFLICT).entity(JsonError.error("La série existe déjà")).build();
