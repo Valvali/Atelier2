@@ -58,7 +58,7 @@
 
 						<div class="control">
 				  		<label class="label">Image :</label>
-							<vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"  v-model="img"/>
+							<vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions" v-on:vdropzone-success="success" v-model="img"/> <!-- -->
 						</div>
 						<div class="control">
 							<label class="label">Difficulté :</label>
@@ -151,10 +151,10 @@ export default {
 
 
 			dropzoneOptions: {
-          url: 'https://httpbin.org/post',
+          url: 'http://localhost:8080/api/file', //TODO url
           thumbnailWidth: 500,
           maxFilesize: 0.5,
-          headers: { "My-Awesome-Header": "header value"},
+          headers: { "autorization": ls.get('token')},
 					maxFiles: "1",
 					acceptedFiles: "image/png,image/gif,image/jpeg",
 					addRemoveLinks: true,
@@ -162,6 +162,11 @@ export default {
 		}
 	},
 	methods: {
+		success(file) {//https://github.com/rowanwins/vue-dropzone/issues/12
+			 var response = JSON.parse(file.xhr.response)
+			 console.log(response.files.file)
+		 },
+
 		reverseFormCity(){
 			this.newCity = !this.newCity
 		},
