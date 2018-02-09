@@ -40,6 +40,7 @@
 	import LayoutBasic from '@/components/layout/BaseLayout'
 	import ls  from '@/services/ls'
   import store from '@/store'
+  import { mapGetters, mapActions } from 'vuex'
 
 
 export default {
@@ -77,7 +78,8 @@ export default {
       }
       else if (this.$route.name == "admin" ) {
         this.backOffice = true
-        this.name = store.getters['auth/getConnectedUser']
+        this.name = mapActions(['auth/getConnectedUser'])
+        console.log(this.name)
       }
       else  {
         this.backOffice = false
