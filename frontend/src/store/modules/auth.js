@@ -17,7 +17,7 @@ export default {
 			return state.connectedAdmin
 		},
 		getConnectedUser(state){
-			return state.user.nom
+			return state.user
 		}
 	},
 	mutations: {
