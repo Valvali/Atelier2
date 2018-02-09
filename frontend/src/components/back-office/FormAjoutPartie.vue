@@ -16,10 +16,6 @@
 					  		<label class="label">Longitude :</label>
 					    	<input class="input" type="text" placeholder="Entrez la longitude" :pattern="finalRegex" @input="ifRegexLng()" @change="ifRegexLngEnd()" v-model="lng" required>
 					  	</div><br>
-							<div class="control">
-					  		<label class="label">Ville :</label>
-					    	<input class="input" type="text" placeholder="Entrez la ville" v-model="city" required>
-					  	</div><br>
 						</div>
 						<div class="block">
 							<v-map id="map" :zoom="zoom" :center="center" :options="option" v-on:l-click="getPoint($event)" >
@@ -29,7 +25,37 @@
 						</div>
 					</div>
 
-			  	<div class="block">
+
+						<div class="block" v-if="!newCity">
+							<button class="button is-link" @click.prevent="reverseFormCity()"> Nouvelle ville</button>
+							<label class="label">Ville :</label>
+							<b-select placeholder="Selectionner une ville" v-model="city">
+								<option v-for="s in series">{{ s }}</option>
+							</b-select>
+						</div>
+						<div class="coordonees" v-else>
+							<div class="block">
+								<button class="button is-link" @click.prevent="reverseFormCity()"> Selecteur de ville</button>
+								<label class="label">Nom de la nouvelle ville</label>
+								<input class="input" type="text" placeholder="Entrez la nouvelle ville" v-model="nameNewCity" required>
+								<div class="control"><br>
+						  		<label class="label">Latitude :</label>
+						    	<input class="input" type="text" placeholder="Entrez la latitude" :pattern="finalRegex" @input="ifRegexLat2()" @change="ifRegexLatEnd2()" v-model="newCityLat" required>
+						  	</div><br>
+						  	<div class="control">
+						  		<label class="label">Longitude :</label>
+						    	<input class="input" type="text" placeholder="Entrez la longitude" :pattern="finalRegex" @input="ifRegexLng2()" @change="ifRegexLngEnd2()" v-model="newCityLng" required>
+						  	</div><br>
+							</div>
+							<div class="block">
+								<v-map id="map" :zoom="zoom2" :center="center2" :options="option2" v-on:l-click="getPoint2($event)" >
+				          <v-tilelayer :url="url" ></v-tilelayer>
+									<v-marker :lat-lng='[this.newCityLat, this.newCityLng]' ></v-marker>
+				        </v-map>
+							</div>
+						</div>
+					<div class="block">
+
 						<div class="control">
 				  		<label class="label">Image :</label>
 							<vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"  v-model="img"/>
@@ -74,7 +100,7 @@
 
 
 				 	<div class="control">
-				    	<button class="button is-link">Enregistrer</button>
+				    	<button type="submit" class="button is-link">Enregistrer</button>
 				 	</div>
 			</form>
 		</div>
@@ -85,7 +111,7 @@
 <script>
 	import api from '@/services/api'
 	import LayoutBasic from '@/components/layout/BaseLayout'
-	import axios from 'axios'
+	import ls  from '@/services/ls'
 
 	import vue2Dropzone from 'vue2-dropzone'
 	import 'vue2-dropzone/dist/vue2Dropzone.css'
@@ -97,20 +123,31 @@ export default {
 	},
 	data: function () {
     return {
+			url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       zoom: 13,
       center: [48.6833, 6.19], //nancy
-      url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       option: {},
+
+			zoom2:5,
+			center2:[47.9197, 2.4745],
+			option2: {},
 
 			inputRegex: "^[0-9]+[\.]?([0-9]+$|$)",
 			finalRegex: "^[0-9]+(\.[0-9]+$|$)",
 
+			newCity: false,
+			nameNewCity:"",
+			newCityLat: "",
+			newCityLng: "",
+
 			difficulty:"2",
 			lat: "",
 			lng: "",
+
 			description: "",
 			city: "",
 			img:"",
+			series:[],
 
 
 			dropzoneOptions: {
@@ -125,16 +162,35 @@ export default {
 		}
 	},
 	methods: {
-		async getPoint(e){
+		reverseFormCity(){
+			this.newCity = !this.newCity
+		},
+		getPoint(e){
 			this.lat = e.latlng.lat
 			this.lng = e.latlng.lng
 		},
+		getPoint2(e){
+			this.newCityLat = e.latlng.lat
+			this.newCityLng = e.latlng.lng
+		},
 		submit(){
+
 			console.log(this.lat)
 			console.log(this.lng)
-			console.log(this.city)
 			console.log(this.img)
 			console.log(this.description)
+			console.log(this.difficulty)
+
+			if (this.newCity) {
+				console.log("new city")
+				console.log(this.nameNewCity)
+				console.log(this.newCityLat)
+				console.log(this.newCityLng)
+			}else {
+				console.log("old city")
+				console.log(this.city)
+			}
+
 		},
 		ifRegexLat(){
 			if(!this.lat.match(this.inputRegex)){
@@ -157,11 +213,39 @@ export default {
 				console.log(false);
 				this.lng = this.lng.replace("\.", "")
 			}
+		},
+		ifRegexLat2(){
+			if(!this.newCityLat.match(this.inputRegex)){
+				this.newCityLat = ""
+			}
+		},
+		ifRegexLatEnd2(){
+			if(!this.newCityLat.match(this.finalRegex)){
+				console.log(false);
+				this.newCityLat = this.newCityLat.replace("\.", "")
+			}
+		},
+		ifRegexLng2(){
+			if(!this.newCityLng.match(this.inputRegex)){
+				this.newCityLng = ""
+			}
+		},
+		ifRegexLngEnd2(){
+			if(!this.newCityLng.match(this.finalRegex)){
+				console.log(false);
+				this.newCityLng = this.newCityLng.replace("\.", "")
+			}
 		}
 	},
-
-
-
+	created(){
+		ls.clear() //black magic / doesn't work without this
+		console.log(api);
+		api.get('/serie').then(response=>{
+			this.series=response.data
+		}).catch((err) => {
+			  console.log(err)
+		})
+	}
 
 }
 </script>

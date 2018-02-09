@@ -30,7 +30,7 @@
     <div class="content_test" v-else>
       <div class="center">
         <h1 class="homeTitle"><b>La liste selectionnée ne possède pas suffisament de point pour jouer</b></h1>
-        <button class="button is-primary" @click="home()">Retour ver l'accueil</button>
+        <button class="button is-primary" @click="home()">Retour vers l'accueil</button>
       </div>
 
     </div>
