@@ -8,10 +8,10 @@ export default {
 		// Add a request interceptor
 		api.interceptors.request.use( function (config) {
 			if(ls.get('token')){
-				if(!config.params){
-					config.params = {}
+				if(!config.headers) {
+					config.headers = {}
 				}
-				config.params.token = ls.get('token');
+				config.headers.authorization = ls.get('token');
 			}
 			return config
 		}, function (error) {

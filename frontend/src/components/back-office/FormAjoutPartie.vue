@@ -181,14 +181,32 @@ export default {
 			console.log(this.description)
 			console.log(this.difficulty)
 
+			let newPoints = [{
+				lat: this.lat,
+				lng: this.lng,
+				img: 'https://www.petitfute.com/medias/professionnel/30049/premium/600_450/223989-nancy-place-stanislas.jpg', // TODO get response dropzone
+				description: this.description,
+				difficulte: this.difficulty
+			}]
+
 			if (this.newCity) {
 				console.log("new city")
 				console.log(this.nameNewCity)
 				console.log(this.newCityLat)
 				console.log(this.newCityLng)
+				let ville = {
+					lieu: this.nameNewCity,
+					lat: this.newCityLat,
+					lng: this.newCityLng,
+					zoom: this.zoom2,
+					points: newPoints
+				}
+				api.post('serie', ville)
 			}else {
 				console.log("old city")
 				console.log(this.city)
+				newPoints[0].serie = { lieu: this.city }
+				api.post('point', newPoints[0])
 			}
 
 		},
@@ -238,13 +256,13 @@ export default {
 		}
 	},
 	created(){
-		ls.clear() //black magic / doesn't work without this
 		console.log(api);
 		api.get('/serie').then(response=>{
 			this.series=response.data
 		}).catch((err) => {
 			  console.log(err)
 		})
+		console.log(config.params.token)
 	}
 
 }
