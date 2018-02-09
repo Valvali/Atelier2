@@ -51,6 +51,7 @@ export default {
 				this.$router.push({name:'admin'})
 			}).catch(e => {
 				console.log(e)
+				this.$router.push({name:'inscription'})
 				
 			})
 			
