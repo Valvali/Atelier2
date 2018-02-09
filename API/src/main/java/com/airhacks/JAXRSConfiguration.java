@@ -20,11 +20,12 @@ import org.provider.CORSResponseFilter;
  *
  * @author airhacks.com
  */
-@ApplicationPath("/")
+@ApplicationPath("api")
 public class JAXRSConfiguration extends Application {
         @Override
         public Set<Class<?>> getClasses() {
         Set<Class<?>> s = new HashSet<>();
+        s.add(com.github.phillipkruger.apiee.ApieeService.class);
         s.add(CORSRequestFilter.class);
         s.add(CORSResponseFilter.class);
         s.add(PartieResource.class);

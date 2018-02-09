@@ -1,7 +1,12 @@
 package org.api.boundary;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,14 +32,26 @@ import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 @Path("file")
+@Api(value = "API RESTful")
 public class FileResource {
     
     final String uploadDir = "/opt/jboss/";
     
     @GET
+    @ApiOperation(value = "Récupère toutes une image précedement uploadée sur le serveur", notes = "format: api/file/sha1sum.extension")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "OK")
+        ,
+        @ApiResponse(code = 404, message = "File not found")})
+    
     @Path("{fileName}")
     public Response getFile(@PathParam("fileName") String fileName) {
-      File file = new File(uploadDir + fileName);
+        File file;
+        file = new File(uploadDir + fileName);
+        if (! file.canRead()) {
+            return Response.status(Response.Status.NOT_FOUND).entity("404 File not found").build();
+        }
+      
       return Response.ok(file, MediaType.APPLICATION_OCTET_STREAM)
       .header("Content-Disposition", "attachment; filename=\"" + file.getName() + "\"" ) //optional
       .build();
@@ -44,6 +61,13 @@ public class FileResource {
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
+    @ApiOperation(value = "Upload une image sur le serveur")
+    @ApiResponses(value = {
+        @ApiResponse(code = 201, message = "Created")
+        ,
+        @ApiResponse(code = 500, message = "Internal server error")})
+    
+
     
     public Response uploadFichier(MultipartFormDataInput input) {
         
