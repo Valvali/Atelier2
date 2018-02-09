@@ -211,8 +211,8 @@ export default {
 			}else {
 				console.log("old city")
 				console.log(this.city)
-				newPoints[0].serie = { lieu: this.city }
-				api.post('point', newPoints[0])
+				// newPoints[0].serie = { lieu: this.city }
+				api.post('point/' + this.city, newPoints[0])
 			}
 
 		},

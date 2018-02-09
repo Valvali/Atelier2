@@ -43,7 +43,9 @@ class SerieManager {
         for (Point p: s.getPoints()) {
             pm.save(p);
         }
-        s.setId(UUID.randomUUID().toString());
+        if (s.getId() == null) {
+            s.setId(UUID.randomUUID().toString());
+        }
         return this.em.merge(s);
     }
     
