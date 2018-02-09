@@ -32,14 +32,14 @@ export default {
 	actions: {
 		signup({commit},credentials){
 			api.post('/user',credentials).then(response=>{
-				commit('setConnectedUser', response.data)
 			}).catch(error => {
 				console.log(error)
 				})
 		},
 		signin ({commit}, user){
 			return api.post('/auth', user).then((response) => {
-				ls.set('token',response.data.token)
+				ls.set('token',response.headers.authorization)
+				commit('setConnectedUser', response.data)
 			}).catch((err) => {
 				return Promise.reject('Login failed')
 			})

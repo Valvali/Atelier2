@@ -40,7 +40,7 @@
 	import LayoutBasic from '@/components/layout/BaseLayout'
 	import ls  from '@/services/ls'
   import store from '@/store'
-  import { mapGetters, mapActions } from 'vuex'
+  import { mapGetters} from 'vuex'
 
 
 export default {
@@ -78,8 +78,7 @@ export default {
       }
       else if (this.$route.name == "admin" ) {
         this.backOffice = true
-        this.name = mapActions(['auth/getConnectedUser'])
-        console.log(this.name)
+        this.name = store.getters['auth/getConnectedUser']
       }
       else  {
         this.backOffice = false
@@ -149,5 +148,10 @@ export default {
   .infoParty button{
     vertical-align: middle;
 
+  }
+  h1.homeTitle{
+    color:black;
+    font-size: 2em;
+    margin-top:50px;
   }
 </style>
