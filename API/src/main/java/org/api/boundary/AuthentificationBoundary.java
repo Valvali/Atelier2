@@ -45,7 +45,10 @@ public class AuthentificationBoundary {
             authentifie(mail, motDePasse);
             // On fournit un token
             String token = issueToken(mail);
-            return Response.ok().header(AUTHORIZATION, "Bearer " + token).build();
+            Utilisateur u = um.findByEmail(mail);
+            u.setId(""); // mask UUID
+            u.setPassword(""); // mask password hash
+            return Response.ok().header(AUTHORIZATION, "Bearer " + token).entity(u).build();
 
         } catch (Exception e) {
             return Response.status(Response.Status.UNAUTHORIZED).build();
