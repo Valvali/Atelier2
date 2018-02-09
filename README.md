@@ -10,10 +10,14 @@ cd APIDeploy
 # création des images docker (en tant que root si nécéssaire)
 ./build.sh
 
-# construction de l'archive api.war: utiliser maven (build avec votre IDE ou manuellement)
+# construction de l'archive api.war avec maven
+
+cd ../API
+mvn clean install
 
 # lancement de l'API
-docker-compose up
+docker-compose up -d
+cd ..
 ```
 
 ## Build Setup (client)
