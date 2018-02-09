@@ -27,6 +27,7 @@ import javax.ws.rs.core.UriInfo;
 import org.api.entity.Partie;
 import org.api.entity.Point;
 import org.api.entity.Serie;
+import org.control.JsonError;
 
 /**
  *
@@ -54,7 +55,7 @@ public class PartieResource {
         Serie serie = sm.findByName(nomSerie);
         if (serie == null) {
             return Response.status(Response.Status.BAD_REQUEST)
-                    .entity("Cette série n'existe pas").build();
+                    .entity(JsonError.error("Cette série n'existe pas")).build();
 
         }
         
@@ -63,7 +64,7 @@ public class PartieResource {
         List<Point> points = pm.nouvellePartie(nomSerie, difficulte);
         if (points == null) {
             return Response.status(Response.Status.BAD_REQUEST)
-                    .entity("Pas assez de POI pour cette difficultê").build();
+                    .entity(JsonError.error("Pas assez de POI pour cette difficultê")).build();
         }
         for (Point p : points) {
             JsonObjectBuilder pointJSON = Json.createObjectBuilder();

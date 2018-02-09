@@ -73,7 +73,12 @@ export default {
       RayonValid: 2000,
       interval: null,
 
-      donnees : json, // à ne pas faire comme ça !!!!!
+      playerInfo: {},
+
+      donnees: {
+        token: "",
+        points: []
+      },
       //markerIcon: "../../assets/marker.png",
     };
   },
@@ -125,7 +130,7 @@ export default {
     underNumber(){
       let ret = []
       for(let i=0 ; i<this.number ; i++){
-        ret.push(this.donnees[i])
+        ret.push(this.donnees.points[i])
       }
       if(this.number>= this.iterationMax ){
         this.position =  L.latLng(0 , 0);
@@ -133,10 +138,10 @@ export default {
         this.descr = "le jeu est terminée, veuillez cliquez sur la carte pour voir le tableau des scores"
         this.difficulty = 1
       }else{
-        this.position = L.latLng(this.donnees[this.number].lat , this.donnees[this.number].lng);
-        this.img = this.donnees[this.number].img
-        this.descr = this.donnees[this.number].description
-        this.difficulty = this.donnees[this.number].difficulte
+        this.position = L.latLng(this.donnees.points[this.number].lat , this.donnees.points[this.number].lng);
+        this.img = this.donnees.points[this.number].img
+        this.descr = this.donnees.points[this.number].description
+        this.difficulty = this.donnees.points[this.number].difficulte
 
       }
       return ret
@@ -162,13 +167,12 @@ export default {
 
 
       let playerInfo = {
-				"pseudo":ls.get(0).pseudo,
-				"score": this.score,
-				"difficulty":ls.get(0).difficulty,
-				"city": ls.get(0).city,
-			}
-      //console.log(playerInfo);
-
+          "pseudo":ls.get(0).pseudo,
+          "score": this.score,
+          "difficulty":ls.get(0).difficulty,
+          "city": ls.get(0).city,
+      }
+      
       if(this.number>= this.iterationMax){
         //end of the game
         this.$router.push({'name': 'result'})
@@ -189,6 +193,19 @@ export default {
   },
   created: function () {
     this.count();
+
+    this.playerInfo = {
+      "pseudo":ls.get(0).pseudo,
+      "score": this.score,
+      "difficulty":ls.get(0).difficulty,
+      "city": ls.get(0).city,
+    }
+
+    api.post('/partie/' + this.playerInfo.city + '/' + this.playerInfo.difficulty).then(response=>{
+			this.donnees=response.data;
+		}).catch((err) => {
+			  console.log(err);
+			})
   }
 }
 </script>

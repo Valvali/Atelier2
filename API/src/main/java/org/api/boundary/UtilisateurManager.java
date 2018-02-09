@@ -15,6 +15,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import org.api.entity.Utilisateur;
+import org.control.PasswordManagement;
+import org.mindrot.jbcrypt.BCrypt;
 /**
  *
  * @author vali
@@ -35,20 +37,19 @@ public class UtilisateurManager {
     }
     
     public boolean checkCredentials(String mail, String password) {
-        Query q = this.em.createQuery("SELECT u FROM Utilisateur u WHERE u.mail = :usermail AND u.password = :userpassword")
-        .setParameter("usermail", mail)
-        .setParameter("userpassword", password);
-        
+        Query q = this.em.createQuery("SELECT u FROM Utilisateur u WHERE u.mail = :usermail")
+        .setParameter("usermail", mail);
         try {
-            q.getSingleResult();
+           Utilisateur u = (Utilisateur) q.getSingleResult();
+           return BCrypt.checkpw(password, u.getPassword());
         } catch(NoResultException e) {
             return false;
         }
-        return true;
     }
 
     public Utilisateur save(Utilisateur u) {
         u.setId(UUID.randomUUID().toString());
+        u.setPassword(PasswordManagement.digestPassword(u.getPassword()));
         return this.em.merge(u);
     }
 
