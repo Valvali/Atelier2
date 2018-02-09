@@ -32,7 +32,7 @@ export default {
 	actions: {
 		signup({commit},credentials){
 			api.post('/user',credentials).then(response=>{
-				ls.set('token',response.data.token)
+				// ls.set('token',response.data.token)
 				commit('setConnectedUser', response.data)
 			}).catch(error => {
 				console.log(error)
@@ -44,5 +44,10 @@ export default {
 				console.log(err)
 			})
 		},
+
+		logout({commit}){
+			commit('initState')
+			// ls.remove('token')
+		}
 	}
 }

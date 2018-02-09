@@ -69,6 +69,8 @@
 	import api from '@/services/api'
 	import LayoutBasic from '@/components/layout/BaseLayout'
 	import ls  from '@/services/ls'
+	import store from '@/store'
+
 
 
 export default {
@@ -94,7 +96,7 @@ export default {
 				"difficulty":this.difficulty,
 				"city": this.city,
 			}
-			ls.set (0, playerInfo)
+			ls.set(0, playerInfo)
 			this.$router.push({'name': 'geoloc'})
 		}
 	},
@@ -104,7 +106,11 @@ export default {
 			this.serie=response.data;
 		}).catch((err) => {
 			  console.log(err);
-			})
+		})
+		if (store.getters['auth/isConnected']) {
+			this.pseudo = store.getters['auth/getConnectedUser']
+		}
+
 	}
 }
 </script>
