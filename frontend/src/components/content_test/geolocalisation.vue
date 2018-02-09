@@ -43,6 +43,8 @@ import LayoutBasic from '@/components/layout/BaseLayout'
 import ls  from '@/services/ls'
 import Vue from 'vue'
 
+import config from '@/config'
+
 
 import json from '../../../assets/donneestest.json'
 
@@ -150,8 +152,11 @@ export default {
         this.descr = "le jeu est terminée, veuillez cliquez sur la carte pour voir le tableau des scores"
         this.difficulty = 1
       }else{
-        this.position = L.latLng(this.donnees.points[this.number].lat , this.donnees.points[this.number].lng);
+        this.position = L.latLng(this.donnees.points[this.number].lat , this.donnees.points[this.number].lng)
         this.img = this.donnees.points[this.number].img
+        if (this.img.startsWith('/')) {
+          this.img = config.url + this.img
+        }
         this.descr = this.donnees.points[this.number].description
         this.difficulty = this.donnees.points[this.number].difficulte
 

@@ -39,7 +39,7 @@ public class FileResource {
     final String uploadDir = "/opt/jboss/";
     
     @GET
-    @ApiOperation(value = "Récupère toutes une image précedement uploadée sur le serveur", notes = "format: api/file/sha1sum.extension")
+    @ApiOperation(value = "Récupère toutes une image précedement uploadée sur le serveur", notes = "format: /file/sha1sum.extension")
     @ApiResponses(value = {
         @ApiResponse(code = 200, message = "OK")
         ,
@@ -95,7 +95,7 @@ public class FileResource {
             }
         }
         JsonObject output;
-        output = Json.createObjectBuilder().add("url", "/api/file/" + finalName).build();
+        output = Json.createObjectBuilder().add("url", "/file/" + finalName).build();
         return Response.status(Response.Status.CREATED).entity(output).build();
     }
 
