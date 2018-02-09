@@ -187,9 +187,6 @@ export default {
 
     },
   },
-  computed: {
-
-  },
   created: function () {
     this.count();
   }
