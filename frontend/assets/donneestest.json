@@ -17,14 +17,14 @@
   "lng": "6.179632",
   "img": "https://media-cdn.tripadvisor.com/media/photo-s/0e/c5/0e/63/basilique-saint-epvre.jpg",
   "description":"Basilique Saint-Epvre",
-  "difficulte": "2"
+  "difficulte": "1"
 },
 {
   "lat": "48.682845",
   "lng": "6.1611653",
   "img": "http://www.univ-lorraine.fr/sites/www.univ-lorraine.fr/files/styles/header/public/iut-nancy-charlemagne.jpg?itok=ghAR954-",
   "description":"IUT Nancy-Charlemagne",
-  "difficulte": "3"
+  "difficulte": "1"
 },
 {
   "lat": "48.6587665",
@@ -45,7 +45,7 @@
   "lng": "6.1762033",
   "img": "http://ekladata.com/qyTPU4beaBOGYjKQOB1JZT2Kg28.jpg",
   "description":"Cathédrale Notre-Dame-de-l'Annonciation ",
-  "difficulte": "3"
+  "difficulte": "1"
 },
 {
   "lat": "48.6963432",
@@ -66,7 +66,7 @@
   "lng": "6.1659675",
   "img": "http://www.laforet.com/sites/default/files/styles/agence-video__800x650_/public/thumb-immobilier-vandoeuvrelesnancy.jpg?itok=sIrohMQ1",
   "description":"Vélodrome",
-  "difficulte": "3"
+  "difficulte": "1"
 },
 {
   "lat": "48.6846556",
