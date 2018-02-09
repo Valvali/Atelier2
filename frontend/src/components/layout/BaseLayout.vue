@@ -150,4 +150,9 @@ export default {
     vertical-align: middle;
 
   }
+  h1.homeTitle{
+    color:black;
+    font-size: 2em;
+    margin-top:50px;
+  }
 </style>

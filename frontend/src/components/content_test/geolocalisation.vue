@@ -1,6 +1,6 @@
 <template>
   <layout-basic>
-    <div class="content_test">
+    <div class="content_test" v-if="!errorList">
 
         <v-map id="map" :zoom="zoom" :center="center" :options="option" v-on:l-click="getPoint($event)" >
 
@@ -26,6 +26,13 @@
             </p>
           </div>
         </div>
+    </div>
+    <div class="content_test" v-else>
+      <div class="center">
+        <h1 class="homeTitle"><b>La liste selectionnée ne possède pas suffisament de point pour jouer</b></h1>
+        <button class="button is-primary" @click="home()">Retour ver l'accueil</button>
+      </div>
+
     </div>
   </layout-basic>
 </template>
@@ -53,6 +60,8 @@ export default {
   name: 'App',
   data: function () {
     return {
+      errorList: false,
+
       zoom: 13,
       center: [48.6833, 6.19], //nancy
 
@@ -83,6 +92,9 @@ export default {
     };
   },
   methods: {
+    home(){
+      this.$router.push({'name': 'home'})
+    },
     multiplyByTime(val){
       if(this.time<5){
         val = val*5
@@ -172,7 +184,7 @@ export default {
           "difficulty":ls.get(0).difficulty,
           "city": ls.get(0).city,
       }
-      
+
       if(this.number>= this.iterationMax){
         //end of the game
         this.$router.push({'name': 'result'})
@@ -205,7 +217,8 @@ export default {
 			this.donnees=response.data;
 		}).catch((err) => {
 			  console.log(err);
-			})
+        this.errorList = true;
+		})
   }
 }
 </script>
@@ -214,6 +227,7 @@ export default {
 <style scoped>
 @import "~leaflet/dist/leaflet.css";
 .content_test{
+  min-height: 500px;
   display: flex;
   margin:10px;
   text-align: left;
@@ -239,6 +253,11 @@ export default {
   margin:0px;
   display: block;
   width: 100%;
+}
+.center{
+  width: 100%;
+  margin: 100px 0 100px 0;
+  text-align: center;
 }
 
 @media screen and (max-width: 900px) {
