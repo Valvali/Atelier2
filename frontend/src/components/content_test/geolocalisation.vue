@@ -187,9 +187,12 @@ export default {
 
       if(this.number>= this.iterationMax){
         //end of the game
+        this.postScore()
+        
         this.$router.push({'name': 'result'})
       }else{
         //redirection vers la page suivante
+        
         this.time = 0
         this.number++
         this.$router.push({'name': 'geoloc'})
@@ -200,8 +203,12 @@ export default {
           this.count()
         }
       }
-
     },
+    postScore() {
+      api.post('score/'+this.donnees.token+'/'+this.playerInfo.city, {"score": this.score, "nom" : this.playerInfo.pseudo}, function(response) {
+        console.log(response)
+      });
+    }
   },
   created: function () {
     this.count();
