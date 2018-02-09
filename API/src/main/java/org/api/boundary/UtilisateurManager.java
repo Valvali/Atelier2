@@ -29,6 +29,18 @@ public class UtilisateurManager {
     public Utilisateur findById(String id) {
         return this.em.find(Utilisateur.class, id);
     }
+    
+    public Utilisateur findByEmail(String mail) {
+        Query q = this.em.createQuery("SELECT u FROM Utilisateur u WHERE u.mail = :usermail")
+        .setParameter("usermail", mail);
+        Utilisateur u;
+        try {
+            u = (Utilisateur) q.getSingleResult();
+        } catch(NoResultException e) {
+            return null;
+        }
+        return u;
+    }
 
     public List<Utilisateur> findAll() {
         Query q = this.em.createNamedQuery("User.findAll", Utilisateur.class);
