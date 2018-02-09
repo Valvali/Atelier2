@@ -21,7 +21,7 @@
 
           <img class="tips" :src="img" alt="photo">
           <div class="description">
-            <h3>description</h3>
+            <h3><strong>Description :</strong></h3>
             <p>{{descr}}
             </p>
           </div>
@@ -190,9 +190,6 @@ export default {
       }
 
     },
-  },
-  computed: {
-
   },
   created: function () {
     this.count();

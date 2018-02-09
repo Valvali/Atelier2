@@ -4,28 +4,26 @@
     <header>
    		 	<div class="bar_nav">
 				<img src="../../../assets/images/geoquiz.jpg"/>
-              <div class="pseudo" v-if="connected">
-                <strong class="infoParty "> {{pseudo}}
-                  <router-link class="buttonHome" to="home()">Accueil</router-link>
-                </strong>
-
-              </div>
-              <div class="pseudo" v-else>
-                <strong class="infoParty ">
-                  <router-link class="buttonHome" to="connexion" >Ajouter un Point</router-link>
-                 </strong>
-              </div>
-	          	<!-- <div class="pseudo" v-if="isConnected">
-	            	<strong class="infoParty "> {{pseudo}}
-                  <router-link class="buttonHome" to="home()">Déconnexion</router-link>
-                </strong>
-
+	          	<div class="pseudo" v-if="connected">
+	            	<span class="infoParty "> <span>{{pseudo}}</span>
+                  <button class="button is-primary" @click="home()">Accueil</button>
+                </span>
+	          	</div>
+              <div class="pseudo" v-else-if="backOffice">
+	            	<span class="infoParty "> <span>{{name}}</span>
+                  <button class="button is-primary" @click="logOut()">Deconnexion</button>
+                </span>
+	          	</div>
+              <div class="pseudo" v-else-if="signin">
+	            	<span class="infoParty ">
+                  <button class="button is-primary" @click="home()">Accueil</button>
+                </span>
 	          	</div>
               <div class="pseudo" v-else>
-	            	<strong class="infoParty ">
-                  <router-link class="buttonHome" to="connexion" >Ajouter un Point</router-link>
-                 </strong>
-	          	</div> -->
+	            	<span class="infoParty ">
+                  <button class="button is-primary" @click="connexion()" >Ajouter un Point</button>
+                 </span>
+	          	</div>
    		 	</div>
     </header>
 
@@ -38,42 +36,66 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
 	import api from '@/services/api'
 	import LayoutBasic from '@/components/layout/BaseLayout'
 	import ls  from '@/services/ls'
-  
+  import store from '@/store'
+
 
 export default {
 	data: function () {
 	  return {
+      name : "",
+      signin: false,
+      backOffice: false,
       connected: false,
       pseudo : "",
       score : 0
 	  }
 	},
-  computed: mapGetters({isConnected: 'auth/isConnected'}),
 
   methods: {
 
     home(){
       this.$router.push({'name': 'home'})
     },
+    logOut(){
+      this.$store.dispatch('auth/logout').then(response=>{
+        this.$router.push({'name': 'home'})
+      })
+    },
+    connexion(){
+      this.$router.push({'name': 'connection'})
+    },
 
     actualise(){
+      if (this.$route.name == "geoloc" || this.$route.name == "result") {
+        this.connected = true
+      }
+      else if (this.$route.name == "connection" || this.$route.name == "inscription") {
+        this.signin = true
+      }
+      else if (this.$route.name == "admin" ) {
+        this.backOffice = true
+        this.name = store.getters['auth/getConnectedUser']
+      }
+      else  {
+        this.backOffice = false
+        this.connected = false
+        this.signin = false
+      }
+
       if(ls.isEmpty(0)){
         this.pseudo = ""
         this.score =  0
       }else {
         this.pseudo =  ls.get(0).pseudo;
         this.score =   ls.get(0).score;
-        if(ls.get(0)){ this.connected = true; }
       }
 
     }
 	},
   created: function () {
-    this.connected = false ;
     this.actualise();
 
     // setTimeout(function(){
@@ -113,13 +135,6 @@ export default {
 	html{
 		height: 100%;
 	}
-	.buttonHome{
-		padding:5px;
-		color:white;
-		background-color: green;
-		text-align: center;
-	}
-
   .pseudo{
     padding-top : -20px;
     margin: 0;
@@ -128,9 +143,13 @@ export default {
     text-align: right;
   }
   .infoParty{
+    font-weight: bold;
     display: block;
-    vertical-align: center;
     margin: 20px 25px 20px 20px;
     color: white;
+  }
+  .infoParty button{
+    vertical-align: middle;
+
   }
 </style>

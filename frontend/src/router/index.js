@@ -30,7 +30,7 @@ export const router = new Router({
         if (ls.isEmpty(0)) {
           next({path:"home"})
         } else {
-          next(false)
+          next(true)
         }
       }
     },
@@ -42,45 +42,45 @@ export const router = new Router({
         if (ls.isEmpty(0)) {
           next({path:"home"})
         } else {
-          next(false)
+          next(true)
         }
       }
     },
     {
       path: '/admin',
       name: 'admin',
-      component: backOffice,
+      component: backOffice,/*
       beforeEnter: (to, from, next) => {
         if (store.getters['auth/isConnected']) {
-          next({path:"connexion"})
+          next({path:"connection"})
         } else {
           next(false)
+        }
+      }*/
+    },
+    {
+      path: '/inscription',
+      name: 'inscription',
+      component: inscription,
+      beforeEnter: (to, from, next) => {
+        if (store.getters['auth/isConnected']) {
+          next({path:"admin"})
+        } else {
+          next(true)
         }
       }
     },
     {
-      path: '/inscription',
-      name: 'inscrption',
-      component: inscription,/*
-      beforeEnter: (to, from, next) => {
-        if (!store.getters['auth/isConnected']) {
-          next({path:"admin"})
-        } else {
-          next(false)
-        }
-      }*/
-    },
-    {
       path: '/connexion',
       name: 'connection',
-      component: connexion,/*
+      component: connexion,
       beforeEnter: (to, from, next) => {
-        if (!store.getters['auth/isConnected']) {
+        if (store.getters['auth/isConnected']) {
           next({path:"admin"})
         } else {
-          next(false)
+          next(true)
         }
-      }*/
+      }
     },
     {
       path: '*',
