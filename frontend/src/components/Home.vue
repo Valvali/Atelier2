@@ -146,10 +146,11 @@ export default {
 	},
 	data: function () {
 	  return {
-			info:false,
+			info:true,
 			pseudo: "",
 			difficulty: "2",
-	    serie:[]
+			serie : "",
+	    series:[],
 	  };
 	},
   methods: {
