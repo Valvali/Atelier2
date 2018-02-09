@@ -154,9 +154,6 @@ export default {
       }else{
         this.position = L.latLng(this.donnees.points[this.number].lat , this.donnees.points[this.number].lng)
         this.img = this.donnees.points[this.number].img
-        if (this.img.startsWith('/')) {
-          this.img = config.url + this.img
-        }
         this.descr = this.donnees.points[this.number].description
         this.difficulty = this.donnees.points[this.number].difficulte
 
@@ -193,11 +190,11 @@ export default {
       if(this.number>= this.iterationMax){
         //end of the game
         this.postScore()
-        
+
         this.$router.push({'name': 'result'})
       }else{
         //redirection vers la page suivante
-        
+
         this.time = 0
         this.number++
         this.$router.push({'name': 'geoloc'})
@@ -226,6 +223,13 @@ export default {
     }
 
     api.post('/partie/' + this.playerInfo.city + '/' + this.playerInfo.difficulty).then(response=>{
+      let data = response.data
+      for (var i = 0; i < data.points.length; i++) {
+        if (data.points[i].img.startsWith('/')) {
+          data.points[i].img = config.url + data.points[i].img
+        }
+      }
+
 			this.donnees=response.data;
 		}).catch((err) => {
 			  console.log(err);
