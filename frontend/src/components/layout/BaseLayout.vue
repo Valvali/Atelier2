@@ -23,7 +23,7 @@
 	            	<span class="infoParty ">
                   <button class="button is-primary" @click="connexion()" >Ajouter un Point</button>
                  </span>
-	          	</div> 
+	          	</div>
    		 	</div>
     </header>
 
@@ -131,16 +131,6 @@ export default {
 	html{
 		height: 100%;
 	}
-<<<<<<< HEAD
-
-=======
-	.buttonHome{
-		padding:5px;
-		color:white;
-		background-color: green;
-		text-align: center;
-	}
->>>>>>> 0085f85dfb883d8a746aab7f84f84139a549cab5
   .pseudo{
     padding-top : -20px;
     margin: 0;
