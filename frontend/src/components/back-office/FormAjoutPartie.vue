@@ -143,6 +143,7 @@ export default {
 			difficulty:"2",
 			lat: "",
 			lng: "",
+			urlImage: "",
 
 			description: "",
 			city: "",
@@ -153,8 +154,8 @@ export default {
 			dropzoneOptions: {
           url: 'http://localhost:8080/api/file', //TODO url
           thumbnailWidth: 500,
-          maxFilesize: 0.5,
-          headers: { "autorization": ls.get('token')},
+          maxFilesize: 5,
+          headers: { "authorization": ls.get('token')},
 					maxFiles: "1",
 					acceptedFiles: "image/png,image/gif,image/jpeg",
 					addRemoveLinks: true,
@@ -164,7 +165,7 @@ export default {
 	methods: {
 		success(file) {//https://github.com/rowanwins/vue-dropzone/issues/12
 			 var response = JSON.parse(file.xhr.response)
-			 console.log(response.files.file)
+			 this.urlImage = response.url
 		 },
 
 		reverseFormCity(){
@@ -189,7 +190,7 @@ export default {
 			let newPoints = [{
 				lat: this.lat,
 				lng: this.lng,
-				img: 'https://www.petitfute.com/medias/professionnel/30049/premium/600_450/223989-nancy-place-stanislas.jpg', // TODO get response dropzone
+				img: this.urlImage,
 				description: this.description,
 				difficulte: this.difficulty
 			}]
