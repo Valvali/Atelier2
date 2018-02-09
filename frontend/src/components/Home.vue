@@ -64,9 +64,11 @@
 			<button class="button is-link" @click="reverseInfo()"> Commencer la partie</button>
 			<div class="textInfo">
 				<p>
-					Géoquiz est une application de jeu de géolocalisation. Après avoir rempli le formulaire pour connaître la ville, la difficulté et votre pseudo, le test commence:
-					Le principe est simple, l'application vous fournis un image est l'objectif est de retrouver la localisation du lieu en photo, pour cela il faut cliquer sur la carte
-					MAIS ATTENTION il n'y qu'une seule tentative.
+					Géoquiz est une application de jeu de géolocalisation. Après avoir rempli le formulaire
+					pour connaître la ville, la difficulté et votre pseudo, le test commence.<br>
+					Le principe est simple, l'application vous fournit une image et l'objectif
+					est de retrouver la localisation du lieu en photo, pour cela il faut cliquer sur la carte
+					<strong>MAIS ATTENTION</strong> il n'y a qu'une seule tentative.
 
 					<h2>Le calcul des points :</h2>
 
@@ -189,9 +191,9 @@ export default {
 		width: 80%;
 	}
 	.container{
-		width: calc( 100% - 2 * 20%);
-		margin-left: 20%;
-		margin-right: 20%;
+		width: calc( 100% - 2 * 30%);
+		margin-left: 30%;
+		margin-right: 30%;
 
 		margin-top:60px;
 		margin-bottom: 150px;
@@ -218,6 +220,7 @@ export default {
 		Line-Height: 1.8;
 	}
 	.textInfo h2 {
+		margin-top: 25px;
 		font-weight: bold;
 		font-size: 1.5em
 	}
@@ -227,14 +230,21 @@ export default {
 	}
 	.listPoint h3{
 		font-weight: bold;
-		font-size: 1.2em
+		font-size: 1.2em;
+		margin-bottom: 10px;
+		margin-top: 20px;
+
 	}
 	.listPoint table  {
 		width: 100%;
 	}
 	.listPoint table th {
-    background-color: blue;
+		text-align: center;
+    background-color: #714dd2;
     color: white;
+	}
+	.listPoint table td{
+		text-align: center;
 	}
 
 
