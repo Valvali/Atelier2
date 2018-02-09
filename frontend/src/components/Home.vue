@@ -1,8 +1,8 @@
 <template>
 	<layout-basic>
-	<h1 class="homeTitle"><b>Welcome to our application GeoQuizz, please launch the game...</b></h1>
-	 	<div class="container">
-
+	<h1 class="homeTitle"><b>Welcome to our application GeoQuiz</b></h1>
+	 	<div class="container" v-if="info">
+			<button class="button is-link" @click="reverseInfo()"> Information</button>
 			<!--<form class="" action="index.html" @submit.prevent="newGame(city)">-->
 
 
@@ -56,9 +56,76 @@
 			  	</div><br>
 
 				 	<div class="control">
-				    	<button class="button is-link">Envoyer</button>
+				    	<button class="button is-link">Commencer le test</button>
 				 	</div>
 			</form>
+		</div>
+		<div class="container" v-else>
+			<button class="button is-link" @click="reverseInfo()"> Commencer la partie</button>
+			<div class="textInfo">
+				<p>
+					Géoquiz est une application de jeu de géolocalisation. Après avoir rempli le formulaire
+					pour connaître la ville, la difficulté et votre pseudo, le test commence.<br>
+					Le principe est simple, l'application vous fournit une image et l'objectif
+					est de retrouver la localisation du lieu en photo, pour cela il faut cliquer sur la carte
+					<strong>MAIS ATTENTION</strong> il n'y a qu'une seule tentative.
+
+					<h2>Le calcul des points :</h2>
+
+					<div class="listPoint">
+						<h3>Distance :</h3>
+							<table>
+								<tr>
+							    <th>< 2 000 m </th>
+							    <th>> 2 000 m</th>
+							  </tr>
+							  <tr>
+							    <td>distance du point / 2</td>
+							    <td>le score est de 0</td>
+							  </tr>
+							</table>
+
+						<h3>Temps :</h3>
+						<table>
+							<tr>
+								<th>< 5 s </th>
+								<th>< 10 s </th>
+								<th>< 20 s </th>
+								<th>< 30 s </th>
+								<th>> 30 s</th>
+							</tr>
+							<tr>
+								<td>score x 5</td>
+								<td>score x 2,5</td>
+								<td>score x 1,5</td>
+								<td>score x 1</td>
+								<td>le score est de 0</td>
+
+							</tr>
+						</table>
+
+						<h3>Difficulté :</h3>
+							<table>
+								<tr>
+									<th> Facile </th>
+									<th> Moyen </th>
+									<th> Difficile </th>
+									<th> Expert </th>
+								</tr>
+								<tr>
+									<td>score x 0,5</td>
+									<td>score x 1</td>
+									<td>score x 2</td>
+									<td>score x 4</td>
+
+								</tr>
+							</table>
+					</div>
+
+
+
+				</p>
+			</div>
 		</div>
  	</layout-basic>
 </template>
@@ -79,12 +146,16 @@ export default {
 	},
 	data: function () {
 	  return {
-		pseudo: "",
-		difficulty: "2",
+			info:false,
+			pseudo: "",
+			difficulty: "2",
 	    serie:[]
 	  };
 	},
   methods: {
+		reverseInfo(){
+			this.info = !this.info
+		},
 		async newGame() {/*
 			await api.get('partie/' + this.city).then(function (response) {
 				console.log(response);
@@ -135,17 +206,53 @@ export default {
 		background-color: #3273dc;
 	}
 
-
 	h1.homeTitle{
 		color:black;
 		font-size: 2em;
 		margin-top:50px;
 	}
+	.textInfo{
+		text-align: left;
+		margin-top:25px;
+		margin-bottom: 25px;
+	}
+	.textInfo p {
+		Line-Height: 1.8;
+	}
+	.textInfo h2 {
+		margin-top: 25px;
+		font-weight: bold;
+		font-size: 1.5em
+	}
+	.listPoint{
+		width: calc(100% - 2 * 5%);
+		margin: 0 5% 0 5%;
+	}
+	.listPoint h3{
+		font-weight: bold;
+		font-size: 1.2em;
+		margin-bottom: 10px;
+		margin-top: 20px;
+
+	}
+	.listPoint table  {
+		width: 100%;
+	}
+	.listPoint table th {
+		text-align: center;
+    background-color: #714dd2;
+    color: white;
+	}
+	.listPoint table td{
+		text-align: center;
+	}
+
+
 	@media screen and (max-width: 900px) {
 		.container{
-			width: calc( 100% - 2 * 25%);
-			margin-left: 25%;
-			margin-right: 25%;
+			width: calc( 100% - 2 * 15%);
+			margin-left: 15%;
+			margin-right: 15%;
 
 			margin-top:60px;
 			margin-bottom: 150px;
@@ -159,6 +266,10 @@ export default {
 			width: calc( 100% - 2 * 2.5%);
 			margin-left: 2.5%;
 			margin-right: 2.5%;
+		}
+		.listPoint{
+			width: 100%;
+			margin: 0 ;
 		}
 	}
 
