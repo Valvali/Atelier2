@@ -153,10 +153,17 @@ export default {
     vertical-align: middle;
 
   }
+  
   .pseu{
     margin-right: 20px;
   }
   .welcMessage{
     color:yellow;
+  }
+
+  h1.homeTitle{
+    color:black;
+    font-size: 2em;
+    margin-top:50px;
   }
 </style>

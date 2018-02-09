@@ -21,31 +21,31 @@
 			  	<div class="control">
 						<label class="label">Difficulté :</label>
 						<b-field>
-            <b-radio-button v-model="difficulty"
-                native-value="1"
-                type="is-primary">
-                Façile
-            </b-radio-button>
+	            <b-radio-button v-model="difficulty"
+	                native-value="1"
+	                type="is-primary">
+	                Façile
+	            </b-radio-button>
 
-            <b-radio-button v-model="difficulty"
-                native-value="2"
-                type="is-primary"
-								checked="checked">
-                Normal
-            </b-radio-button>
+	            <b-radio-button v-model="difficulty"
+	                native-value="2"
+	                type="is-primary"
+									checked="checked">
+	                Normal
+	            </b-radio-button>
 
-            <b-radio-button v-model="difficulty"
-                native-value="3"
-								type="is-primary">
-                Difficile
-            </b-radio-button>
+	            <b-radio-button v-model="difficulty"
+	                native-value="3"
+									type="is-primary">
+	                Difficile
+	            </b-radio-button>
 
-            <b-radio-button v-model="difficulty"
-                native-value="4"
-								type="is-primary">
-                Expert
-            </b-radio-button>
-        </b-field>
+	            <b-radio-button v-model="difficulty"
+	                native-value="4"
+									type="is-primary">
+	                Expert
+	            </b-radio-button>
+        		</b-field>
 
 
 			  	</div><br>
@@ -207,11 +207,7 @@ export default {
 		background-color: #3273dc;
 	}
 
-	h1.homeTitle{
-		color:black;
-		font-size: 2em;
-		margin-top:50px;
-	}
+
 	.textInfo{
 		text-align: left;
 		margin-top:25px;
