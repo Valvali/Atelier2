@@ -5,17 +5,17 @@
 ## Déploiement de l'API
 
 ``` bash
-cd APIDeploy
 
 # création des images docker (en tant que root si nécéssaire)
+cd APIDeploy
 ./build.sh
 
 # construction de l'archive api.war avec maven
-
 cd ../API
 mvn clean install
 
-# lancement de l'API
+# lancement de l'API (en tant que root si nécéssaire)
+cd ../APIDeploy
 docker-compose up -d
 cd ..
 ```
