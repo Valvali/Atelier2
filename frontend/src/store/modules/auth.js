@@ -32,7 +32,6 @@ export default {
 	actions: {
 		signup({commit},credentials){
 			api.post('/user',credentials).then(response=>{
-				// ls.set('token',response.data.token)
 				commit('setConnectedUser', response.data)
 			}).catch(error => {
 				console.log(error)
@@ -40,14 +39,15 @@ export default {
 		},
 		signin ({commit}, user){
 			return api.post('/auth', user).then((response) => {
+				ls.set('token',response.data.token)
 			}).catch((err) => {
-				console.log(err)
+				return Promise.reject('Login failed')
 			})
 		},
 
 		logout({commit}){
 			commit('initState')
-			// ls.remove('token')
+			ls.remove('token')
 		}
 	}
 }

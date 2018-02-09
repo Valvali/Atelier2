@@ -7,11 +7,11 @@
 			<form class="" @submit.prevent="submit()">
 			  	<div class="control">
 			  		<label class="label">E-mail :</label>
-			    	<input class="input" type="mail" placeholder="Entrez votre E-mail" v-model="user.mail" required>
+			    	<input class="input" type="email" placeholder="Entrez votre E-mail" v-model="user.mail" required>
 			  	</div><br>
 			  	<div class="control">
 			  		<label class="label">Password :</label>
-			    	<b-input class="b-input" type="password" password-reveal v-model="user.password" required/>
+			    	<b-input class="b-input" type="password"  placeholder="Entrez votre mot de passe" password-reveal v-model="user.password" required/>
 			  	</div><br>
 
 				 	<div class="control">
@@ -49,6 +49,9 @@ export default {
 			console.log(this.user.password)
 			this.$store.dispatch('auth/signin',this.user).then(response=>{
 				this.$router.push({name:'admin'})
+			}).catch(e => {
+				console.log(e)
+				
 			})
 			
 		}
