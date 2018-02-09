@@ -5,12 +5,16 @@
    		 	<div class="bar_nav">
 				<img src="../../../assets/images/geoquiz.jpg"/>
 	          	<div class="pseudo" v-if="connected">
-	            	<span class="infoParty "> <span>{{pseudo}}</span>
+	            	<span class="infoParty "> 
+                  <span class="welcMessage">Welcome</span>
+                  <span class="pseu">{{pseudo}}</span>
                   <button class="button is-primary" @click="home()">Accueil</button>
                 </span>
 	          	</div>
               <div class="pseudo" v-else-if="backOffice">
-	            	<span class="infoParty "> <span>{{name}}</span>
+	            	<span class="infoParty "> 
+                  <span class="welcMessage">Welcome</span>
+                  <span class="pseu">{{name}}</span>
                   <button class="button is-primary" @click="logOut()">Deconnexion</button>
                 </span>
 	          	</div>
@@ -149,6 +153,14 @@ export default {
     vertical-align: middle;
 
   }
+  
+  .pseu{
+    margin-right: 20px;
+  }
+  .welcMessage{
+    color:yellow;
+  }
+
   h1.homeTitle{
     color:black;
     font-size: 2em;
