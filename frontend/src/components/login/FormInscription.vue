@@ -15,11 +15,11 @@
 					</div><br>
 					<div class="control">
 						<label class="label">Mot de passe :</label>
-						<input class="input" type="password" password-reveal v-model="user.password" required>
+						<input class="input" type="password" placeholder="Saisissez votre mot de passe" password-reveal v-model="user.password" required>
 					</div><br>
 					<div class="control">
 						<label class="label">Verification du mot de passe</label>
-						<input class="input" type="password" password-reveal v-model="passwordVerif" required >
+						<input class="input" type="password" placeholder="Confirmez votre mot de passe" password-reveal v-model="passwordVerif" required >
 						<div class="messageError" v-if="matchPassword">
 							<strong>Les mots de passes ne correspondent pas !</strong>
 						</div>
