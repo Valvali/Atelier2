@@ -5,6 +5,10 @@
  */
 package org.api.boundary;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -36,6 +40,7 @@ import org.provider.Secured;
  */
 @Stateless
 @Path("user")
+@Api(value = "API RESTful")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 
@@ -67,6 +72,9 @@ public class UtilisateurResource {
     }
         
     @POST
+    @ApiOperation(value = "S'inscrire")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "OK")})
     public Response newUtilisateur(@Valid Utilisateur u, @Context UriInfo uriInfo) {
         Utilisateur newOne = this.um.save(u);
 

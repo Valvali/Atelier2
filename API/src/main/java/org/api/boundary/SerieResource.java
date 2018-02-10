@@ -5,6 +5,10 @@
  */
 package org.api.boundary;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import java.math.BigDecimal;
 import java.net.URI;
 import javax.ejb.Stateless;
@@ -33,6 +37,7 @@ import org.provider.Secured;
  */
 @Stateless
 @Path("serie")
+@Api(value = "API RESTful")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class SerieResource {
@@ -50,6 +55,9 @@ public class SerieResource {
     }
     
     @GET
+    @ApiOperation(value = "Récupération des coordonnés d'une série")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "OK")})
     @Path("{serie}")
     public Response getSerieLocation(@PathParam("serie") String serie) {
         Serie s = sm.findByName(serie);
@@ -61,6 +69,11 @@ public class SerieResource {
     }
     
     @POST
+    @ApiOperation(value = "Créer une nouvelle série")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "OK")
+        ,
+        @ApiResponse(code = 401, message = "Unauthorized")})
     @Secured
     public Response newSerie(@Valid Serie s, @Context UriInfo uriInfo) {
         if (sm.findByName(s.getLieu()) != null) {

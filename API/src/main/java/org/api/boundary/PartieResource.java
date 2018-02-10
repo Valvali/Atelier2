@@ -5,6 +5,10 @@
  */
 package org.api.boundary;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -36,6 +40,7 @@ import org.control.JsonError;
 
 @Stateless
 @Path("partie")
+@Api(value = "API RESTful")
 public class PartieResource {
 
     @Inject
@@ -46,6 +51,11 @@ public class PartieResource {
     
     
     @POST
+    @ApiOperation(value = "Rêcupêrer une partie")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "OK")
+        ,
+        @ApiResponse(code = 401, message = "Unauthorized")})
     @Path("{serie}/{difficulte}")
     public Response getPartie(@PathParam("serie") String nomSerie, @PathParam("difficulte") int difficulte, @Context UriInfo uriInfo) {
         

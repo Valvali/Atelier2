@@ -5,6 +5,10 @@
  */
 package org.api.boundary;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
@@ -40,6 +44,7 @@ import org.provider.Secured;
 
 @Stateless
 @Path("score")
+@Api(value = "API RESTful")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class ScoreResource {
@@ -53,6 +58,9 @@ public class ScoreResource {
     PartieManager pm;
     
     @GET
+    @ApiOperation(value = "Accès à la liste des scores")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "OK")})
     public Response getScore() {
         JsonArrayBuilder jab = Json.createArrayBuilder();
         List<Score> allScores = this.sm.findAll();
@@ -71,6 +79,11 @@ public class ScoreResource {
     }
     
     @POST
+    @ApiOperation(value = "Publication d'un score apres une partie")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "OK")
+        ,
+        @ApiResponse(code = 401, message = "Unauthorized")})
     @Path("{token}/{serie}")
     public Response newScore(@Valid Score s, @PathParam("token") String token, @PathParam("serie") String serie, @Context UriInfo uriInfo) {
         if (! pm.isTokenValid(token, serie)) {
