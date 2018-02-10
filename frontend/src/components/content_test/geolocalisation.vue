@@ -88,7 +88,11 @@ export default {
 
       donnees: {
         token: "",
-        points: []
+        points: [
+          {
+            lat:0
+          }
+        ]
       },
       //markerIcon: "../../assets/marker.png",
     };
@@ -152,6 +156,7 @@ export default {
         this.descr = "le jeu est terminée, veuillez cliquez sur la carte pour voir le tableau des scores"
         this.difficulty = 1
       }else{
+        // console.log(this.donnees)
         this.position = L.latLng(this.donnees.points[this.number].lat , this.donnees.points[this.number].lng)
         this.img = this.donnees.points[this.number].img
         this.descr = this.donnees.points[this.number].description
