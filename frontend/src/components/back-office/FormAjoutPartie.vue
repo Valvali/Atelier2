@@ -58,7 +58,8 @@
 
 						<div class="control">
 				  		<label class="label">Image :</label>
-							<vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions" v-on:vdropzone-success="success" v-model="img"/> <!-- -->
+							<vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions" v-on:vdropzone-success="success" v-model="img" />
+							<p class="red" v-if="verifImage">Aucune image</p>
 						</div>
 						<div class="control">
 							<label class="label">Difficulté :</label>
@@ -94,7 +95,7 @@
 				  	<div class="control">
 				  		<label class="label">Description :</label>
 				    	<b-input id="textarea" class="b-input" type="textarea" minlength="10" maxlength="100"
-						placeholder="Entrez la descriptiond de la partie" v-model="description" required/>
+								placeholder="Entrez la descriptiond de la partie" v-model="description" />
 				  	</div>
 			  	</div>
 
@@ -145,6 +146,7 @@ export default {
 			lng: "",
 			urlImage: "",
 
+			verifImage: false,
 			description: "",
 			city: "",
 			img:"",
@@ -152,7 +154,7 @@ export default {
 
 
 			dropzoneOptions: {
-          url: 'http://localhost:8080/api/file', //TODO url
+          url: 'http://localhost:8080/api/file',
           thumbnailWidth: 500,
           maxFilesize: 5,
           headers: { "authorization": ls.get('token')},
@@ -180,39 +182,43 @@ export default {
 			this.newCityLng = e.latlng.lng
 		},
 		submit(){
+			if(this.urlImage == ""){
+				this.verifImage = true;
+			}else{
+				console.log(this.lat)
+				console.log(this.lng)
+				console.log(this.img)
+				console.log(this.description)
+				console.log(this.difficulty)
 
-			console.log(this.lat)
-			console.log(this.lng)
-			console.log(this.img)
-			console.log(this.description)
-			console.log(this.difficulty)
+				let newPoints = [{
+					lat: this.lat,
+					lng: this.lng,
+					img: this.urlImage,
+					description: this.description,
+					difficulte: this.difficulty
+				}]
 
-			let newPoints = [{
-				lat: this.lat,
-				lng: this.lng,
-				img: this.urlImage,
-				description: this.description,
-				difficulte: this.difficulty
-			}]
-
-			if (this.newCity) {
-				console.log("new city")
-				console.log(this.nameNewCity)
-				console.log(this.newCityLat)
-				console.log(this.newCityLng)
-				let ville = {
-					lieu: this.nameNewCity,
-					lat: this.newCityLat,
-					lng: this.newCityLng,
-					zoom: this.zoom2,
-					points: newPoints
+				if (this.newCity) {
+					console.log("new city")
+					console.log(this.nameNewCity)
+					console.log(this.newCityLat)
+					console.log(this.newCityLng)
+					let ville = {
+						lieu: this.nameNewCity,
+						lat: this.newCityLat,
+						lng: this.newCityLng,
+						zoom: this.zoom2,
+						points: newPoints
+					}
+					api.post('serie', ville)
+				}else {
+					console.log("old city")
+					console.log(this.city)
+					// newPoints[0].serie = { lieu: this.city }
+					api.post('point/' + this.city, newPoints[0])
 				}
-				api.post('serie', ville)
-			}else {
-				console.log("old city")
-				console.log(this.city)
-				// newPoints[0].serie = { lieu: this.city }
-				api.post('point/' + this.city, newPoints[0])
+
 			}
 
 		},
@@ -265,10 +271,10 @@ export default {
 		console.log(api);
 		api.get('/serie').then(response=>{
 			this.series=response.data
+			console.log(response.data)
 		}).catch((err) => {
 			  console.log(err)
 		})
-		console.log(config.params.token)
 	}
 
 }
@@ -337,6 +343,10 @@ export default {
 		margin-left: 5%;
 		margin-right:  5%;
 
+	}
+	.red{
+		font-weight: bold;
+		color:red;
 	}
 
 	@media screen and (max-width: 900px) {
