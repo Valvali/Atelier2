@@ -20,7 +20,7 @@
 						<div class="block">
 							<v-map id="map" :zoom="zoom" :center="center" :options="option" v-on:l-click="getPoint($event)" >
 			          <v-tilelayer :url="url" ></v-tilelayer>
-								<v-marker :lat-lng='[this.lat, this.lng]' ></v-marker>
+								<v-marker :lat-lng='[this.lat, this.lng]' :options="markerOption"></v-marker>
 			        </v-map>
 						</div>
 					</div>
@@ -50,7 +50,7 @@
 							<div class="block">
 								<v-map id="map" :zoom="zoom2" :center="center2" :options="option2" v-on:l-click="getPoint2($event)" >
 				          <v-tilelayer :url="url" ></v-tilelayer>
-									<v-marker :lat-lng='[this.newCityLat, this.newCityLng]' ></v-marker>
+									<v-marker :lat-lng='[this.newCityLat, this.newCityLng]' :options="markerOption"></v-marker>
 				        </v-map>
 							</div>
 						</div>
@@ -128,12 +128,15 @@ export default {
       zoom: 13,
       center: [48.6833, 6.19], //nancy
       option: {},
+			markerOption:{},
 
 			zoom2:5,
 			center2:[47.9197, 2.4745],
 			option2: {},
 
+			//inputRegex: "^-?+[0-9]+[\.]?([0-9]+$|$)", //doesn't work
 			inputRegex: "^[0-9]+[\.]?([0-9]+$|$)",
+			//finalRegex: "^-?+[0-9]+[\.]?([0-9]+$|$)", //doesn't work
 			finalRegex: "^[0-9]+(\.[0-9]+$|$)",
 
 			newCity: false,
