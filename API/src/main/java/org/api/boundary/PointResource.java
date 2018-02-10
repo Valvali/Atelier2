@@ -1,6 +1,10 @@
 
 package org.api.boundary;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +35,7 @@ import org.provider.Secured;
 
 @Stateless
 @Path("point")
+@Api(value = "API RESTful")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class PointResource {
@@ -66,6 +71,11 @@ public class PointResource {
     }
     
     @POST
+    @ApiOperation(value = "Ajouter un point à une série existante")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "OK")
+        ,
+        @ApiResponse(code = 401, message = "Unauthorized")})
     @Secured
     @Path("{serie}")
     public Response newPoint(@Valid Point p, @PathParam("serie") String s, @Context UriInfo uriInfo) {

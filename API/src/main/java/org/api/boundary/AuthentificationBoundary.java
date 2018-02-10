@@ -5,6 +5,10 @@ import org.control.PasswordManagement;
 import org.api.entity.Utilisateur;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import java.security.Key;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -23,6 +27,7 @@ import static javax.ws.rs.core.HttpHeaders.AUTHORIZATION;
 import org.mindrot.jbcrypt.BCrypt;
 
 @Path("auth")
+@Api(value = "API RESTful")
 public class AuthentificationBoundary {
 
     @Inject
@@ -35,6 +40,11 @@ public class AuthentificationBoundary {
     private UriInfo uriInfo;
 
     @POST
+    @ApiOperation(value = "Se connecter en tant qu'utilisateur, renvoie un token Bearer dans le header")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "OK")
+        ,
+        @ApiResponse(code = 401, message = "Unauthorized")})
     @Produces("application/json")
     @Consumes("application/json")
     public Response authentifieUtilisateur(@Valid Utilisateur user) {
