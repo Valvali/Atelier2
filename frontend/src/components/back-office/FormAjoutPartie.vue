@@ -67,7 +67,7 @@
 	            <b-radio-button v-model="difficulty"
 	                native-value="1"
 	                type="is-primary">
-	                Facile
+	                Façile
 	            </b-radio-button>
 
 	            <b-radio-button v-model="difficulty"
@@ -134,12 +134,10 @@ export default {
 			center2:[47.9197, 2.4745],
 			option2: {},
 
-			//inputRegex: "^[\-]?\d?$",//doesn't work
-			//inputRegex: "^[\-]?\d+[\.]?(\d+$|$)",//doesn't work
-			inputRegex: "^\d+[\.]?(\d+$|$)",
-			//finalRegex: "^[\-]?\d+$",//doesn't work
-			//finalRegex: "^[\-]?\d+(\.\d+$|$)",//doesn't work
-			finalRegex: "^\d+(\.\d+$|$)",
+			//inputRegex: "^-?+[0-9]+[\.]?([0-9]+$|$)", //doesn't work
+			inputRegex: "^[0-9]+[\.]?([0-9]+$|$)",
+			//finalRegex: "^-?+[0-9]+[\.]?([0-9]+$|$)", //doesn't work
+			finalRegex: "^[0-9]+(\.[0-9]+$|$)",
 
 			newCity: false,
 			nameNewCity:"",
