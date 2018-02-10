@@ -268,7 +268,6 @@ export default {
 		}).catch((err) => {
 			  console.log(err)
 		})
-		console.log(config.params.token)
 	}
 
 }
