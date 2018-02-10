@@ -43,6 +43,8 @@ import LayoutBasic from '@/components/layout/BaseLayout'
 import ls  from '@/services/ls'
 import Vue from 'vue'
 
+import config from '@/config'
+
 
 import json from '../../../assets/donneestest.json'
 
@@ -150,7 +152,7 @@ export default {
         this.descr = "le jeu est terminée, veuillez cliquez sur la carte pour voir le tableau des scores"
         this.difficulty = 1
       }else{
-        this.position = L.latLng(this.donnees.points[this.number].lat , this.donnees.points[this.number].lng);
+        this.position = L.latLng(this.donnees.points[this.number].lat , this.donnees.points[this.number].lng)
         this.img = this.donnees.points[this.number].img
         this.descr = this.donnees.points[this.number].description
         this.difficulty = this.donnees.points[this.number].difficulte
@@ -187,9 +189,12 @@ export default {
 
       if(this.number>= this.iterationMax){
         //end of the game
+        this.postScore()
+
         this.$router.push({'name': 'result'})
       }else{
         //redirection vers la page suivante
+
         this.time = 0
         this.number++
         this.$router.push({'name': 'geoloc'})
@@ -200,8 +205,12 @@ export default {
           this.count()
         }
       }
-
     },
+    postScore() {
+      api.post('score/'+this.donnees.token+'/'+this.playerInfo.city, {"score": this.score, "nom" : this.playerInfo.pseudo}, function(response) {
+        console.log(response)
+      });
+    }
   },
   created: function () {
     this.count();
@@ -214,6 +223,13 @@ export default {
     }
 
     api.post('/partie/' + this.playerInfo.city + '/' + this.playerInfo.difficulty).then(response=>{
+      let data = response.data
+      for (var i = 0; i < data.points.length; i++) {
+        if (data.points[i].img.startsWith('/')) {
+          data.points[i].img = config.url + data.points[i].img
+        }
+      }
+
 			this.donnees=response.data;
 		}).catch((err) => {
 			  console.log(err);

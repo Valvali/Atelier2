@@ -58,7 +58,7 @@
 
 						<div class="control">
 				  		<label class="label">Image :</label>
-							<vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"  v-model="img"/>
+							<vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions" v-on:vdropzone-success="success" v-model="img"/> <!-- -->
 						</div>
 						<div class="control">
 							<label class="label">Difficulté :</label>
@@ -143,6 +143,7 @@ export default {
 			difficulty:"2",
 			lat: "",
 			lng: "",
+			urlImage: "",
 
 			description: "",
 			city: "",
@@ -151,10 +152,10 @@ export default {
 
 
 			dropzoneOptions: {
-          url: 'https://httpbin.org/post',
+          url: 'http://localhost:8080/api/file', //TODO url
           thumbnailWidth: 500,
-          maxFilesize: 0.5,
-          headers: { "My-Awesome-Header": "header value"},
+          maxFilesize: 5,
+          headers: { "authorization": ls.get('token')},
 					maxFiles: "1",
 					acceptedFiles: "image/png,image/gif,image/jpeg",
 					addRemoveLinks: true,
@@ -162,6 +163,11 @@ export default {
 		}
 	},
 	methods: {
+		success(file) {//https://github.com/rowanwins/vue-dropzone/issues/12
+			 var response = JSON.parse(file.xhr.response)
+			 this.urlImage = response.url
+		 },
+
 		reverseFormCity(){
 			this.newCity = !this.newCity
 		},
@@ -181,14 +187,32 @@ export default {
 			console.log(this.description)
 			console.log(this.difficulty)
 
+			let newPoints = [{
+				lat: this.lat,
+				lng: this.lng,
+				img: this.urlImage,
+				description: this.description,
+				difficulte: this.difficulty
+			}]
+
 			if (this.newCity) {
 				console.log("new city")
 				console.log(this.nameNewCity)
 				console.log(this.newCityLat)
 				console.log(this.newCityLng)
+				let ville = {
+					lieu: this.nameNewCity,
+					lat: this.newCityLat,
+					lng: this.newCityLng,
+					zoom: this.zoom2,
+					points: newPoints
+				}
+				api.post('serie', ville)
 			}else {
 				console.log("old city")
 				console.log(this.city)
+				// newPoints[0].serie = { lieu: this.city }
+				api.post('point/' + this.city, newPoints[0])
 			}
 
 		},
@@ -238,13 +262,13 @@ export default {
 		}
 	},
 	created(){
-		ls.clear() //black magic / doesn't work without this
 		console.log(api);
 		api.get('/serie').then(response=>{
 			this.series=response.data
 		}).catch((err) => {
 			  console.log(err)
 		})
+		console.log(config.params.token)
 	}
 
 }

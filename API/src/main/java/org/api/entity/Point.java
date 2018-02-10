@@ -26,9 +26,9 @@ public class Point implements Serializable {
     
     private int difficulte;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "")
-    private Serie serie;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "")
+//    private Serie serie;
 
     public String getId() {
         return id;
@@ -78,19 +78,19 @@ public class Point implements Serializable {
         this.difficulte = difficulte;
     }
 
-    /**
-     * @return the serie
-     */
-    public Serie getSerie() {
-        return serie;
-    }
-
-    /**
-     * @param serie the serie to set
-     */
-    public void setSerie(Serie serie) {
-        this.serie = serie;
-    }
+//    /**
+//     * @return the serie
+//     */
+//    public Serie getSerie() {
+//        return serie;
+//    }
+//
+//    /**
+//     * @param serie the serie to set
+//     */
+//    public void setSerie(Serie serie) {
+//        this.serie = serie;
+//    }
     
     
 }

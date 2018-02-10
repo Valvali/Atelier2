@@ -4,8 +4,14 @@ package org.api.boundary;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,6 +26,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import org.api.entity.Point;
+import org.api.entity.Serie;
+import org.provider.Secured;
 
 @Stateless
 @Path("point")
@@ -28,6 +36,12 @@ import org.api.entity.Point;
 public class PointResource {
     @Inject
     PointManager pm;
+    
+    @Inject
+    SerieManager sm;
+    
+    @PersistenceContext
+    EntityManager em;
     
     @GET
     public Response getPoints() {
@@ -52,14 +66,26 @@ public class PointResource {
     }
     
     @POST
-    public Response newPoint(@Valid Point p, @Context UriInfo uriInfo) {
-        Point newOne = this.pm.save(p);
-        String id = newOne.getId();
-        URI uri = uriInfo.getAbsolutePathBuilder().path("/"+id).build();
-        return Response.created(uri).build();
+    @Secured
+    @Path("{serie}")
+    public Response newPoint(@Valid Point p, @PathParam("serie") String s, @Context UriInfo uriInfo) {
+        
+        Serie serie = sm.findByName(s);
+        em.detach(serie);
+        serie.getPoints().add(p);
+        
+        
+//        Point newOne = this.pm.save(p);
+        this.sm.save(serie);
+        
+        
+//        String id = newOne.getId();
+//        URI uri = uriInfo.getAbsolutePathBuilder().path("/"+id).build();
+        return Response.created(/*uri*/null).build();
     }
     
     @DELETE
+    @Secured
     @Path("{id}")
     public Response suppression(@PathParam("id") long id) {
         this.pm.delete(id);

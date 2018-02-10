@@ -12,13 +12,89 @@
 			"item": []
 		},
 		{
-			"name": "Nancy",
+			"name": "Create user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "26b14e94-4590-4e56-be09-5371d63a7461",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
 						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nom\": \"test\",\n\t\"mail\": \"test@test.net\",\n\t\"password\": \"test\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Log in as user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"mail\": \"test@test.net\",\n\t\"password\": \"test\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Add Nancy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QHRlc3QubmV0IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2FwaS9hdXRoIiwiaWF0IjoxNTE4MTg4MTIxLCJleHAiOjE1NDk3MjQxMjF9.OiyESd9Tyg9DV9_Q7velCt4t17aBuDjxH9ksfNtXLC9emfeohT5o6OiaFphIHMqLX0-BVOOtVt3BWsWU62awig"
 					}
 				],
 				"body": {
@@ -99,6 +175,54 @@
 				"description": ""
 			},
 			"response": []
+		},
+		{
+			"name": "Get a new game",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "143711e0-cf17-4aa3-b81e-fcc37dd3701c",
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"",
+							"pm.environment.set(\"gameToken\", responseBody.token);",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/partie/Nancy/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"partie",
+						"Nancy",
+						"4"
+					]
+				},
+				"description": "insertion points Nancy"
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -126,9 +250,9 @@
 	],
 	"variable": [
 		{
-			"id": "9823cdac-3e3c-403c-bf61-1b765a35cb42",
-			"key": "url",
-			"value": "\"http://localhost:8080\"",
+			"id": "7dbd34fe-ab3c-47f9-83e6-f0be1a937c3b",
+			"key": "token",
+			"value": "",
 			"type": "text"
 		}
 	]
