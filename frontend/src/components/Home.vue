@@ -24,7 +24,7 @@
 	            <b-radio-button v-model="difficulty"
 	                native-value="1"
 	                type="is-primary">
-	                Façile
+	                Facile
 	            </b-radio-button>
 
 	            <b-radio-button v-model="difficulty"
