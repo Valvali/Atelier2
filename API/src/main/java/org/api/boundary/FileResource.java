@@ -30,6 +30,7 @@ import javax.ws.rs.core.Response;
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
+import org.provider.Secured;
 
 @Path("file")
 @Api(value = "API RESTful")
@@ -38,7 +39,7 @@ public class FileResource {
     final String uploadDir = "/opt/jboss/";
     
     @GET
-    @ApiOperation(value = "Récupère toutes une image précedement uploadée sur le serveur", notes = "format: api/file/sha1sum.extension")
+    @ApiOperation(value = "Récupère toutes une image précedement uploadée sur le serveur", notes = "format: /file/sha1sum.extension")
     @ApiResponses(value = {
         @ApiResponse(code = 200, message = "OK")
         ,
@@ -59,6 +60,7 @@ public class FileResource {
     }
     
     @POST
+    @Secured
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     @ApiOperation(value = "Upload une image sur le serveur")
@@ -66,9 +68,6 @@ public class FileResource {
         @ApiResponse(code = 201, message = "Created")
         ,
         @ApiResponse(code = 500, message = "Internal server error")})
-    
-
-    
     public Response uploadFichier(MultipartFormDataInput input) {
         
         Map<String, List<InputPart>> formulaire = input.getFormDataMap();
@@ -96,7 +95,7 @@ public class FileResource {
             }
         }
         JsonObject output;
-        output = Json.createObjectBuilder().add("url", "/api/file/" + finalName).build();
+        output = Json.createObjectBuilder().add("url", "/file/" + finalName).build();
         return Response.status(Response.Status.CREATED).entity(output).build();
     }
 

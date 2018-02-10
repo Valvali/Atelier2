@@ -11,6 +11,7 @@ import org.api.boundary.ScoreResource;
 import org.api.boundary.SerieResource;
 import org.api.boundary.FileResource;
 import org.api.boundary.UtilisateurResource;
+import org.provider.AuthentificationFiltre;
 import org.provider.CORSRequestFilter;
 import org.provider.CORSResponseFilter;
 
@@ -35,6 +36,7 @@ public class JAXRSConfiguration extends Application {
         s.add(FileResource.class);
         s.add(UtilisateurResource.class);
         s.add(AuthentificationBoundary.class);
+        s.add(AuthentificationFiltre.class);
         return s;
     }
 }

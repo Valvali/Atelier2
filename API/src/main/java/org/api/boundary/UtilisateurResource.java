@@ -28,6 +28,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import org.api.entity.Utilisateur;
+import org.provider.Secured;
 
 /**
  *
@@ -44,6 +45,7 @@ public class UtilisateurResource {
     UtilisateurManager um;
     
     @GET
+    @Secured
     public Response GetUsers() {
         JsonArrayBuilder jab = Json.createArrayBuilder();
         for (Utilisateur u: this.um.findAll()) {
@@ -54,6 +56,7 @@ public class UtilisateurResource {
     }
     
     @GET
+    @Secured
     @Path("{id}")
     public Response getOneUser(@PathParam("id") String id, @Context UriInfo uriInfo) {
         Utilisateur u = um.findById(id);
@@ -73,6 +76,7 @@ public class UtilisateurResource {
     }
         
     @DELETE
+    @Secured
     @Path("{id}")
     public Response suppression(@PathParam("id") String id) {
         this.um.delete(id);

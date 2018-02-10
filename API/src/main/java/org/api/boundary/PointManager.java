@@ -27,7 +27,9 @@ public class PointManager {
     }
 
     public Point save(Point p) {
-        p.setId(UUID.randomUUID().toString());
+        if (p.getId() == null) {
+            p.setId(UUID.randomUUID().toString());
+        }
         return this.em.merge(p);
     }
 

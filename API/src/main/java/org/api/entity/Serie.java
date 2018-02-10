@@ -6,8 +6,10 @@
 package org.api.entity;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -25,7 +27,7 @@ public class Serie {
     private double lat;
     private double lng;
     private double zoom; // niveau de zoom par défaut
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Point> points;
 
     public String getId() {

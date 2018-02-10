@@ -9,8 +9,8 @@
           <li><div class="score">01 : <div class="left">{{item.nom}}</div> <div class="right">{{item.score}}</div></div></li>
 
         </div>-->
-      <ul   v-for="item in topScore">
-        <li><div class="score"> <div class="left"><span class="strong">{{item.position}} :</span> {{item.pseudo}}</div> <div class="right">{{item.score}}</div></div></li>
+      <ul   v-for="(item, key) in scores">
+        <li><div class="score"> <div class="left"><span class="strong">{{key + 1}} :</span> {{item.nom}}</div> <div class="right">{{item.score}}</div></div></li>
       </ul>
       <button class="button is-primary" @click="home">Retour vers l'accueil</button>
     </div>
@@ -32,16 +32,10 @@ export default {
   },
 
   name: 'App',
-  data() {
-    return {
-    scores:[]
-
-  }
-},
   data: function () {
     return {
       finalScore :  "",
-
+      scores:[],
       topScore : json,
     };
 	},
@@ -53,6 +47,7 @@ export default {
       api.get('/score').then(response => {
         // success callback
         this.scores = response.data
+        console.log(this.scores)
       }, response => {
         // error callback
         console.log("error = "+response.message)
