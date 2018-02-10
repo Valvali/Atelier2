@@ -189,7 +189,7 @@ export default {
 
       if(this.number>= this.iterationMax){
         //end of the game
-        this.postScore()
+        await this.postScore()
 
         this.$router.push({'name': 'result'})
       }else{
@@ -206,8 +206,8 @@ export default {
         }
       }
     },
-    postScore() {
-      api.post('score/'+this.donnees.token+'/'+this.playerInfo.city, {"score": this.score, "nom" : this.playerInfo.pseudo}, function(response) {
+    async postScore() {
+      await api.post('score/'+this.donnees.token+'/'+this.playerInfo.city, {"score": this.score, "nom" : this.playerInfo.pseudo}, function(response) {
         console.log(response)
       });
     }
