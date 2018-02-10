@@ -128,7 +128,7 @@ export default {
       zoom: 13,
       center: [48.6833, 6.19], //nancy
       option: {},
-			markerOption:{},
+			markerOption:{ interactive:false },
 
 			zoom2:5,
 			center2:[47.9197, 2.4745],
