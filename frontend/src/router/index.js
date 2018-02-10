@@ -20,7 +20,7 @@ export const router = new Router({
     {
     	path: '/',
     	name: 'home',
-    	component: Home
+    	component: Home,
     },
     {
       path: '/geolocation',
@@ -49,14 +49,14 @@ export const router = new Router({
     {
       path: '/admin',
       name: 'admin',
-      component: backOffice,/*
+      component: backOffice,
       beforeEnter: (to, from, next) => {
-        if (store.getters['auth/isConnected']) {
+        if (!store.getters['auth/isConnected']) {
           next({path:"connection"})
         } else {
-          next(false)
+          next(true)
         }
-      }*/
+      }
     },
     {
       path: '/inscription',
