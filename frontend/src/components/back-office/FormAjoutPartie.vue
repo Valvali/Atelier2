@@ -7,20 +7,20 @@
 			<form class="" @submit.prevent="submit()" >
 					<div class="coordonees">
 						<div class="block">
-							<p>Veuillez entrer les coordonnées manuellement ou cliquer sur la carte le point d'intéret</p><br>
+							<p>Veuillez cliquer sur la carte pour définir les coordonées du point d'intéret</p><br>
 							<div class="control">
 					  		<label class="label">Latitude :</label>
-					    	<input class="input" type="text" placeholder="Entrez la latitude" :pattern="finalRegex" @input="ifRegexLat()" @change="ifRegexLatEnd()" v-model="lat" required>
+					    	<input class="input" type="text" placeholder="Entrez la latitude" :pattern="finalRegex" @input="ifRegexLat()" @change="ifRegexLatEnd()" v-model="lat" required disabled>
 					  	</div><br>
 					  	<div class="control">
 					  		<label class="label">Longitude :</label>
-					    	<input class="input" type="text" placeholder="Entrez la longitude" :pattern="finalRegex" @input="ifRegexLng()" @change="ifRegexLngEnd()" v-model="lng" required>
+					    	<input class="input" type="text" placeholder="Entrez la longitude" :pattern="finalRegex" @input="ifRegexLng()" @change="ifRegexLngEnd()" v-model="lng" required disabled>
 					  	</div><br>
 						</div>
 						<div class="block">
 							<v-map id="map" :zoom="zoom" :center="center" :options="option" v-on:l-click="getPoint($event)" >
 			          <v-tilelayer :url="url" ></v-tilelayer>
-								<v-marker :lat-lng='[this.lat, this.lng]' :options="markerOption"></v-marker>
+								<v-marker :lat-lng='[this.lat, this.lng]' ></v-marker>
 			        </v-map>
 						</div>
 					</div>
@@ -40,17 +40,17 @@
 								<input class="input" type="text" placeholder="Entrez la nouvelle ville" v-model="nameNewCity" required>
 								<div class="control"><br>
 						  		<label class="label">Latitude :</label>
-						    	<input class="input" type="text" placeholder="Entrez la latitude" :pattern="finalRegex" @input="ifRegexLat2()" @change="ifRegexLatEnd2()" v-model="newCityLat" required>
+						    	<input class="input" type="text" placeholder="Entrez la latitude" :pattern="finalRegex" @input="ifRegexLat2()" @change="ifRegexLatEnd2()" v-model="newCityLat" required disabled>
 						  	</div><br>
 						  	<div class="control">
 						  		<label class="label">Longitude :</label>
-						    	<input class="input" type="text" placeholder="Entrez la longitude" :pattern="finalRegex" @input="ifRegexLng2()" @change="ifRegexLngEnd2()" v-model="newCityLng" required>
+						    	<input class="input" type="text" placeholder="Entrez la longitude" :pattern="finalRegex" @input="ifRegexLng2()" @change="ifRegexLngEnd2()" v-model="newCityLng" required disabled>
 						  	</div><br>
 							</div>
 							<div class="block">
 								<v-map id="map" :zoom="zoom2" :center="center2" :options="option2" v-on:l-click="getPoint2($event)" >
 				          <v-tilelayer :url="url" ></v-tilelayer>
-									<v-marker :lat-lng='[this.newCityLat, this.newCityLng]' :options="markerOption"></v-marker>
+									<v-marker :lat-lng='[this.newCityLat, this.newCityLng]' ></v-marker>
 				        </v-map>
 							</div>
 						</div>
@@ -58,8 +58,7 @@
 
 						<div class="control">
 				  		<label class="label">Image :</label>
-							<vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions" v-on:vdropzone-success="success" v-model="img" />
-							<p class="red" v-if="verifImage">Aucune image</p>
+							<vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions" v-on:vdropzone-success="success" v-model="img"/> <!-- -->
 						</div>
 						<div class="control">
 							<label class="label">Difficulté :</label>
@@ -67,7 +66,7 @@
 	            <b-radio-button v-model="difficulty"
 	                native-value="1"
 	                type="is-primary">
-	                Facile
+	                Façile
 	            </b-radio-button>
 
 	            <b-radio-button v-model="difficulty"
@@ -95,7 +94,7 @@
 				  	<div class="control">
 				  		<label class="label">Description :</label>
 				    	<b-input id="textarea" class="b-input" type="textarea" minlength="10" maxlength="100"
-								placeholder="Entrez la descriptiond de la partie" v-model="description" />
+						placeholder="Entrez la descriptiond de la partie" v-model="description" required/>
 				  	</div>
 			  	</div>
 
@@ -128,18 +127,13 @@ export default {
       zoom: 13,
       center: [48.6833, 6.19], //nancy
       option: {},
-			markerOption:{ interactive:false },
 
 			zoom2:5,
 			center2:[47.9197, 2.4745],
 			option2: {},
 
-			//inputRegex: "^[\-]?\d?$",//doesn't work
-			//inputRegex: "^[\-]?\d+[\.]?(\d+$|$)",//doesn't work
-			inputRegex: "^\d+[\.]?(\d+$|$)",
-			//finalRegex: "^[\-]?\d+$",//doesn't work
-			//finalRegex: "^[\-]?\d+(\.\d+$|$)",//doesn't work
-			finalRegex: "^\d+(\.\d+$|$)",
+			inputRegex: "^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$",
+			finalRegex: "^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$",
 
 			newCity: false,
 			nameNewCity:"",
@@ -151,7 +145,6 @@ export default {
 			lng: "",
 			urlImage: "",
 
-			verifImage: false,
 			description: "",
 			city: "",
 			img:"",
@@ -159,7 +152,7 @@ export default {
 
 
 			dropzoneOptions: {
-          url: 'http://localhost:8080/api/file',
+          url: 'http://localhost:8080/api/file', //TODO url
           thumbnailWidth: 500,
           maxFilesize: 5,
           headers: { "authorization": ls.get('token')},
@@ -187,43 +180,39 @@ export default {
 			this.newCityLng = e.latlng.lng
 		},
 		submit(){
-			if(this.urlImage == ""){
-				this.verifImage = true;
-			}else{
-				console.log(this.lat)
-				console.log(this.lng)
-				console.log(this.img)
-				console.log(this.description)
-				console.log(this.difficulty)
 
-				let newPoints = [{
-					lat: this.lat,
-					lng: this.lng,
-					img: this.urlImage,
-					description: this.description,
-					difficulte: this.difficulty
-				}]
+			console.log(this.lat)
+			console.log(this.lng)
+			console.log(this.img)
+			console.log(this.description)
+			console.log(this.difficulty)
 
-				if (this.newCity) {
-					console.log("new city")
-					console.log(this.nameNewCity)
-					console.log(this.newCityLat)
-					console.log(this.newCityLng)
-					let ville = {
-						lieu: this.nameNewCity,
-						lat: this.newCityLat,
-						lng: this.newCityLng,
-						zoom: this.zoom2,
-						points: newPoints
-					}
-					api.post('serie', ville)
-				}else {
-					console.log("old city")
-					console.log(this.city)
-					// newPoints[0].serie = { lieu: this.city }
-					api.post('point/' + this.city, newPoints[0])
+			let newPoints = [{
+				lat: this.lat,
+				lng: this.lng,
+				img: this.urlImage,
+				description: this.description,
+				difficulte: this.difficulty
+			}]
+
+			if (this.newCity) {
+				console.log("new city")
+				console.log(this.nameNewCity)
+				console.log(this.newCityLat)
+				console.log(this.newCityLng)
+				let ville = {
+					lieu: this.nameNewCity,
+					lat: this.newCityLat,
+					lng: this.newCityLng,
+					zoom: this.zoom2,
+					points: newPoints
 				}
-
+				api.post('serie', ville)
+			}else {
+				console.log("old city")
+				console.log(this.city)
+				// newPoints[0].serie = { lieu: this.city }
+				api.post('point/' + this.city, newPoints[0])
 			}
 
 		},
@@ -276,7 +265,6 @@ export default {
 		console.log(api);
 		api.get('/serie').then(response=>{
 			this.series=response.data
-			console.log(response.data)
 		}).catch((err) => {
 			  console.log(err)
 		})
@@ -348,10 +336,6 @@ export default {
 		margin-left: 5%;
 		margin-right:  5%;
 
-	}
-	.red{
-		font-weight: bold;
-		color:red;
 	}
 
 	@media screen and (max-width: 900px) {
