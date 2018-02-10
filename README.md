@@ -20,6 +20,10 @@ docker-compose up -d
 cd ..
 ```
 
+## Insertion des données
+
+Utiliser Postman: importer la collection de requetes fournie (donneesGeoQuiz.postman_collection.json) et lancez la
+
 ## Build Setup (client)
 
 ``` bash
@@ -47,3 +51,9 @@ frontend :
 - dropzone : https://github.com/rowanwins/vue-dropzone
 - leaflet : https://github.com/KoRiGaN/Vue2Leaflet
 - buefy : https://github.com/rafaelpimpa/buefy
+
+backend:
+- docker
+- Java EE
+- postgresql
+- ApiEE
